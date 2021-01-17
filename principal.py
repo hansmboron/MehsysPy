@@ -1,10 +1,13 @@
 import sqlite3
 import sys
+
+from PyQt5 import Qt
 from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
     QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, QTimeEdit, \
     QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget
 
+from Utils.readOnly import ReadOnlyDelegate
 from usuario import UiUsuario
 
 
@@ -128,18 +131,25 @@ class UiMainWindow(QMainWindow):
         self.table_hor.setObjectName("table_hor")
         self.table_hor.setColumnCount(6)
         self.table_hor.setRowCount(0)
+        delegate = ReadOnlyDelegate(self.table_hor)
         item = QTableWidgetItem()
         self.table_hor.setHorizontalHeaderItem(0, item)
+        self.table_hor.setItemDelegateForColumn(0, delegate)
         item = QTableWidgetItem()
         self.table_hor.setHorizontalHeaderItem(1, item)
+        self.table_hor.setItemDelegateForColumn(1, delegate)
         item = QTableWidgetItem()
         self.table_hor.setHorizontalHeaderItem(2, item)
+        self.table_hor.setItemDelegateForColumn(2, delegate)
         item = QTableWidgetItem()
         self.table_hor.setHorizontalHeaderItem(3, item)
+        self.table_hor.setItemDelegateForColumn(3, delegate)
         item = QTableWidgetItem()
         self.table_hor.setHorizontalHeaderItem(4, item)
+        self.table_hor.setItemDelegateForColumn(4, delegate)
         item = QTableWidgetItem()
         self.table_hor.setHorizontalHeaderItem(5, item)
+        self.table_hor.setItemDelegateForColumn(5, delegate)
         self.layoutWidget.setGeometry(QRect(20, 10, 681, 141))
         self.layoutWidget.setObjectName("layoutWidget")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
@@ -204,18 +214,25 @@ class UiMainWindow(QMainWindow):
         self.table_cli.setObjectName("table_cli")
         self.table_cli.setColumnCount(6)
         self.table_cli.setRowCount(0)
+        delegate_cli = ReadOnlyDelegate(self.table_cli)
         item = QTableWidgetItem()
         self.table_cli.setHorizontalHeaderItem(0, item)
+        self.table_cli.setItemDelegateForColumn(0, delegate_cli)
         item = QTableWidgetItem()
         self.table_cli.setHorizontalHeaderItem(1, item)
+        self.table_cli.setItemDelegateForColumn(1, delegate_cli)
         item = QTableWidgetItem()
         self.table_cli.setHorizontalHeaderItem(2, item)
+        self.table_cli.setItemDelegateForColumn(2, delegate_cli)
         item = QTableWidgetItem()
         self.table_cli.setHorizontalHeaderItem(3, item)
+        self.table_cli.setItemDelegateForColumn(3, delegate_cli)
         item = QTableWidgetItem()
         self.table_cli.setHorizontalHeaderItem(4, item)
+        self.table_cli.setItemDelegateForColumn(4, delegate_cli)
         item = QTableWidgetItem()
         self.table_cli.setHorizontalHeaderItem(5, item)
+        self.table_cli.setItemDelegateForColumn(5, delegate_cli)
         self.layoutWidget_2.setGeometry(QRect(20, 155, 681, 51))
         self.layoutWidget_2.setObjectName("layoutWidget_2")
         self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -269,16 +286,22 @@ class UiMainWindow(QMainWindow):
         self.table_ser.setObjectName("table_ser")
         self.table_ser.setColumnCount(5)
         self.table_ser.setRowCount(0)
+        delegate_ser = ReadOnlyDelegate(self.table_ser)
         item = QTableWidgetItem()
         self.table_ser.setHorizontalHeaderItem(0, item)
+        self.table_ser.setItemDelegateForColumn(0, delegate_ser)
         item = QTableWidgetItem()
         self.table_ser.setHorizontalHeaderItem(1, item)
+        self.table_ser.setItemDelegateForColumn(1, delegate_ser)
         item = QTableWidgetItem()
         self.table_ser.setHorizontalHeaderItem(2, item)
+        self.table_ser.setItemDelegateForColumn(2, delegate_ser)
         item = QTableWidgetItem()
         self.table_ser.setHorizontalHeaderItem(3, item)
+        self.table_ser.setItemDelegateForColumn(3, delegate_ser)
         item = QTableWidgetItem()
         self.table_ser.setHorizontalHeaderItem(4, item)
+        self.table_ser.setItemDelegateForColumn(4, delegate_ser)
         self.layoutWidget_5.setGeometry(QRect(20, 155, 681, 51))
         self.layoutWidget_5.setObjectName("layoutWidget_5")
         self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
@@ -355,7 +378,18 @@ class UiMainWindow(QMainWindow):
         self.menubar.addAction(self.menuClientes.menuAction())
         self.menubar.addAction(self.menuServi_os.menuAction())
         self.menubar.addAction(self.menuSair.menuAction())
+
         # largura padrao das tabelas
+        self.table_hor.setColumnWidth(0, 50)
+        self.table_hor.setColumnWidth(1, 180)
+        self.table_hor.setColumnWidth(5, 120)
+        self.table_cli.setColumnWidth(0, 50)
+        self.table_cli.setColumnWidth(1, 200)
+        self.table_cli.setColumnWidth(5, 130)
+        self.table_ser.setColumnWidth(0, 50)
+        self.table_ser.setColumnWidth(1, 200)
+        self.table_ser.setColumnWidth(2, 200)
+
         # desativar botões por padrao
         self.txtId_hor.setEnabled(False)
         self.btnAtu_hor.setEnabled(False)
@@ -638,7 +672,7 @@ class UiMainWindow(QMainWindow):
             self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
             self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
             self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
-            self.table_hor.setItem(row, 4, QTableWidgetItem(r[5]))
+            self.table_hor.setItem(row, 5, QTableWidgetItem(r[5]))
             row += 1
         db.close()
 
@@ -659,7 +693,7 @@ class UiMainWindow(QMainWindow):
             self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
             self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
             self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
-            self.table_hor.setItem(row, 4, QTableWidgetItem(r[5]))
+            self.table_hor.setItem(row, 5, QTableWidgetItem(r[5]))
             row += 1
         db.close()
 
