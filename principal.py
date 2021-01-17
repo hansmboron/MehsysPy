@@ -355,6 +355,8 @@ class UiMainWindow(QMainWindow):
         self.menubar.addAction(self.menuClientes.menuAction())
         self.menubar.addAction(self.menuServi_os.menuAction())
         self.menubar.addAction(self.menuSair.menuAction())
+        # largura padrao das tabelas
+        # desativar botões por padrao
         self.txtId_hor.setEnabled(False)
         self.btnAtu_hor.setEnabled(False)
         self.txtId_cli.setEnabled(False)
@@ -371,8 +373,13 @@ class UiMainWindow(QMainWindow):
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
         self.btnLim_cli.clicked.connect(self.on_btn_clear_cli_pressed)
         self.btnPesNom_cli.clicked.connect(self.pesquisar_clientes)
+        self.pushButton_15.clicked.connect(self.pesquisar_servicos)
+        self.btnPesNom_hor.clicked.connect(self.pesquisar_horarios)
+        self.btnPesDat_hor.clicked.connect(self.pesq_hor_by_date)
+        self.tabWidget.currentChanged.connect(self.popula_todas_tabelas)
 
         self.retranslateUi()
+        self.tabWidget.setCurrentIndex(1)
         self.tabWidget.setCurrentIndex(0)
         QMetaObject.connectSlotsByName(self)
 
@@ -521,9 +528,16 @@ class UiMainWindow(QMainWindow):
 
     def on_menu_horarios(self):
         self.tabWidget.setCurrentIndex(0)
+        self.pesquisar_horarios()
 
     def on_menu_servicos(self):
         self.tabWidget.setCurrentIndex(2)
+        self.pesquisar_servicos()
+
+    def popula_todas_tabelas(self):
+        self.pesquisar_horarios()
+        self.pesquisar_clientes()
+        self.pesquisar_servicos()
 
     # MÉTODOS TAB CLIENTES --------------------------------------------------------------
 
@@ -562,10 +576,12 @@ class UiMainWindow(QMainWindow):
         self.txtEnd_cli.setText(None)
         self.txtFon_cli.setText(None)
 
+    # Carregar tabela com dados dos clientes
     def pesquisar_clientes(self):
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
-        sql = 'select id as ID, nome as Nome, sexo as Sexo, cpf as CPF, endereco as Ender, fone as Fone from tbclientes where nome like ?'
+        sql = 'select id as ID, nome as Nome, sexo as Sexo, cpf as CPF, endereco as Ender, fone as Fone from ' \
+              'tbclientes where nome like ? '
         search = '%' + self.txtPesNom_cli.text() + '%'
         cursor.execute(sql, [search])
         rs = cursor.fetchall()
@@ -579,6 +595,73 @@ class UiMainWindow(QMainWindow):
             self.table_cli.setItem(row, 4, QTableWidgetItem(r[4]))
             self.table_cli.setItem(row, 5, QTableWidgetItem(r[5]))
             row += 1
+        db.close()
+
+    # METODOS TAB SERVIÇOS -----------------------------------------------------------
+
+    # Carregar tabela com dados dos serviços
+    def pesquisar_servicos(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'select id as ID, nome as Nome, usuario as Profissional, valor as Valor, duracao as Duração from ' \
+              'tbservicos where nome like ? '
+        search = '%' + self.lineEdit_9.text() + '%'
+        cursor.execute(sql, [search])
+        rs = cursor.fetchall()
+        row = 0
+        self.table_ser.setRowCount(len(rs))
+        for r in rs:
+            self.table_ser.setItem(row, 0, QTableWidgetItem(str(r[0])))
+            self.table_ser.setItem(row, 1, QTableWidgetItem(r[1]))
+            self.table_ser.setItem(row, 2, QTableWidgetItem(r[2]))
+            self.table_ser.setItem(row, 3, QTableWidgetItem(r[3]))
+            self.table_ser.setItem(row, 4, QTableWidgetItem(r[4]))
+            row += 1
+        db.close()
+
+    # METODOS TAB HORÁRIOS -----------------------------------------------------------
+
+    # Carregar tabela com dados dos horarios por nome
+    def pesquisar_horarios(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'select id as ID, cliente as Cliente, servico as Serviço, data as Data, horario as Horário, ' \
+              'profissional as Profissional from tbhorarios where cliente like ? '
+        search = '%' + self.txtPesNom_hor.text() + '%'
+        cursor.execute(sql, [search])
+        rs = cursor.fetchall()
+        row = 0
+        self.table_hor.setRowCount(len(rs))
+        for r in rs:
+            self.table_hor.setItem(row, 0, QTableWidgetItem(str(r[0])))
+            self.table_hor.setItem(row, 1, QTableWidgetItem(r[1]))
+            self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
+            self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
+            self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
+            self.table_hor.setItem(row, 4, QTableWidgetItem(r[5]))
+            row += 1
+        db.close()
+
+    # Carregar tabela com dados dos horarios por nome
+    def pesq_hor_by_date(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'select id as ID, cliente as Cliente, servico as Serviço, data as Data, horario as Horário, ' \
+              'profissional as Profissional from tbhorarios where data like ? '
+        search = '%' + self.txtPesDat_hor.text() + '%'
+        cursor.execute(sql, [search])
+        rs = cursor.fetchall()
+        row = 0
+        self.table_hor.setRowCount(len(rs))
+        for r in rs:
+            self.table_hor.setItem(row, 0, QTableWidgetItem(str(r[0])))
+            self.table_hor.setItem(row, 1, QTableWidgetItem(r[1]))
+            self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
+            self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
+            self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
+            self.table_hor.setItem(row, 4, QTableWidgetItem(r[5]))
+            row += 1
+        db.close()
 
 
 app = QApplication(sys.argv)
