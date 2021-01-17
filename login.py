@@ -28,9 +28,6 @@ class MainWindow(QMainWindow):
         self.label = QLabel(self.layoutWidget)
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.btnEntrar = QPushButton(self.centralwidget)
-        # conectar no bando de dados
-        self.db = sqlite3.connect('dbmehsys.db')
-        self.cursor = self.db.cursor()
         MainWindow.setObjectName(self, "MainWindow")
         MainWindow.resize(self, 400, 300)
         MainWindow.setMinimumSize(self, QSize(400, 300))
@@ -80,16 +77,21 @@ class MainWindow(QMainWindow):
         self.label.setText(_translate("MainWindow", "Usuário:"))
         self.txtUser.setToolTip(_translate("MainWindow", "Nome de usuário"))
         self.txtUser.setStatusTip(_translate("MainWindow", "Nome de usuário"))
-        self.txtUser.setPlaceholderText(_translate("MainWindow", "Nome de usuário"))
+        self.txtUser.setPlaceholderText(
+            _translate("MainWindow", "Nome de usuário"))
         self.label_2.setToolTip(_translate("MainWindow", "Senha do usuário"))
         self.label_2.setStatusTip(_translate("MainWindow", "Senha do usuário"))
         self.label_2.setText(_translate("MainWindow", "Senha:"))
         self.txtPass.setToolTip(_translate("MainWindow", "Senha do usuário"))
         self.txtPass.setStatusTip(_translate("MainWindow", "Senha do usuário"))
-        self.txtPass.setPlaceholderText(_translate("MainWindow", "Senha do usuário"))
+        self.txtPass.setPlaceholderText(
+            _translate("MainWindow", "Senha do usuário"))
 
     #  Função do botão entrar
     def login(self):
+        # conectar no bando de dados
+        self.db = sqlite3.connect('dbmehsys.db')
+        self.cursor = self.db.cursor()
         sql = "select * from tbusuarios where login=? and senha=?"
         user = self.txtUser.text()
         password = self.txtPass.text()
@@ -97,9 +99,9 @@ class MainWindow(QMainWindow):
         rs = self.cursor.fetchall()
         if len(user) < 1 or len(password) < 1:
             QMessageBox.warning(self, "Erro ao Logar", "PREENCHA OS CAMPOS LOGIN E SENHA PARA ENTRAR\n\n\nObs: "
-                                                        "Usuário padrão(admin), "
-                                                        "Senha padrão(1234)", QMessageBox.Ok,
-                                 QMessageBox.Ok)
+                                "Usuário padrão(admin), "
+                                "Senha padrão(1234)", QMessageBox.Ok,
+                                QMessageBox.Ok)
         elif len(rs) > 0:
             if rs[0][5] == 'admin':  # Se perfil == 'admin'
                 self.window = UiMainWindow()
@@ -118,8 +120,8 @@ class MainWindow(QMainWindow):
                 login.close()
         else:
             QMessageBox.warning(self, "Erro ao Logar", "USUÁRIO OU SENHA INVÁLIDO(S)\n\n\nObs: Usuário padrão(admin), "
-                                                        "Senha padrão(1234)", QMessageBox.Ok,
-                                     QMessageBox.Ok)
+                                "Senha padrão(1234)", QMessageBox.Ok,
+                                QMessageBox.Ok)
 
     #
     # def closeEvent(self, event):

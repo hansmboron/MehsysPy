@@ -16,9 +16,6 @@ class UiMainWindow(QMainWindow):
         UiMainWindow.resize(self, 750, 600)
         UiMainWindow.setMinimumSize(self, QSize(750, 600))
         self.center()
-        # conectar no bando de dados
-        self.db = sqlite3.connect('dbmehsys.db')
-        self.cursor = self.db.cursor()
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabHor = QWidget()
         self.line = QFrame(self.tabHor)
@@ -118,7 +115,8 @@ class UiMainWindow(QMainWindow):
         sizePolicy = QSizePolicy(QSizePolicy.Maximum, QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
         self.tabWidget.setObjectName("tabWidget")
         self.tabHor.setObjectName("tabHor")
@@ -312,7 +310,8 @@ class UiMainWindow(QMainWindow):
         self.verticalLayout_6.addWidget(self.txtId_ser)
         self.horHor_ser.setObjectName("horHor_ser")
         self.verticalLayout_6.addWidget(self.horHor_ser)
-        spacerItem = QSpacerItem(20, 45, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        spacerItem = QSpacerItem(
+            20, 45, QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.verticalLayout_6.addItem(spacerItem)
         self.horizontalLayout_9.addLayout(self.verticalLayout_6)
         self.line_3.setGeometry(QRect(20, 210, 681, 16))
@@ -370,6 +369,8 @@ class UiMainWindow(QMainWindow):
         self.actionHor_rios.triggered.connect(self.on_menu_horarios)
         self.actionServi_os.triggered.connect(self.on_menu_servicos)
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
+        self.btnLim_cli.clicked.connect(self.on_btn_clear_cli_pressed)
+        self.btnPesNom_cli.clicked.connect(self.pesquisar_clientes)
 
         self.retranslateUi()
         self.tabWidget.setCurrentIndex(0)
@@ -377,7 +378,8 @@ class UiMainWindow(QMainWindow):
 
     def retranslateUi(self):
         _translate = QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", "Tela Principal - Mehsys"))
+        self.setWindowTitle(_translate(
+            "MainWindow", "Tela Principal - Mehsys"))
         item = self.table_hor.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Id"))
         item = self.table_hor.horizontalHeaderItem(1)
@@ -390,22 +392,30 @@ class UiMainWindow(QMainWindow):
         item.setText(_translate("MainWindow", "Horário"))
         item = self.table_hor.horizontalHeaderItem(5)
         item.setText(_translate("MainWindow", "Profissional"))
-        self.txtPesCli_hor.setPlaceholderText(_translate("MainWindow", "Pesquisar cliente"))
-        self.cbbSer_hor.setPlaceholderText(_translate("MainWindow", "Selecionar serviço"))
-        self.cbbPro_hor.setPlaceholderText(_translate("MainWindow", "Selecionar Profissional"))
+        self.txtPesCli_hor.setPlaceholderText(
+            _translate("MainWindow", "Pesquisar cliente"))
+        self.cbbSer_hor.setPlaceholderText(
+            _translate("MainWindow", "Selecionar serviço"))
+        self.cbbPro_hor.setPlaceholderText(
+            _translate("MainWindow", "Selecionar Profissional"))
         self.txtId_hor.setPlaceholderText(_translate("MainWindow", "Id"))
-        self.cbbHor_hor.setPlaceholderText(_translate("MainWindow", "Selecionar horário"))
+        self.cbbHor_hor.setPlaceholderText(
+            _translate("MainWindow", "Selecionar horário"))
         self.btnAge_hor.setText(_translate("MainWindow", "Agendar"))
         self.btnAtu_hor.setText(_translate("MainWindow", "Atualizar"))
         self.btnExc_hor.setText(_translate("MainWindow", "Excluir"))
         self.BtnImp_hor.setText(_translate("MainWindow", "Imprimir"))
         self.btnLim_hor.setText(_translate("MainWindow", "Limpar"))
-        self.txtPesNom_hor.setPlaceholderText(_translate("MainWindow", "Nome cliente"))
+        self.txtPesNom_hor.setPlaceholderText(
+            _translate("MainWindow", "Nome cliente"))
         self.btnPesNom_hor.setText(_translate("MainWindow", "Pesquisar"))
-        self.txtPesDat_hor.setPlaceholderText(_translate("MainWindow", "Data agendamento"))
+        self.txtPesDat_hor.setPlaceholderText(
+            _translate("MainWindow", "Data agendamento"))
         self.btnPesDat_hor.setText(_translate("MainWindow", "Pesquisar"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabHor), _translate("MainWindow", "Horários"))
-        self.txtPesNom_cli.setPlaceholderText(_translate("MainWindow", "Nome cliente"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tabHor), _translate("MainWindow", "Horários"))
+        self.txtPesNom_cli.setPlaceholderText(
+            _translate("MainWindow", "Nome cliente"))
         self.btnPesNom_cli.setText(_translate("MainWindow", "Pesquisar"))
         item = self.table_cli.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Id"))
@@ -423,14 +433,21 @@ class UiMainWindow(QMainWindow):
         self.btnAtu_cli.setText(_translate("MainWindow", "Atualizar"))
         self.btnExc_cli.setText(_translate("MainWindow", "Excluir"))
         self.btnLim_cli.setText(_translate("MainWindow", "Limpar"))
-        self.txtNom_cli.setPlaceholderText(_translate("MainWindow", "Nome cliente"))
-        self.cbcSex_cli.setPlaceholderText(_translate("MainWindow", "Selecionar sexo"))
-        self.txtCpf_cli.setPlaceholderText(_translate("MainWindow", "CPF cliente"))
+        self.txtNom_cli.setPlaceholderText(
+            _translate("MainWindow", "Nome cliente"))
+        self.cbcSex_cli.setPlaceholderText(
+            _translate("MainWindow", "Selecionar sexo"))
+        self.txtCpf_cli.setPlaceholderText(
+            _translate("MainWindow", "CPF cliente"))
         self.txtId_cli.setPlaceholderText(_translate("MainWindow", "Id"))
-        self.txtEnd_cli.setPlaceholderText(_translate("MainWindow", "Endereço cliente"))
-        self.txtFon_cli.setPlaceholderText(_translate("MainWindow", "Fone cliente"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabCli), _translate("MainWindow", "Clientes"))
-        self.lineEdit_9.setPlaceholderText(_translate("MainWindow", "Nome serviço"))
+        self.txtEnd_cli.setPlaceholderText(
+            _translate("MainWindow", "Endereço cliente"))
+        self.txtFon_cli.setPlaceholderText(
+            _translate("MainWindow", "Fone cliente"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tabCli), _translate("MainWindow", "Clientes"))
+        self.lineEdit_9.setPlaceholderText(
+            _translate("MainWindow", "Nome serviço"))
         self.pushButton_15.setText(_translate("MainWindow", "Pesquisar"))
         item = self.table_ser.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Id"))
@@ -446,12 +463,17 @@ class UiMainWindow(QMainWindow):
         self.pushButton_18.setText(_translate("MainWindow", "Atualizar"))
         self.pushButton_19.setText(_translate("MainWindow", "Excluir"))
         self.pushButton_21.setText(_translate("MainWindow", "Limpar"))
-        self.txtNom_ser.setPlaceholderText(_translate("MainWindow", "Nome serviço"))
-        self.cbbPro_ser.setPlaceholderText(_translate("MainWindow", "Selecionar profissional"))
-        self.txtSer_ser.setPlaceholderText(_translate("MainWindow", "Valor serviço"))
+        self.txtNom_ser.setPlaceholderText(
+            _translate("MainWindow", "Nome serviço"))
+        self.cbbPro_ser.setPlaceholderText(
+            _translate("MainWindow", "Selecionar profissional"))
+        self.txtSer_ser.setPlaceholderText(
+            _translate("MainWindow", "Valor serviço"))
         self.txtId_ser.setPlaceholderText(_translate("MainWindow", "Id"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabSer), _translate("MainWindow", "Serviços"))
-        self.menuAtendimentos.setTitle(_translate("MainWindow", "Atendimentos"))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(
+            self.tabSer), _translate("MainWindow", "Serviços"))
+        self.menuAtendimentos.setTitle(
+            _translate("MainWindow", "Atendimentos"))
         self.menuClientes.setTitle(_translate("MainWindow", "Usuários"))
         self.menuHor_rios.setTitle(_translate("MainWindow", "Relatórios"))
         self.menuServi_os.setTitle(_translate("MainWindow", "Opções"))
@@ -464,7 +486,8 @@ class UiMainWindow(QMainWindow):
         self.actionHor_rios_2.setText(_translate("MainWindow", "Horários"))
         self.actionServi_os_2.setText(_translate("MainWindow", "Serviços"))
         self.actionAjuda.setText(_translate("MainWindow", "Ajuda"))
-        self.actionAddHor.setText(_translate("MainWindow", "Adicionar horários"))
+        self.actionAddHor.setText(_translate(
+            "MainWindow", "Adicionar horários"))
         self.actionSair_2.setText(_translate("MainWindow", "Sair"))
 
     # pergunta para sair do programa
@@ -494,6 +517,7 @@ class UiMainWindow(QMainWindow):
 
     def on_menu_clientes(self):
         self.tabWidget.setCurrentIndex(1)
+        self.pesquisar_clientes()
 
     def on_menu_horarios(self):
         self.tabWidget.setCurrentIndex(0)
@@ -505,17 +529,56 @@ class UiMainWindow(QMainWindow):
 
     # Adicionar novo cliente
     def on_btn_sal_cli_pressed(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
         sql = 'insert into tbclientes(nome, sexo, cpf, endereco, fone) values(?,?,?,?,?)'
         nome = self.txtNom_cli.text()
         sexo = self.cbcSex_cli.currentText()
         cpf = self.txtCpf_cli.text()
         endereco = self.txtEnd_cli.text()
         fone = self.txtFon_cli.text()
-        self.cursor.execute(sql, [nome, sexo, cpf, endereco, fone])
-        if len(nome.strip()) < 4 or len(cpf.strip()) < 11 or len(fone.strip()) < 14:
-            QMessageBox.warning(self, 'Preencha os campos', 'Preencha os campos obrigatórios para adicionar novo '
-                                                                'cliente')
+        try:
+            if len(nome.strip()) < 4 or len(cpf.strip()) < 11 or len(fone.strip()) < 11:
+                QMessageBox.warning(self, 'Preencha os campos', 'Preencha os campos obrigatórios para adicionar novo '
+                                    'cliente')
+            else:
+                cursor.execute(sql, [nome, sexo, cpf, endereco, fone])
+                db.commit()
+                QMessageBox.information(
+                    self, 'SUCESSO', 'Cliente Adicionado com Sucesso!')
+                self.on_btn_clear_cli_pressed()
+                db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
 
+    def on_btn_clear_cli_pressed(self):
+        self.btnAtu_cli.setEnabled(False)
+        self.btnSal_cli.setEnabled(True)
+        self.txtId_cli.setText(None)
+        self.txtNom_cli.setText(None)
+        self.cbcSex_cli.setCurrentIndex(0)
+        self.txtCpf_cli.setText(None)
+        self.txtEnd_cli.setText(None)
+        self.txtFon_cli.setText(None)
+
+    def pesquisar_clientes(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'select id as ID, nome as Nome, sexo as Sexo, cpf as CPF, endereco as Ender, fone as Fone from tbclientes where nome like ?'
+        search = '%' + self.txtPesNom_cli.text() + '%'
+        cursor.execute(sql, [search])
+        rs = cursor.fetchall()
+        row = 0
+        self.table_cli.setRowCount(len(rs))
+        for r in rs:
+            self.table_cli.setItem(row, 0, QTableWidgetItem(str(r[0])))
+            self.table_cli.setItem(row, 1, QTableWidgetItem(r[1]))
+            self.table_cli.setItem(row, 2, QTableWidgetItem(r[2]))
+            self.table_cli.setItem(row, 3, QTableWidgetItem(r[3]))
+            self.table_cli.setItem(row, 4, QTableWidgetItem(r[4]))
+            self.table_cli.setItem(row, 5, QTableWidgetItem(r[5]))
+            row += 1
 
 
 app = QApplication(sys.argv)
