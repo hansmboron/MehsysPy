@@ -1,8 +1,9 @@
+import sqlite3
 import sys
 from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
     QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, QTimeEdit, \
-    QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget
+    QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget
 
 from usuario import UiUsuario
 
@@ -14,7 +15,10 @@ class UiMainWindow(QMainWindow):
         UiMainWindow.setObjectName(self, "MainWindow")
         UiMainWindow.resize(self, 750, 600)
         UiMainWindow.setMinimumSize(self, QSize(750, 600))
-
+        self.center()
+        # conectar no bando de dados
+        self.db = sqlite3.connect('dbmehsys.db')
+        self.cursor = self.db.cursor()
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabHor = QWidget()
         self.line = QFrame(self.tabHor)
@@ -94,8 +98,8 @@ class UiMainWindow(QMainWindow):
         self.menuServi_os = QMenu(self.menubar)
         self.menuSair = QMenu(self.menubar)
         self.statusbar = QStatusBar()
-        self.actionClientes = QAction()
         self.actionHor_rios = QAction()
+        self.actionClientes = QAction()
         self.actionServi_os = QAction()
         self.actionUsu_rios = QAction()
         self.actionUsu_rios.setEnabled(False)
@@ -327,8 +331,8 @@ class UiMainWindow(QMainWindow):
         self.setMenuBar(self.menubar)
         self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
-        self.actionClientes.setObjectName("actionClientes")
         self.actionHor_rios.setObjectName("actionHor_rios")
+        self.actionClientes.setObjectName("actionClientes")
         self.actionServi_os.setObjectName("actionServi_os")
         self.actionUsu_rios.setObjectName("actionUsu_rios")
         self.actionClientes_2.setObjectName("actionClientes_2")
@@ -337,25 +341,35 @@ class UiMainWindow(QMainWindow):
         self.actionAjuda.setObjectName("actionAjuda")
         self.actionAddHor.setObjectName("actionAddHor")
         self.actionSair_2.setObjectName("actionSair_2")
-        self.menuAtendimentos.addAction(self.actionClientes)
         self.menuAtendimentos.addAction(self.actionHor_rios)
+        self.menuAtendimentos.addAction(self.actionClientes)
         self.menuAtendimentos.addAction(self.actionServi_os)
         self.menuClientes.addAction(self.actionUsu_rios)
-        self.menuHor_rios.addAction(self.actionClientes_2)
         self.menuHor_rios.addAction(self.actionHor_rios_2)
+        self.menuHor_rios.addAction(self.actionClientes_2)
         self.menuHor_rios.addAction(self.actionServi_os_2)
         self.menuServi_os.addAction(self.actionAjuda)
         self.menuServi_os.addAction(self.actionAddHor)
         self.menuSair.addAction(self.actionSair_2)
         self.menubar.addAction(self.menuAtendimentos.menuAction())
-        self.menubar.addAction(self.menuClientes.menuAction())
         self.menubar.addAction(self.menuHor_rios.menuAction())
+        self.menubar.addAction(self.menuClientes.menuAction())
         self.menubar.addAction(self.menuServi_os.menuAction())
         self.menubar.addAction(self.menuSair.menuAction())
+        self.txtId_hor.setEnabled(False)
+        self.btnAtu_hor.setEnabled(False)
+        self.txtId_cli.setEnabled(False)
+        self.btnAtu_cli.setEnabled(False)
+        self.txtId_ser.setEnabled(False)
+        self.pushButton_18.setEnabled(False)
 
         # conect funçoes de botoes com a view
         self.actionUsu_rios.triggered.connect(self.open_users_screens)
         self.actionSair_2.triggered.connect(self.closeEvent)
+        self.actionClientes.triggered.connect(self.on_menu_clientes)
+        self.actionHor_rios.triggered.connect(self.on_menu_horarios)
+        self.actionServi_os.triggered.connect(self.on_menu_servicos)
+        self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
 
         self.retranslateUi()
         self.tabWidget.setCurrentIndex(0)
@@ -442,8 +456,8 @@ class UiMainWindow(QMainWindow):
         self.menuHor_rios.setTitle(_translate("MainWindow", "Relatórios"))
         self.menuServi_os.setTitle(_translate("MainWindow", "Opções"))
         self.menuSair.setTitle(_translate("MainWindow", "Sair"))
-        self.actionClientes.setText(_translate("MainWindow", "Clientes"))
         self.actionHor_rios.setText(_translate("MainWindow", "Horários"))
+        self.actionClientes.setText(_translate("MainWindow", "Clientes"))
         self.actionServi_os.setText(_translate("MainWindow", "Serviços"))
         self.actionUsu_rios.setText(_translate("MainWindow", "Usuários"))
         self.actionClientes_2.setText(_translate("MainWindow", "Clientes"))
@@ -462,15 +476,46 @@ class UiMainWindow(QMainWindow):
         else:
             event.ignore()
 
-    # não funciona decobrir porque
-    def keyPressEvent(self, event):
-        print("Pressionado!!!")
+    # centralizar tela
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
+    # def keyPressEvent(self, event):
+    #     print("Pressionado!!!")
 
     def open_users_screens(self):
         self.window = QMainWindow()
         self.ui = UiUsuario()
         self.ui.setupUi(self.window)
         self.window.show()
+
+    def on_menu_clientes(self):
+        self.tabWidget.setCurrentIndex(1)
+
+    def on_menu_horarios(self):
+        self.tabWidget.setCurrentIndex(0)
+
+    def on_menu_servicos(self):
+        self.tabWidget.setCurrentIndex(2)
+
+    # MÉTODOS TAB CLIENTES --------------------------------------------------------------
+
+    # Adicionar novo cliente
+    def on_btn_sal_cli_pressed(self):
+        sql = 'insert into tbclientes(nome, sexo, cpf, endereco, fone) values(?,?,?,?,?)'
+        nome = self.txtNom_cli.text()
+        sexo = self.cbcSex_cli.currentText()
+        cpf = self.txtCpf_cli.text()
+        endereco = self.txtEnd_cli.text()
+        fone = self.txtFon_cli.text()
+        self.cursor.execute(sql, [nome, sexo, cpf, endereco, fone])
+        if len(nome.strip()) < 4 or len(cpf.strip()) < 11 or len(fone.strip()) < 14:
+            QMessageBox.warning(self, 'Preencha os campos', 'Preencha os campos obrigatórios para adicionar novo '
+                                                                'cliente')
+
 
 
 app = QApplication(sys.argv)
