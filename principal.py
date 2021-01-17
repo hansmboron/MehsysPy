@@ -1,7 +1,6 @@
 import sqlite3
 import sys
 
-from PyQt5 import Qt
 from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
     QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, QTimeEdit, \
@@ -89,7 +88,7 @@ class UiMainWindow(QMainWindow):
         self.txtSer_ser = QLineEdit(self.layoutWidget_6)
         self.verticalLayout_6 = QVBoxLayout()
         self.txtId_ser = QLineEdit(self.layoutWidget_6)
-        self.horHor_ser = QTimeEdit(self.layoutWidget_6)
+        self.horHor_ser = QLineEdit(self.layoutWidget_6)
         self.line_3 = QFrame(self.tabSer)
         self.menubar = QMenuBar(self)
         self.menuAtendimentos = QMenu(self.menubar)
@@ -254,6 +253,9 @@ class UiMainWindow(QMainWindow):
         self.txtNom_cli.setObjectName("txtNom_cli")
         self.verticalLayout_3.addWidget(self.txtNom_cli)
         self.cbcSex_cli.setObjectName("cbcSex_cli")
+        self.cbcSex_cli.addItem('Indefinido')
+        self.cbcSex_cli.addItem('Femenino')
+        self.cbcSex_cli.addItem('Masculino')
         self.verticalLayout_3.addWidget(self.cbcSex_cli)
         self.txtCpf_cli.setClearButtonEnabled(True)
         self.txtCpf_cli.setObjectName("txtCpf_cli")
@@ -378,6 +380,10 @@ class UiMainWindow(QMainWindow):
         self.menubar.addAction(self.menuClientes.menuAction())
         self.menubar.addAction(self.menuServi_os.menuAction())
         self.menubar.addAction(self.menuSair.menuAction())
+        self.txtCpf_cli.setInputMask('###.###.###-##')
+        self.txtFon_cli.setInputMask('(##) #####-####')
+        self.txtSer_ser.setInputMask('R$#.###,##')
+        self.horHor_ser.setInputMask('#:##min')
 
         # largura padrao das tabelas
         self.table_hor.setColumnWidth(0, 50)
@@ -398,7 +404,7 @@ class UiMainWindow(QMainWindow):
         self.txtId_ser.setEnabled(False)
         self.pushButton_18.setEnabled(False)
 
-        # conect funçoes de botoes com a view
+        # conectar funçoes com componentes da view
         self.actionUsu_rios.triggered.connect(self.open_users_screens)
         self.actionSair_2.triggered.connect(self.closeEvent)
         self.actionClientes.triggered.connect(self.on_menu_clientes)
@@ -407,10 +413,18 @@ class UiMainWindow(QMainWindow):
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
         self.btnLim_cli.clicked.connect(self.on_btn_clear_cli_pressed)
         self.btnPesNom_cli.clicked.connect(self.pesquisar_clientes)
+        self.txtPesNom_cli.textChanged.connect(self.pesquisar_clientes)
         self.pushButton_15.clicked.connect(self.pesquisar_servicos)
+        self.lineEdit_9.textChanged.connect(self.pesquisar_servicos)
         self.btnPesNom_hor.clicked.connect(self.pesquisar_horarios)
+        self.txtPesNom_hor.textChanged.connect(self.pesquisar_horarios)
         self.btnPesDat_hor.clicked.connect(self.pesq_hor_by_date)
+        self.txtPesDat_hor.textChanged.connect(self.pesq_hor_by_date)
         self.tabWidget.currentChanged.connect(self.popula_todas_tabelas)
+
+        self.table_cli.clicked.connect(self.setar_campos_cli)
+        self.table_ser.clicked.connect(self.setar_campos_ser)
+        self.table_hor.clicked.connect(self.setar_campos_hor)
 
         self.retranslateUi()
         self.tabWidget.setCurrentIndex(1)
@@ -572,6 +586,7 @@ class UiMainWindow(QMainWindow):
         self.pesquisar_horarios()
         self.pesquisar_clientes()
         self.pesquisar_servicos()
+        self.popula_cbb_profissional()
 
     # MÉTODOS TAB CLIENTES --------------------------------------------------------------
 
@@ -594,6 +609,7 @@ class UiMainWindow(QMainWindow):
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO', 'Cliente Adicionado com Sucesso!')
+                self.pesquisar_clientes()
                 self.on_btn_clear_cli_pressed()
                 db.close()
         except Exception as e:
@@ -631,6 +647,17 @@ class UiMainWindow(QMainWindow):
             row += 1
         db.close()
 
+    # popular campos do formulário selecionando uma linha da tabela
+    def setar_campos_cli(self):
+        rows = sorted(set(index.row() for index in self.table_cli.selectedIndexes()))
+        for r in rows:
+            self.txtId_cli.setText(self.table_cli.item(r, 0).text())
+            self.txtNom_cli.setText(self.table_cli.item(r, 1).text())
+            self.cbcSex_cli.setCurrentText(self.table_cli.item(r, 2).text())
+            self.txtCpf_cli.setText(self.table_cli.item(r, 3).text())
+            self.txtEnd_cli.setText(self.table_cli.item(r, 4).text())
+            self.txtFon_cli.setText(self.table_cli.item(r, 5).text())
+
     # METODOS TAB SERVIÇOS -----------------------------------------------------------
 
     # Carregar tabela com dados dos serviços
@@ -652,6 +679,38 @@ class UiMainWindow(QMainWindow):
             self.table_ser.setItem(row, 4, QTableWidgetItem(r[4]))
             row += 1
         db.close()
+
+    # popular campos do formulário selecionando uma linha da tabela
+    def setar_campos_ser(self):
+        rows = sorted(set(index.row() for index in self.table_ser.selectedIndexes()))
+        for r in rows:
+            self.txtId_ser.setText(self.table_ser.item(r, 0).text())
+            self.txtNom_ser.setText(self.table_ser.item(r, 1).text())
+            self.cbbPro_ser.setCurrentText(self.table_ser.item(r, 2).text())
+            self.txtSer_ser.setText(self.table_ser.item(r, 3).text())
+            self.horHor_ser.setText(self.table_ser.item(r, 4).text())
+
+    # popula combobox profissional
+    def popula_cbb_profissional(self):
+        self.cbbPro_ser.clear()
+        self.cbbPro_ser.addItem("Selecionar")
+        self.cbbPro_ser.setCurrentIndex(0)
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'select usuario from tbusuarios order by usuario'
+        try:
+            cursor.execute(sql)
+            rs = cursor.fetchall()
+            for i in range(len(rs)):
+                print(len(rs))
+                print(rs)
+                print(i)
+                self.cbbPro_ser.addItem(rs[i][0])
+            db.close()
+        except Exception as e:
+            db.close()
+            print(e)
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
 
     # METODOS TAB HORÁRIOS -----------------------------------------------------------
 
@@ -696,6 +755,11 @@ class UiMainWindow(QMainWindow):
             self.table_hor.setItem(row, 5, QTableWidgetItem(r[5]))
             row += 1
         db.close()
+
+    def setar_campos_hor(self):
+        rows = sorted(set(index.row() for index in self.table_hor.selectedIndexes()))
+        for r in rows:
+            print(r)
 
 
 app = QApplication(sys.argv)
