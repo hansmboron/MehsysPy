@@ -1,7 +1,7 @@
 import sqlite3
 import sys
 
-from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize
+from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize, QDate
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
     QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, QTimeEdit, \
     QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget
@@ -421,6 +421,8 @@ class UiMainWindow(QMainWindow):
         self.btnPesDat_hor.clicked.connect(self.pesq_hor_by_date)
         self.txtPesDat_hor.textChanged.connect(self.pesq_hor_by_date)
         self.tabWidget.currentChanged.connect(self.popula_todas_tabelas)
+        # self.cbbHor_hor.currentTextChanged.connect(self.popula_cbb_horarios)
+        # self.cbbHor_hor.activated.connect(self.popula_cbb_horarios)
 
         self.table_cli.clicked.connect(self.setar_campos_cli)
         self.table_ser.clicked.connect(self.setar_campos_ser)
@@ -586,7 +588,10 @@ class UiMainWindow(QMainWindow):
         self.pesquisar_horarios()
         self.pesquisar_clientes()
         self.pesquisar_servicos()
+        self.popula_cbb_servicos()
         self.popula_cbb_profissional()
+        self.popula_cbb_profissional_hor()
+        self.popula_cbb_horarios(self.cbbPro_hor.currentText(), self.dat_hor.text())
 
     # MÉTODOS TAB CLIENTES --------------------------------------------------------------
 
@@ -603,7 +608,7 @@ class UiMainWindow(QMainWindow):
         try:
             if len(nome.strip()) < 4 or len(cpf.strip()) < 11 or len(fone.strip()) < 11:
                 QMessageBox.warning(self, 'Preencha os campos', 'Preencha os campos obrigatórios para adicionar novo '
-                                    'cliente')
+                                                                'cliente')
             else:
                 cursor.execute(sql, [nome, sexo, cpf, endereco, fone])
                 db.commit()
@@ -667,18 +672,22 @@ class UiMainWindow(QMainWindow):
         sql = 'select id as ID, nome as Nome, usuario as Profissional, valor as Valor, duracao as Duração from ' \
               'tbservicos where nome like ? '
         search = '%' + self.lineEdit_9.text() + '%'
-        cursor.execute(sql, [search])
-        rs = cursor.fetchall()
-        row = 0
-        self.table_ser.setRowCount(len(rs))
-        for r in rs:
-            self.table_ser.setItem(row, 0, QTableWidgetItem(str(r[0])))
-            self.table_ser.setItem(row, 1, QTableWidgetItem(r[1]))
-            self.table_ser.setItem(row, 2, QTableWidgetItem(r[2]))
-            self.table_ser.setItem(row, 3, QTableWidgetItem(r[3]))
-            self.table_ser.setItem(row, 4, QTableWidgetItem(r[4]))
-            row += 1
-        db.close()
+        try:
+            cursor.execute(sql, [search])
+            rs = cursor.fetchall()
+            row = 0
+            self.table_ser.setRowCount(len(rs))
+            for r in rs:
+                self.table_ser.setItem(row, 0, QTableWidgetItem(str(r[0])))
+                self.table_ser.setItem(row, 1, QTableWidgetItem(r[1]))
+                self.table_ser.setItem(row, 2, QTableWidgetItem(r[2]))
+                self.table_ser.setItem(row, 3, QTableWidgetItem(r[3]))
+                self.table_ser.setItem(row, 4, QTableWidgetItem(r[4]))
+                row += 1
+            db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
 
     # popular campos do formulário selecionando uma linha da tabela
     def setar_campos_ser(self):
@@ -702,14 +711,10 @@ class UiMainWindow(QMainWindow):
             cursor.execute(sql)
             rs = cursor.fetchall()
             for i in range(len(rs)):
-                print(len(rs))
-                print(rs)
-                print(i)
                 self.cbbPro_ser.addItem(rs[i][0])
             db.close()
         except Exception as e:
             db.close()
-            print(e)
             QMessageBox.warning(self, 'ERRO!!!', str(e))
 
     # METODOS TAB HORÁRIOS -----------------------------------------------------------
@@ -721,19 +726,23 @@ class UiMainWindow(QMainWindow):
         sql = 'select id as ID, cliente as Cliente, servico as Serviço, data as Data, horario as Horário, ' \
               'profissional as Profissional from tbhorarios where cliente like ? '
         search = '%' + self.txtPesNom_hor.text() + '%'
-        cursor.execute(sql, [search])
-        rs = cursor.fetchall()
-        row = 0
-        self.table_hor.setRowCount(len(rs))
-        for r in rs:
-            self.table_hor.setItem(row, 0, QTableWidgetItem(str(r[0])))
-            self.table_hor.setItem(row, 1, QTableWidgetItem(r[1]))
-            self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
-            self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
-            self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
-            self.table_hor.setItem(row, 5, QTableWidgetItem(r[5]))
-            row += 1
-        db.close()
+        try:
+            cursor.execute(sql, [search])
+            rs = cursor.fetchall()
+            row = 0
+            self.table_hor.setRowCount(len(rs))
+            for r in rs:
+                self.table_hor.setItem(row, 0, QTableWidgetItem(str(r[0])))
+                self.table_hor.setItem(row, 1, QTableWidgetItem(r[1]))
+                self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
+                self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
+                self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
+                self.table_hor.setItem(row, 5, QTableWidgetItem(r[5]))
+                row += 1
+            db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
 
     # Carregar tabela com dados dos horarios por nome
     def pesq_hor_by_date(self):
@@ -741,25 +750,102 @@ class UiMainWindow(QMainWindow):
         cursor = db.cursor()
         sql = 'select id as ID, cliente as Cliente, servico as Serviço, data as Data, horario as Horário, ' \
               'profissional as Profissional from tbhorarios where data like ? '
-        search = '%' + self.txtPesDat_hor.text() + '%'
-        cursor.execute(sql, [search])
-        rs = cursor.fetchall()
-        row = 0
-        self.table_hor.setRowCount(len(rs))
-        for r in rs:
-            self.table_hor.setItem(row, 0, QTableWidgetItem(str(r[0])))
-            self.table_hor.setItem(row, 1, QTableWidgetItem(r[1]))
-            self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
-            self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
-            self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
-            self.table_hor.setItem(row, 5, QTableWidgetItem(r[5]))
-            row += 1
-        db.close()
+        try:
+            search = '%' + self.txtPesDat_hor.text() + '%'
+            cursor.execute(sql, [search])
+            rs = cursor.fetchall()
+            row = 0
+            self.table_hor.setRowCount(len(rs))
+            for r in rs:
+                self.table_hor.setItem(row, 0, QTableWidgetItem(str(r[0])))
+                self.table_hor.setItem(row, 1, QTableWidgetItem(r[1]))
+                self.table_hor.setItem(row, 2, QTableWidgetItem(r[2]))
+                self.table_hor.setItem(row, 3, QTableWidgetItem(r[3]))
+                self.table_hor.setItem(row, 4, QTableWidgetItem(r[4]))
+                self.table_hor.setItem(row, 5, QTableWidgetItem(r[5]))
+                row += 1
+            db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
 
+    # popular campos do formulário selecionando uma linha da tabela
     def setar_campos_hor(self):
         rows = sorted(set(index.row() for index in self.table_hor.selectedIndexes()))
         for r in rows:
-            print(r)
+            self.txtId_hor.setText(self.table_hor.item(r, 0).text())
+            self.txtPesCli_hor.setText(self.table_hor.item(r, 1).text())
+            self.cbbSer_hor.setCurrentText(self.table_hor.item(r, 2).text())
+            y = int(self.table_hor.item(r, 3).text()[6:])
+            m = int(self.table_hor.item(r, 3).text()[3:5])
+            d = int(self.table_hor.item(r, 3).text()[:2])
+            data = QDate(y, m, d)
+            self.dat_hor.setDate(data)
+            self.cbbHor_hor.setCurrentText(self.table_hor.item(r, 4).text())
+            self.cbbPro_hor.setCurrentText(self.table_hor.item(r, 5).text())
+
+    # popula combobox serviços
+    def popula_cbb_servicos(self):
+        self.cbbSer_hor.clear()
+        self.cbbSer_hor.addItem("Selecionar")
+        self.cbbSer_hor.setCurrentIndex(0)
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'select nome, id from tbservicos order by nome'
+        try:
+            cursor.execute(sql)
+            rs = cursor.fetchall()
+            for i in range(len(rs)):
+                self.cbbSer_hor.addItem(rs[i][0] + '  - ' + str(rs[i][1]))
+            db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+    # popula combobox de horários de atendimento
+    def popula_cbb_horarios(self, profissional, data):
+        self.cbbHor_hor.clear()
+        self.cbbHor_hor.addItem("Selecionar")
+        self.cbbHor_hor.setCurrentIndex(0)
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = "select p.* from (select '" \
+              + data + "' data, '" + profissional + \
+              "' funcionario, horario from " \
+              "horarios) p left join " \
+              "horarios_agendados c on " \
+              "p.horario=c.horario and " \
+              "p.data=c.data and " \
+              "p.funcionario=c.funcionario where " \
+              "c.data is null "
+        try:
+            cursor.execute(sql)
+            rs = cursor.fetchall()
+            for i in range(len(rs)):
+                self.cbbHor_hor.addItem(rs[i][2])
+            db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+        # popula combobox profissionais
+
+    def popula_cbb_profissional_hor(self):
+        self.cbbPro_hor.clear()
+        self.cbbPro_hor.addItem("Selecionar")
+        self.cbbPro_hor.setCurrentIndex(0)
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'select usuario from tbusuarios order by usuario'
+        try:
+            cursor.execute(sql)
+            rs = cursor.fetchall()
+            for i in range(len(rs)):
+                self.cbbPro_hor.addItem(rs[i][0])
+            db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
 
 
 app = QApplication(sys.argv)
