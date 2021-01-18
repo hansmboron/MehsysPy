@@ -393,8 +393,7 @@ class UiMainWindow(QMainWindow):
         self.table_hor.setColumnWidth(1, 180)
         self.table_hor.setColumnWidth(5, 120)
         self.table_cli.setColumnWidth(0, 50)
-        self.table_cli.setColumnWidth(1, 200)
-        self.table_cli.setColumnWidth(5, 130)
+        self.table_cli.setColumnWidth(1, 190)
         self.table_ser.setColumnWidth(0, 50)
         self.table_ser.setColumnWidth(1, 200)
         self.table_ser.setColumnWidth(2, 200)
@@ -402,10 +401,13 @@ class UiMainWindow(QMainWindow):
         # desativar botões por padrao
         self.txtId_hor.setEnabled(False)
         self.btnAtu_hor.setEnabled(False)
+        self.btnExc_hor.setEnabled(False)
         self.txtId_cli.setEnabled(False)
         self.btnAtu_cli.setEnabled(False)
+        self.btnExc_cli.setEnabled(False)
         self.txtId_ser.setEnabled(False)
         self.pushButton_18.setEnabled(False)
+        self.pushButton_19.setEnabled(False)
         self.listPesCli.setVisible(False)
         # self.listPesCli.setEnabled(False)
 
@@ -416,6 +418,8 @@ class UiMainWindow(QMainWindow):
         self.actionHor_rios.triggered.connect(self.on_menu_horarios)
         self.actionServi_os.triggered.connect(self.on_menu_servicos)
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
+        self.btnAtu_cli.clicked.connect(self.on_btn_atu_cli_pressed)
+        self.btnExc_cli.clicked.connect(self.on_btn_del_cli_pressed)
         self.btnLim_cli.clicked.connect(self.on_btn_clear_cli_pressed)
         self.btnPesNom_cli.clicked.connect(self.pesquisar_clientes)
         self.txtPesNom_cli.textChanged.connect(self.pesquisar_clientes)
@@ -627,20 +631,70 @@ class UiMainWindow(QMainWindow):
         endereco = self.txtEnd_cli.text()
         fone = self.txtFon_cli.text()
         try:
-            if len(nome.strip()) < 4 or len(cpf.strip()) < 11 or len(fone.strip()) < 11:
-                QMessageBox.warning(self, 'Preencha os campos', 'Preencha os campos obrigatórios para adicionar novo '
-                                                                'cliente')
+            if len(nome.strip()) < 4 or len(cpf.strip()) < 14 or len(fone.strip()) < 14:
+                QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para adicionar novo cliente!')
             else:
                 cursor.execute(sql, [nome, sexo, cpf, endereco, fone])
                 db.commit()
                 QMessageBox.information(
-                    self, 'SUCESSO', 'Cliente Adicionado com Sucesso!')
+                    self, 'SUCESSO!!!', 'Cliente ADICIONADO com Sucesso!')
                 self.pesquisar_clientes()
                 self.on_btn_clear_cli_pressed()
                 db.close()
         except Exception as e:
             db.close()
             QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+    # atualizar dados de cliente
+    def on_btn_atu_cli_pressed(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'update tbclientes set nome=?, sexo=?, cpf=?, endereco=?, fone=? where id=?'
+        nome = self.txtNom_cli.text()
+        sexo = self.cbcSex_cli.currentText()
+        cpf = self.txtCpf_cli.text()
+        endereco = self.txtEnd_cli.text()
+        fone = self.txtFon_cli.text()
+        id = self.txtId_cli.text()
+        try:
+            if len(nome.strip()) < 4 or len(cpf.strip()) < 14 or len(fone.strip()) < 14:
+                QMessageBox.warning(self, 'Preencha os campos', 'Preencha os campos obrigatórios para atualizar dados '
+                                                                'do cliente')
+            else:
+                cursor.execute(sql, [nome, sexo, cpf, endereco, fone, id])
+                db.commit()
+                QMessageBox.information(
+                    self, 'SUCESSO!!!', 'Cliente ATUALIZADO com Sucesso!')
+                self.pesquisar_clientes()
+                self.on_btn_clear_cli_pressed()
+                db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+    # deletar cliente do banco de dados
+    def on_btn_del_cli_pressed(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'delete from tbclientes where id=?'
+        id = self.txtId_cli.text()
+        confirm = QMessageBox.question(self, 'REMOVER CLIENTE?',
+                                       f'Tem certeza que quer REMOVER o cliente ({self.txtNom_cli.text()})?',
+                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if confirm == QMessageBox.Yes:
+            try:
+                cursor.execute(sql, [id])
+                db.commit()
+                QMessageBox.information(
+                    self, 'SUCESSO!!!', f'Cliente ({self.txtNom_cli.text()}) EXCLUIDO com Sucesso!')
+                self.pesquisar_clientes()
+                self.on_btn_clear_cli_pressed()
+                db.close()
+            except Exception as e:
+                db.close()
+                QMessageBox.warning(self, 'ERRO!!!', str(e))
+        else:
+            db.close()
 
     def on_btn_clear_cli_pressed(self):
         self.btnAtu_cli.setEnabled(False)
@@ -651,6 +705,9 @@ class UiMainWindow(QMainWindow):
         self.txtCpf_cli.setText(None)
         self.txtEnd_cli.setText(None)
         self.txtFon_cli.setText(None)
+        self.btnSal_cli.setEnabled(True)
+        self.btnAtu_cli.setEnabled(False)
+        self.btnExc_cli.setEnabled(False)
 
     # Carregar tabela com dados dos clientes
     def pesquisar_clientes(self):
@@ -683,6 +740,9 @@ class UiMainWindow(QMainWindow):
             self.txtCpf_cli.setText(self.table_cli.item(r, 3).text())
             self.txtEnd_cli.setText(self.table_cli.item(r, 4).text())
             self.txtFon_cli.setText(self.table_cli.item(r, 5).text())
+        self.btnSal_cli.setEnabled(False)
+        self.btnAtu_cli.setEnabled(True)
+        self.btnExc_cli.setEnabled(True)
 
     # METODOS TAB SERVIÇOS -----------------------------------------------------------
 
