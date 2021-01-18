@@ -387,6 +387,7 @@ class UiMainWindow(QMainWindow):
         self.txtFon_cli.setInputMask('(##) #####-####')
         self.txtSer_ser.setInputMask('R$#.###,##')
         self.horHor_ser.setInputMask('#:##min')
+        self.horHor_ser.setText('n')
 
         # largura padrao das tabelas
         self.table_hor.setColumnWidth(0, 50)
@@ -423,6 +424,10 @@ class UiMainWindow(QMainWindow):
         self.btnLim_cli.clicked.connect(self.on_btn_clear_cli_pressed)
         self.btnPesNom_cli.clicked.connect(self.pesquisar_clientes)
         self.txtPesNom_cli.textChanged.connect(self.pesquisar_clientes)
+        self.pushButton_17.clicked.connect(self.on_btn_sal_ser_pressed)
+        self.pushButton_18.clicked.connect(self.on_btn_atu_ser_pressed)
+        self.pushButton_19.clicked.connect(self.on_btn_del_ser_pressed)
+        self.pushButton_21.clicked.connect(self.on_btn_clear_ser_pressed)
         self.pushButton_15.clicked.connect(self.pesquisar_servicos)
         self.lineEdit_9.textChanged.connect(self.pesquisar_servicos)
         self.btnPesNom_hor.clicked.connect(self.pesquisar_horarios)
@@ -697,8 +702,6 @@ class UiMainWindow(QMainWindow):
             db.close()
 
     def on_btn_clear_cli_pressed(self):
-        self.btnAtu_cli.setEnabled(False)
-        self.btnSal_cli.setEnabled(True)
         self.txtId_cli.setText(None)
         self.txtNom_cli.setText(None)
         self.cbcSex_cli.setCurrentIndex(0)
@@ -746,6 +749,92 @@ class UiMainWindow(QMainWindow):
 
     # METODOS TAB SERVIÇOS -----------------------------------------------------------
 
+    # Adicionar novo serviço
+    def on_btn_sal_ser_pressed(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'insert into tbservicos(nome, usuario, valor, duracao) values(?,?,?,?)'
+        nome = self.txtNom_ser.text()
+        prof = self.cbbPro_ser.currentText()
+        valor = self.txtSer_ser.text()
+        print(valor[2:3])
+        duracao = self.horHor_ser.text()
+        try:
+            if len(nome.strip()) < 4 or len(valor.strip()) < 10 or (int(valor[4:7]) <= 0 and int(valor[2:3]) <= 0):
+                QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para adicionar novo serviço!')
+            else:
+                cursor.execute(sql, [nome, prof, valor, duracao])
+                db.commit()
+                QMessageBox.information(
+                    self, 'SUCESSO!!!', 'Serviço ADICIONADO com Sucesso!')
+                self.pesquisar_servicos()
+                self.on_btn_clear_ser_pressed()
+                db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+    # atualizar dados de serviço
+    def on_btn_atu_ser_pressed(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'update tbservicos set nome=?, usuario=?, valor=?, duracao=? where id=?'
+        nome = self.txtNom_ser.text()
+        prof = self.cbbPro_ser.currentText()
+        valor = self.txtSer_ser.text()
+        duracao = self.horHor_ser.text()
+        id = self.txtId_ser.text()
+        try:
+            if len(nome.strip()) < 4 or len(valor.strip()) < 10 or (int(valor[4:7]) <= 0 and int(valor[2:3]) <= 0):
+                QMessageBox.warning(self, 'Preencha os campos',
+                                    'Preencha os campos obrigatórios para atualizar dados '
+                                    'do serviço')
+            else:
+                cursor.execute(sql, [nome, prof, valor, duracao, id])
+                db.commit()
+                QMessageBox.information(
+                    self, 'SUCESSO!!!', 'Serviço ATUALIZADO com Sucesso!')
+                self.pesquisar_servicos()
+                self.on_btn_clear_ser_pressed()
+                db.close()
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+    # deletar serviço do banco de dados
+    def on_btn_del_ser_pressed(self):
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = 'delete from tbservicos where id=?'
+        id = self.txtId_ser.text()
+        confirm = QMessageBox.question(self, 'REMOVER SERVIÇO?',
+                                       f'Tem certeza que quer REMOVER o serviço ({self.txtNom_ser.text()})?',
+                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if confirm == QMessageBox.Yes:
+            try:
+                cursor.execute(sql, [id])
+                db.commit()
+                QMessageBox.information(
+                    self, 'SUCESSO!!!', f'Cliente ({self.txtNom_ser.text()}) EXCLUIDO com Sucesso!')
+                self.pesquisar_servicos()
+                self.on_btn_clear_ser_pressed()
+                db.close()
+            except Exception as e:
+                db.close()
+                QMessageBox.warning(self, 'ERRO!!!', str(e))
+        else:
+            db.close()
+
+    def on_btn_clear_ser_pressed(self):
+        self.txtId_ser.setText(None)
+        self.txtNom_ser.setText(None)
+        self.cbbPro_ser.setCurrentIndex(0)
+        self.txtSer_ser.setText(None)
+        self.horHor_ser.setText(None)
+        self.pushButton_17.setEnabled(True)
+        self.pushButton_18.setEnabled(False)
+        self.pushButton_19.setEnabled(False)
+
     # Carregar tabela com dados dos serviços
     def pesquisar_servicos(self):
         db = sqlite3.connect('dbmehsys.db')
@@ -779,6 +868,9 @@ class UiMainWindow(QMainWindow):
             self.cbbPro_ser.setCurrentText(self.table_ser.item(r, 2).text())
             self.txtSer_ser.setText(self.table_ser.item(r, 3).text())
             self.horHor_ser.setText(self.table_ser.item(r, 4).text())
+        self.pushButton_17.setEnabled(False)
+        self.pushButton_18.setEnabled(True)
+        self.pushButton_19.setEnabled(True)
 
     # popula combobox profissional
     def popula_cbb_profissional(self):
