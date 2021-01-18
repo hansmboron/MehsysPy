@@ -909,30 +909,32 @@ class UiMainWindow(QMainWindow):
         prof = self.cbbPro_hor.currentText()
         sql3 = 'select nome from tbservicos where nome = ?'
         try:
-            cursor.execute(sql3, [servico])
-            rs_ser = cursor.fetchall()
-            id_ser = -1
-            if len(rs_ser) >= 1:
-                id_ser = rs_ser[0][0]
+            for i in range(1):
+                cursor.execute(sql3, [servico])
+                rs_ser = cursor.fetchall()
+                id_ser = -1
+                if len(rs_ser) >= 1:
+                    id_ser = rs_ser[0][0]
 
-            if self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
-                    and self.cbbHor_hor.currentIndex() < 0 \
-                    and self.dat_hor.text() != '01/01/2000':
-                self.popula_cbb_horarios()
-                QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
+                if self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
+                        and self.cbbHor_hor.currentIndex() < 0 \
+                        and self.dat_hor.text() != '01/01/2000':
+                    self.popula_cbb_horarios()
+                    QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
+                    break
 
-            if len(
-                    cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() == 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
-                QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para criar novo Agendamento!')
-            else:
-                cursor.execute(sql, [cliente, servico, data, horario, prof, id_ser])
-                cursor.execute(sql2, [data, prof, horario])
-                db.commit()
-                QMessageBox.information(
-                    self, 'SUCESSO!!!', 'Agendamento ADICIONADO com Sucesso!')
-                self.pesquisar_horarios()
-                self.on_btn_clear_hor_pressed()
-                db.close()
+                if len(
+                        cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() == 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
+                    QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para criar novo Agendamento!')
+                else:
+                    cursor.execute(sql, [cliente, servico, data, horario, prof, id_ser])
+                    cursor.execute(sql2, [data, prof, horario])
+                    db.commit()
+                    QMessageBox.information(
+                        self, 'SUCESSO!!!', 'Agendamento ADICIONADO com Sucesso!')
+                    self.pesquisar_horarios()
+                    self.on_btn_clear_hor_pressed()
+            db.close()
         except Exception as e:
             db.close()
             QMessageBox.warning(self, 'ERRO!!!', str(e))
@@ -941,25 +943,43 @@ class UiMainWindow(QMainWindow):
     def on_btn_atu_hor_pressed(self):
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
-        sql = 'update tbservicos set nome=?, usuario=?, valor=?, duracao=? where id=?'
-        nome = self.txtNom_ser.text()
-        prof = self.cbbPro_ser.currentText()
-        valor = self.txtSer_ser.text()
-        duracao = self.horHor_ser.text()
-        id = self.txtId_ser.text()
+        sql = 'update tbhorarios set cliente=?, servico=?, data=?, horario=?, profissional=?, id_ser=? where id=?'
+        sql2 = 'update horarios_agendados set data=?, funcionario=?, horario=? where data=? and funcionario=? and ' \
+               'horario=? '
+        cliente = self.txtPesCli_hor.text()
+        servico = self.cbbSer_hor.currentText()
+        data = self.dat_hor.text()
+        horario = self.cbbHor_hor.currentText()
+        prof = self.cbbPro_hor.currentText()
+        id = self.txtId_hor.text()
+        sql3 = 'select nome from tbservicos where nome = ?'
         try:
-            if len(nome.strip()) < 4 or len(valor.strip()) < 10 or (int(valor[4:7]) <= 0 and int(valor[2:3]) <= 0):
-                QMessageBox.warning(self, 'Preencha os campos',
-                                    'Preencha os campos obrigatórios para atualizar dados '
-                                    'do serviço')
-            else:
-                cursor.execute(sql, [nome, prof, valor, duracao, id])
-                db.commit()
-                QMessageBox.information(
-                    self, 'SUCESSO!!!', 'Serviço ATUALIZADO com Sucesso!')
-                self.pesquisar_servicos()
-                self.on_btn_clear_ser_pressed()
-                db.close()
+            for i in range(1):
+                cursor.execute(sql3, [servico])
+                rs_ser = cursor.fetchall()
+                id_ser = -1
+                if len(rs_ser) >= 1:
+                    id_ser = rs_ser[0][0]
+
+                if self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
+                        and self.cbbHor_hor.currentIndex() < 0 \
+                        and self.dat_hor.text() != '01/01/2000':
+                    self.popula_cbb_horarios()
+                    QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
+                    break
+
+                if len(
+                        cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() == 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
+                    QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para Atualizar o Agendamento!')
+                else:
+                    cursor.execute(sql, [cliente, servico, data, horario, prof, id_ser, id])
+                    cursor.execute(sql2, [data, prof, horario, data, prof, horario])
+                    db.commit()
+                    QMessageBox.information(
+                        self, 'SUCESSO!!!', 'Agendamento ATUALIZADO com Sucesso!')
+                    self.pesquisar_horarios()
+                    self.on_btn_clear_hor_pressed()
+            db.close()
         except Exception as e:
             db.close()
             QMessageBox.warning(self, 'ERRO!!!', str(e))
@@ -968,19 +988,24 @@ class UiMainWindow(QMainWindow):
     def on_btn_del_hor_pressed(self):
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
-        sql = 'delete from tbservicos where id=?'
-        id = self.txtId_ser.text()
-        confirm = QMessageBox.question(self, 'REMOVER SERVIÇO?',
-                                       f'Tem certeza que quer REMOVER o serviço ({self.txtNom_ser.text()})?',
+        sql = 'delete from tbhorarios where id=?'
+        sql2 = 'delete from horarios_agendados where data=? and funcionario=? and horario=?'
+        id = self.txtId_hor.text()
+        data = self.dat_hor.text()
+        horario = self.cbbHor_hor.currentText()
+        prof = self.cbbPro_hor.currentText()
+        confirm = QMessageBox.question(self, 'REMOVER AGENDAMENTO?',
+                                       f'Tem certeza que quer REMOVER o agendamento nº:({id})?',
                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if confirm == QMessageBox.Yes:
             try:
                 cursor.execute(sql, [id])
+                cursor.execute(sql2, [data, prof, horario])
                 db.commit()
                 QMessageBox.information(
-                    self, 'SUCESSO!!!', f'Cliente ({self.txtNom_ser.text()}) EXCLUIDO com Sucesso!')
-                self.pesquisar_servicos()
-                self.on_btn_clear_ser_pressed()
+                    self, 'SUCESSO!!!', f'Agendamento nº:({id}) EXCLUIDO com Sucesso!')
+                self.pesquisar_horarios()
+                self.on_btn_clear_hor_pressed()
                 db.close()
             except Exception as e:
                 db.close()
@@ -995,6 +1020,7 @@ class UiMainWindow(QMainWindow):
         self.cbbPro_hor.setCurrentIndex(0)
         self.dat_hor.setDate(QDate(2000, 1, 1))
         self.cbbHor_hor.setCurrentIndex(0)
+        self.cbbSer_hor.setEnabled(True)
         self.btnAtu_hor.setEnabled(False)
         self.btnExc_hor.setEnabled(False)
         self.btnAge_hor.setEnabled(True)
@@ -1068,6 +1094,7 @@ class UiMainWindow(QMainWindow):
         self.btnAtu_hor.setEnabled(True)
         self.btnExc_hor.setEnabled(True)
         self.btnAge_hor.setEnabled(False)
+        self.cbbSer_hor.setEnabled(False)
         self.listPesCli.setVisible(False)
 
     # pesquisa clientes para o campo de texto txtPesCli_hor
