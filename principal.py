@@ -1,10 +1,10 @@
 import sqlite3
 import sys
 
-from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize, QDate
+from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize, QDate, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
-    QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, QTimeEdit, \
-    QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget
+    QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, \
+    QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget, QListWidget
 
 from Utils.readOnly import ReadOnlyDelegate
 from usuario import UiUsuario
@@ -198,6 +198,9 @@ class UiMainWindow(QMainWindow):
         self.horizontalLayout_3.addWidget(self.txtPesDat_hor)
         self.btnPesDat_hor.setObjectName("btnPesDat_hor")
         self.horizontalLayout_3.addWidget(self.btnPesDat_hor)
+        self.listPesCli = QListWidget(self.tabHor)
+        self.listPesCli.setGeometry(QRect(20, 47, 338, 91))
+        self.listPesCli.setObjectName("listPesCli")
         self.tabWidget.addTab(self.tabHor, "")
         self.tabCli.setObjectName("tabCli")
         self.layoutWidget3.setGeometry(QRect(120, 230, 481, 41))
@@ -403,6 +406,8 @@ class UiMainWindow(QMainWindow):
         self.btnAtu_cli.setEnabled(False)
         self.txtId_ser.setEnabled(False)
         self.pushButton_18.setEnabled(False)
+        self.listPesCli.setVisible(False)
+        # self.listPesCli.setEnabled(False)
 
         # conectar funçoes com componentes da view
         self.actionUsu_rios.triggered.connect(self.open_users_screens)
@@ -421,8 +426,10 @@ class UiMainWindow(QMainWindow):
         self.btnPesDat_hor.clicked.connect(self.pesq_hor_by_date)
         self.txtPesDat_hor.textChanged.connect(self.pesq_hor_by_date)
         self.tabWidget.currentChanged.connect(self.popula_todas_tabelas)
-        # self.cbbHor_hor.currentTextChanged.connect(self.popula_cbb_horarios)
-        # self.cbbHor_hor.activated.connect(self.popula_cbb_horarios)
+        self.txtPesCli_hor.textChanged.connect(self.popula_list_cli)
+        self.listPesCli.clicked.connect(self.get_item_selected)
+        # self.cbbHor_hor.currentTextChanged.connect(self.call_popula_hor)
+        # self.cbbHor_hor.activated.connect(self.call_popula_hor)
 
         self.table_cli.clicked.connect(self.setar_campos_cli)
         self.table_ser.clicked.connect(self.setar_campos_ser)
@@ -556,6 +563,21 @@ class UiMainWindow(QMainWindow):
         else:
             event.ignore()
 
+    # def keyPressEvent(self, event):
+    #     if event.key() and self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
+    #             and self.cbbHor_hor.currentIndex() < 0 \
+    #             and self.dat_hor.text() != '01/01/2000':
+    #         print('evento')
+    #         self.popula_cbb_horarios(self.cbbPro_hor.currentText(), self.dat_hor.text())
+
+    # popula horários somente quando outros campos obrigatórios estão preenchidos e o horário não está no cliq do mouse
+    def mousePressEvent(self, event):
+        if event.buttons() and self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
+                and self.cbbHor_hor.currentIndex() < 0 \
+                and self.dat_hor.text() != '01/01/2000':
+            print('evento')
+            self.popula_cbb_horarios(self.cbbPro_hor.currentText(), self.dat_hor.text())
+
     # centralizar tela
     def center(self):
         qr = self.frameGeometry()
@@ -591,7 +613,6 @@ class UiMainWindow(QMainWindow):
         self.popula_cbb_servicos()
         self.popula_cbb_profissional()
         self.popula_cbb_profissional_hor()
-        self.popula_cbb_horarios(self.cbbPro_hor.currentText(), self.dat_hor.text())
 
     # MÉTODOS TAB CLIENTES --------------------------------------------------------------
 
@@ -784,6 +805,56 @@ class UiMainWindow(QMainWindow):
             self.cbbHor_hor.setCurrentText(self.table_hor.item(r, 4).text())
             self.cbbPro_hor.setCurrentText(self.table_hor.item(r, 5).text())
 
+    # pesquisa clientes para o campo de texto txtPesCli_hor
+    def popula_list_cli(self):
+        self.listPesCli.clear()
+        db = sqlite3.connect('dbmehsys.db')
+        cursor = db.cursor()
+        sql = "select nome from tbclientes where nome like ? order by nome"
+        search = '%' + self.txtPesCli_hor.text() + '%'
+        try:
+            cursor.execute(sql, [search])
+            rs = cursor.fetchall()
+            v = 0
+            if len(rs) == 1:
+                self.listPesCli.addItem(rs[0][0])
+                v = 1
+            elif len(rs) == 2:
+                self.listPesCli.addItem(rs[0][0])
+                self.listPesCli.addItem(rs[1][0])
+                v = 2
+            elif len(rs) == 3:
+                self.listPesCli.addItem(rs[0][0])
+                self.listPesCli.addItem(rs[1][0])
+                self.listPesCli.addItem(rs[2][0])
+                v = 3
+            elif len(rs) == 4:
+                self.listPesCli.addItem(rs[0][0])
+                self.listPesCli.addItem(rs[1][0])
+                self.listPesCli.addItem(rs[2][0])
+                self.listPesCli.addItem(rs[3][0])
+                v = 4
+            else:
+                while len(rs) > 0 and v <= 4:
+                    self.listPesCli.addItem(rs[v][0])
+                    v += 1
+            db.close()
+
+            if v >= 1:
+                self.listPesCli.setVisible(True)
+            else:
+                self.listPesCli.setVisible(False)
+
+        except Exception as e:
+            db.close()
+            QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+    # obter valor da lista
+    def get_item_selected(self):
+        print(self.listPesCli.currentItem().text())
+        self.txtPesCli_hor.setText(self.listPesCli.currentItem().text())
+        self.listPesCli.setVisible(False)
+
     # popula combobox serviços
     def popula_cbb_servicos(self):
         self.cbbSer_hor.clear()
@@ -828,8 +899,7 @@ class UiMainWindow(QMainWindow):
             db.close()
             QMessageBox.warning(self, 'ERRO!!!', str(e))
 
-        # popula combobox profissionais
-
+    # popula combobox profissionais
     def popula_cbb_profissional_hor(self):
         self.cbbPro_hor.clear()
         self.cbbPro_hor.addItem("Selecionar")
