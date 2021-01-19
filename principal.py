@@ -1,10 +1,13 @@
 import sqlite3
 import sys
+import os
 
 from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize, QDate, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
     QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, \
-    QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget, QListWidget
+    QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget, QListWidget, QFileDialog
+from reportlab.platypus import SimpleDocTemplate,Paragraph,Table,TableStyle
+from reportlab.lib import colors
 
 from Utils.readOnly import ReadOnlyDelegate
 from usuario import UiUsuario
@@ -418,6 +421,7 @@ class UiMainWindow(QMainWindow):
         self.actionClientes.triggered.connect(self.on_menu_clientes)
         self.actionHor_rios.triggered.connect(self.on_menu_horarios)
         self.actionServi_os.triggered.connect(self.on_menu_servicos)
+        self.actionClientes_2.triggered.connect(self.create_pdf_clients)
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
         self.btnAtu_cli.clicked.connect(self.on_btn_atu_cli_pressed)
         self.btnExc_cli.clicked.connect(self.on_btn_del_cli_pressed)
@@ -750,6 +754,34 @@ class UiMainWindow(QMainWindow):
         self.btnSal_cli.setEnabled(False)
         self.btnAtu_cli.setEnabled(True)
         self.btnExc_cli.setEnabled(True)
+
+    def create_pdf_clients(self):
+        confirm = QMessageBox.question(self, 'CONFIRMA IMPRESSÃO?',
+                                       'Confirma a impressão de um arquivo em "pdf" contendo\ntodos os clientes '
+                                       'cadastrados no bando de dados?',
+                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if confirm == QMessageBox.Yes:
+            file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo')
+            print(file[0])
+            doc = SimpleDocTemplate(file[0])
+            flow_obj = []
+            td = [["ID", "NOME", "SEXO", "CPF", "ENDEREÇO", "TELEFONE"]]
+            db = sqlite3.connect('dbmehsys.db')
+            cursor = db.cursor()
+            cursor.execute("select * from tbclientes")
+            rs = cursor.fetchall()
+            for i in range(len(rs)):
+                data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4], rs[i][5]]
+                td.append(data)
+            table = Table(td)
+            db.close()
+            ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
+                             ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
+                             ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
+            table.setStyle(ts)
+            flow_obj.append(table)
+            doc.build(flow_obj)
+
 
     # METODOS TAB SERVIÇOS ========================================================================
 
@@ -1106,7 +1138,7 @@ class UiMainWindow(QMainWindow):
         search = '%' + self.txtPesCli_hor.text() + '%'
         try:
             cursor.execute(sql, [search])
-            rs = cursor.fetchall()
+            rs = cursor.fetchmany(6)
             v = 0
             if len(rs) == 1:
                 self.listPesCli.addItem(rs[0][0])
