@@ -4,13 +4,12 @@ from userUi import Ui_UserMain
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget
 
 
-class UserWindow(QMainWindow):
+class UserWindow(QMainWindow, Ui_UserMain):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.ui = Ui_UserMain()
-        self.ui.setupUi(self)
+        self.setupUi(self)
         self.center()
 
     # centralizar tela

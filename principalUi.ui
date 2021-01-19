@@ -36,7 +36,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tabHor">
      <attribute name="title">
@@ -137,6 +137,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
           <widget class="QLineEdit" name="txtId_hor">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="placeholderText">
             <string>Id</string>
            </property>
@@ -175,6 +178,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnAtu_hor">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Atualizar</string>
          </property>
@@ -182,6 +188,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnExc_hor">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Excluir</string>
          </property>
@@ -248,6 +257,16 @@
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QListWidget" name="listPesCli_hor">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>47</y>
+        <width>338</width>
+        <height>91</height>
+       </rect>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tabCli">
@@ -342,6 +361,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnAtu_cli">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Atualizar</string>
          </property>
@@ -349,6 +371,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnExc_cli">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Excluir</string>
          </property>
@@ -408,6 +433,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
           <widget class="QLineEdit" name="txtId_cli">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="placeholderText">
             <string>Id</string>
            </property>
@@ -532,6 +560,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_18">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Atualizar</string>
          </property>
@@ -539,6 +570,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_19">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="text">
           <string>Excluir</string>
          </property>
@@ -598,13 +632,16 @@
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
           <widget class="QLineEdit" name="txtId_ser">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="placeholderText">
             <string>Id</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTimeEdit" name="horHor_ser"/>
+          <widget class="QLineEdit" name="horHor_ser"/>
          </item>
          <item>
           <spacer name="verticalSpacer">
@@ -655,8 +692,8 @@
     <property name="title">
      <string>Atendimentos</string>
     </property>
-    <addaction name="actionClientes"/>
     <addaction name="actionHor_rios"/>
+    <addaction name="actionClientes"/>
     <addaction name="actionServi_os"/>
    </widget>
    <widget class="QMenu" name="menuClientes">
@@ -669,8 +706,8 @@
     <property name="title">
      <string>Relatórios</string>
     </property>
-    <addaction name="actionClientes_2"/>
     <addaction name="actionHor_rios_2"/>
+    <addaction name="actionClientes_2"/>
     <addaction name="actionServi_os_2"/>
    </widget>
    <widget class="QMenu" name="menuServi_os">
@@ -678,7 +715,7 @@
      <string>Opções</string>
     </property>
     <addaction name="actionAjuda"/>
-    <addaction name="actionSair"/>
+    <addaction name="actionAddHor"/>
    </widget>
    <widget class="QMenu" name="menuSair">
     <property name="title">
@@ -697,15 +734,24 @@
    <property name="text">
     <string>Clientes</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+2</string>
+   </property>
   </action>
   <action name="actionHor_rios">
    <property name="text">
     <string>Horários</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+1</string>
+   </property>
   </action>
   <action name="actionServi_os">
    <property name="text">
     <string>Serviços</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+3</string>
    </property>
   </action>
   <action name="actionUsu_rios">
@@ -733,7 +779,7 @@
     <string>Ajuda</string>
    </property>
   </action>
-  <action name="actionSair">
+  <action name="actionAddHor">
    <property name="text">
     <string>Adicionar horários</string>
    </property>
@@ -741,6 +787,9 @@
   <action name="actionSair_2">
    <property name="text">
     <string>Sair</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
  </widget>

@@ -4,11 +4,11 @@ import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDesktopWidget, QApplication, QMessageBox, QMainWindow
 
-from loginUi import Ui_MainWindow
-from principal import UiMainWindow
+from loginUi import Ui_TelaLoginUi
+from principal import PrincipalWindow
 
 
-class LoginWindow(QMainWindow, Ui_MainWindow):
+class LoginWindow(QMainWindow, Ui_TelaLoginUi):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,7 +43,7 @@ class LoginWindow(QMainWindow, Ui_MainWindow):
                                 QMessageBox.Ok)
         elif len(rs) > 0:
             if rs[0][5] == 'admin':  # Se perfil == 'admin'
-                self.window = UiMainWindow()
+                self.window = PrincipalWindow()
                 self.window.show()
                 self.window.actionAddHor.setEnabled(True)
                 self.window.actionUsu_rios.setEnabled(True)
@@ -53,7 +53,7 @@ class LoginWindow(QMainWindow, Ui_MainWindow):
                 self.db.close()
                 login.close()
             else:  # perfil == 'user'
-                self.window = UiMainWindow()
+                self.window = PrincipalWindow()
                 self.window.show()
                 self.db.close()
                 login.close()
@@ -65,7 +65,7 @@ class LoginWindow(QMainWindow, Ui_MainWindow):
 
     # eventos do teclado
     def keyPressEvent(self, event):
-        if event.key() == Qt.Key_Enter:
+        if event.key() == Qt.Key_Enter or event.key() == Qt.Key_Return:
             self.login()
         if event.key() == Qt.Key_Down:
             self.txtPass.setFocus()

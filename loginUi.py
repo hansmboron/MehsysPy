@@ -11,12 +11,12 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(400, 280)
-        MainWindow.setMinimumSize(QtCore.QSize(400, 280))
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
+class Ui_TelaLoginUi(object):
+    def setupUi(self, TelaLoginUi):
+        TelaLoginUi.setObjectName("TelaLoginUi")
+        TelaLoginUi.resize(400, 280)
+        TelaLoginUi.setMinimumSize(QtCore.QSize(400, 280))
+        self.centralwidget = QtWidgets.QWidget(TelaLoginUi)
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(20, 10, 361, 241))
@@ -48,29 +48,29 @@ class Ui_MainWindow(object):
         self.btnEntrar.setGeometry(QtCore.QRect(20, 190, 321, 34))
         self.btnEntrar.setStyleSheet("background-color: rgb(120, 0, 180);")
         self.btnEntrar.setObjectName("btnEntrar")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        TelaLoginUi.setCentralWidget(self.centralwidget)
+        self.statusbar = QtWidgets.QStatusBar(TelaLoginUi)
         self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
+        TelaLoginUi.setStatusBar(self.statusbar)
 
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        self.retranslateUi(TelaLoginUi)
+        QtCore.QMetaObject.connectSlotsByName(TelaLoginUi)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, TelaLoginUi):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "Tela Login - Mehsys"))
-        self.label.setToolTip(_translate("MainWindow", "Nome de usuário"))
-        self.label.setStatusTip(_translate("MainWindow", "Nome de usuário"))
-        self.label.setText(_translate("MainWindow", "Usuário:"))
-        self.txtUser.setToolTip(_translate("MainWindow", "Nome de usuário"))
-        self.txtUser.setStatusTip(_translate("MainWindow", "Nome de usuário"))
-        self.txtUser.setPlaceholderText(_translate("MainWindow", "Nome de usuário"))
-        self.label_2.setToolTip(_translate("MainWindow", "Senha do usuário"))
-        self.label_2.setStatusTip(_translate("MainWindow", "Senha do usuário"))
-        self.label_2.setText(_translate("MainWindow", "Senha:"))
-        self.txtPass.setToolTip(_translate("MainWindow", "Senha do usuário"))
-        self.txtPass.setStatusTip(_translate("MainWindow", "Senha do usuário"))
-        self.txtPass.setPlaceholderText(_translate("MainWindow", "Senha do usuário"))
-        self.btnEntrar.setToolTip(_translate("MainWindow", "Entrar"))
-        self.btnEntrar.setStatusTip(_translate("MainWindow", "Entrar"))
-        self.btnEntrar.setText(_translate("MainWindow", "Entrar"))
+        TelaLoginUi.setWindowTitle(_translate("TelaLoginUi", "Tela Login - Mehsys"))
+        self.label.setToolTip(_translate("TelaLoginUi", "Nome de usuário"))
+        self.label.setStatusTip(_translate("TelaLoginUi", "Nome de usuário"))
+        self.label.setText(_translate("TelaLoginUi", "Usuário:"))
+        self.txtUser.setToolTip(_translate("TelaLoginUi", "Nome de usuário"))
+        self.txtUser.setStatusTip(_translate("TelaLoginUi", "Nome de usuário"))
+        self.txtUser.setPlaceholderText(_translate("TelaLoginUi", "Nome de usuário"))
+        self.label_2.setToolTip(_translate("TelaLoginUi", "Senha do usuário"))
+        self.label_2.setStatusTip(_translate("TelaLoginUi", "Senha do usuário"))
+        self.label_2.setText(_translate("TelaLoginUi", "Senha:"))
+        self.txtPass.setToolTip(_translate("TelaLoginUi", "Senha do usuário"))
+        self.txtPass.setStatusTip(_translate("TelaLoginUi", "Senha do usuário"))
+        self.txtPass.setPlaceholderText(_translate("TelaLoginUi", "Senha do usuário"))
+        self.btnEntrar.setToolTip(_translate("TelaLoginUi", "Entrar"))
+        self.btnEntrar.setStatusTip(_translate("TelaLoginUi", "Entrar"))
+        self.btnEntrar.setText(_translate("TelaLoginUi", "Entrar"))
