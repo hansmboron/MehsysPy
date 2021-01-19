@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UserMain</class>
+ <widget class="QMainWindow" name="UserMain">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>723</width>
+    <height>575</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>720</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Cadastro de Usuários - Mehsys</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>701</width>
+      <height>541</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Cadastro de Usuários</string>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+    <widget class="QTableWidget" name="table_user">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>320</y>
+       <width>680</width>
+       <height>212</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Id</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nome</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Telefone</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Login</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Senha</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Perfil</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Entrada</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Saída</string>
+      </property>
+     </column>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_6">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>30</y>
+       <width>681</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_9">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QLineEdit" name="txtNom_usu">
+          <property name="statusTip">
+           <string>*Digite o nome completo do usuário</string>
+          </property>
+          <property name="placeholderText">
+           <string>Nome usuário</string>
+          </property>
+          <property name="clearButtonEnabled">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtTel_usu">
+          <property name="statusTip">
+           <string>*Telefone do usuário</string>
+          </property>
+          <property name="inputMask">
+           <string>(##) #####-####</string>
+          </property>
+          <property name="placeholderText">
+           <string>Telefone usuário</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="cbbPer_usu">
+          <property name="statusTip">
+           <string>*Escolha o perfil do usuário(admin=acesso total, user=acesso parcial do sistema)</string>
+          </property>
+          <property name="currentText">
+           <string>user</string>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <property name="placeholderText">
+           <string>Perfil do usuário</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>user</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>admin</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTimeEdit" name="timInicio">
+          <property name="statusTip">
+           <string>Início de horário de trabalho</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QLineEdit" name="txtID_usu">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="statusTip">
+           <string>Código do usuário</string>
+          </property>
+          <property name="placeholderText">
+           <string>Id</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtLog_usu">
+          <property name="statusTip">
+           <string>*Crie um nome de login para acesso ao sistema com pelo menos 4 caractéres</string>
+          </property>
+          <property name="placeholderText">
+           <string>Login usuário</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="txtSen_usu">
+          <property name="statusTip">
+           <string>*Crie uma senha com pelo menos 4 caractéres de qualquer tipo</string>
+          </property>
+          <property name="placeholderText">
+           <string>Senha usuário</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTimeEdit" name="timFim">
+          <property name="statusTip">
+           <string>Fim de horário de trabalho</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_4">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>280</y>
+       <width>481</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <widget class="QLineEdit" name="txtPesUsu_usu">
+        <property name="statusTip">
+         <string>Pesquisar usuários por nome</string>
+        </property>
+        <property name="placeholderText">
+         <string>Pesquisar usuários</string>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnPesUsu_usu">
+        <property name="text">
+         <string>Pesquisar</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="Line" name="line_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>260</y>
+       <width>681</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QWidget" name="layoutWidget_5">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>205</y>
+       <width>681</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_8">
+      <item>
+       <widget class="QPushButton" name="btnSal_usu">
+        <property name="text">
+         <string>Salvar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnAtu_usu">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Atualizar</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnDel_usu">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Excluir</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnLim_usu">
+        <property name="text">
+         <string>Limpar</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

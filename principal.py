@@ -1,16 +1,15 @@
 import sqlite3
 import sys
-import os
 
 from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize, QDate, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
     QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, \
     QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget, QListWidget, QFileDialog
-from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
 
 from Utils.readOnly import ReadOnlyDelegate
-from usuario import UiUsuario
+from usuario import UserWindow
 
 
 class UiMainWindow(QMainWindow):
@@ -608,10 +607,8 @@ class UiMainWindow(QMainWindow):
     #     print("Pressionado!!!")
 
     def open_users_screens(self):
-        self.window = QMainWindow()
-        self.ui = UiUsuario()
-        self.ui.setupUi(self.window)
-        self.window.show()
+        self.user = UserWindow()
+        self.user.show()
 
     def on_menu_clientes(self):
         self.tabWidget.setCurrentIndex(1)
@@ -763,7 +760,7 @@ class UiMainWindow(QMainWindow):
                                        'cadastrados no bando de dados?',
                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         if confirm == QMessageBox.Yes:
-            file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo')
+            file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo', 'clientes.pdf')
             if file[0]:
                 try:
                     doc = SimpleDocTemplate(file[0])
