@@ -188,6 +188,9 @@
           <property name="statusTip">
            <string>*Crie uma senha com pelo menos 4 caractéres de qualquer tipo</string>
           </property>
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
           <property name="placeholderText">
            <string>Senha usuário</string>
           </property>

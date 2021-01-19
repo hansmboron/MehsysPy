@@ -77,6 +77,7 @@ class Ui_UserMain(object):
         self.txtLog_usu.setObjectName("txtLog_usu")
         self.verticalLayout_6.addWidget(self.txtLog_usu)
         self.txtSen_usu = QtWidgets.QLineEdit(self.layoutWidget_6)
+        self.txtSen_usu.setEchoMode(QtWidgets.QLineEdit.Password)
         self.txtSen_usu.setObjectName("txtSen_usu")
         self.verticalLayout_6.addWidget(self.txtSen_usu)
         self.timFim = QtWidgets.QTimeEdit(self.layoutWidget_6)
