@@ -6,7 +6,7 @@ from PyQt5.QtCore import QRect, QCoreApplication, QMetaObject, QSize, QDate, Qt
 from PyQt5.QtWidgets import QApplication, QWidget, QMessageBox, QTabWidget, QFrame, QSizePolicy, QSpacerItem, \
     QTableWidgetItem, QMainWindow, QAction, QHBoxLayout, QPushButton, QVBoxLayout, QComboBox, QLineEdit, \
     QMenuBar, QMenu, QStatusBar, QDateEdit, QTableWidget, QDesktopWidget, QListWidget, QFileDialog
-from reportlab.platypus import SimpleDocTemplate,Paragraph,Table,TableStyle
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Table, TableStyle
 from reportlab.lib import colors
 
 from Utils.readOnly import ReadOnlyDelegate
@@ -422,6 +422,8 @@ class UiMainWindow(QMainWindow):
         self.actionHor_rios.triggered.connect(self.on_menu_horarios)
         self.actionServi_os.triggered.connect(self.on_menu_servicos)
         self.actionClientes_2.triggered.connect(self.create_pdf_clients)
+        self.actionServi_os_2.triggered.connect(self.create_pdf_services)
+        self.actionHor_rios_2.triggered.connect(self.create_pdf_agendamentos)
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
         self.btnAtu_cli.clicked.connect(self.on_btn_atu_cli_pressed)
         self.btnExc_cli.clicked.connect(self.on_btn_del_cli_pressed)
@@ -762,26 +764,30 @@ class UiMainWindow(QMainWindow):
                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         if confirm == QMessageBox.Yes:
             file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo')
-            print(file[0])
-            doc = SimpleDocTemplate(file[0])
-            flow_obj = []
-            td = [["ID", "NOME", "SEXO", "CPF", "ENDEREÇO", "TELEFONE"]]
-            db = sqlite3.connect('dbmehsys.db')
-            cursor = db.cursor()
-            cursor.execute("select * from tbclientes")
-            rs = cursor.fetchall()
-            for i in range(len(rs)):
-                data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4], rs[i][5]]
-                td.append(data)
-            table = Table(td)
-            db.close()
-            ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
-                             ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
-                             ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
-            table.setStyle(ts)
-            flow_obj.append(table)
-            doc.build(flow_obj)
-
+            if file[0]:
+                try:
+                    doc = SimpleDocTemplate(file[0])
+                    flow_obj = []
+                    td = [["ID", "NOME", "SEXO", "CPF", "ENDEREÇO", "TELEFONE"]]
+                    db = sqlite3.connect('dbmehsys.db')
+                    cursor = db.cursor()
+                    cursor.execute("select * from tbclientes")
+                    rs = cursor.fetchall()
+                    for i in range(len(rs)):
+                        data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4], rs[i][5]]
+                        td.append(data)
+                    table = Table(td)
+                    db.close()
+                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
+                                     ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
+                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
+                    table.setStyle(ts)
+                    flow_obj.append(table)
+                    doc.build(flow_obj)
+                    QMessageBox.information(
+                        self, 'Relatório gerado com SUCESSO!!!', f'Relatório de Clientes salvo em: "{file[0]}"')
+                except Exception as e:
+                    QMessageBox.warning(self, 'ERRO!!!', str(e))
 
     # METODOS TAB SERVIÇOS ========================================================================
 
@@ -926,6 +932,38 @@ class UiMainWindow(QMainWindow):
             db.close()
             QMessageBox.warning(self, 'ERRO!!!', str(e))
 
+    def create_pdf_services(self):
+        confirm = QMessageBox.question(self, 'CONFIRMA IMPRESSÃO?',
+                                       'Confirma a impressão de um arquivo em "pdf" contendo\ntodos os serviços '
+                                       'cadastrados no bando de dados?',
+                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if confirm == QMessageBox.Yes:
+            file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo', 'serviços.pdf')
+            if file[0]:
+                try:
+                    doc = SimpleDocTemplate(file[0])
+                    flow_obj = []
+                    td = [["ID", "SERVIÇO", "PROFISSIONAL", "VALOR", "DURAÇÃO"]]
+                    db = sqlite3.connect('dbmehsys.db')
+                    cursor = db.cursor()
+                    cursor.execute("select * from tbservicos")
+                    rs = cursor.fetchall()
+                    for i in range(len(rs)):
+                        data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4]]
+                        td.append(data)
+                    table = Table(td)
+                    db.close()
+                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
+                                     ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
+                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightseagreen)])
+                    table.setStyle(ts)
+                    flow_obj.append(table)
+                    doc.build(flow_obj)
+                    QMessageBox.information(
+                        self, 'Relatório gerado com SUCESSO!!!', f'Relatório de Serviços salvo em: "{file[0]}"')
+                except Exception as e:
+                    QMessageBox.warning(self, 'ERRO!!!', str(e))
+
     # METODOS TAB HORÁRIOS =======================================================================
 
     # Adicionar novo agendamento
@@ -1002,7 +1040,8 @@ class UiMainWindow(QMainWindow):
 
                 if len(
                         cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() == 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
-                    QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para Atualizar o Agendamento!')
+                    QMessageBox.warning(self, 'ERRO!!!',
+                                        'Preencha os campos obrigatórios para Atualizar o Agendamento!')
                 else:
                     cursor.execute(sql, [cliente, servico, data, horario, prof, id_ser, id])
                     cursor.execute(sql2, [data, prof, horario, data, prof, horario])
@@ -1240,6 +1279,38 @@ class UiMainWindow(QMainWindow):
         except Exception as e:
             db.close()
             QMessageBox.warning(self, 'ERRO!!!', str(e))
+
+    def create_pdf_agendamentos(self):
+        confirm = QMessageBox.question(self, 'CONFIRMA IMPRESSÃO?',
+                                       'Confirma a impressão de um arquivo em "pdf" contendo\ntodos os agendamentos '
+                                       'cadastrados no bando de dados?',
+                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if confirm == QMessageBox.Yes:
+            file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo', 'agendamendos.pdf')
+            if file[0]:
+                try:
+                    doc = SimpleDocTemplate(file[0])
+                    flow_obj = []
+                    td = [["ID", "CLIENTE", "SERVIÇO", "DATA", "HORÁRIO", "PROFISSIONAL"]]
+                    db = sqlite3.connect('dbmehsys.db')
+                    cursor = db.cursor()
+                    cursor.execute("select * from tbhorarios")
+                    rs = cursor.fetchall()
+                    for i in range(len(rs)):
+                        data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4], rs[i][5]]
+                        td.append(data)
+                    table = Table(td)
+                    db.close()
+                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
+                                     ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
+                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
+                    table.setStyle(ts)
+                    flow_obj.append(table)
+                    doc.build(flow_obj)
+                    QMessageBox.information(
+                        self, 'Relatório gerado com SUCESSO!!!', f'Relatório de Agendamentos salvo em: "{file[0]}"')
+                except Exception as e:
+                    QMessageBox.warning(self, 'ERRO!!!', str(e))
 
 
 app = QApplication(sys.argv)
