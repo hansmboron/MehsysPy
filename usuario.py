@@ -4,7 +4,7 @@ import sys
 from PyQt5.QtCore import QTime
 
 from Utils.readOnly import ReadOnlyDelegate
-from userUi import Ui_UserMain
+from view.userUi import Ui_UserMain
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDesktopWidget, QMessageBox, QTableWidgetItem
 
 

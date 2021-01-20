@@ -84,11 +84,10 @@ class CreateBdSqlite:
                                 + "VALUES ('teste deletar', '', 'R$0.020,00', '0:10min');")
             self.cursor.execute("INSERT INTO tbhorarios ("
                                 + "cliente, servico, data, horario, profissional, id_ser) "
-                                + "VALUES ('teste deletar', 'teste deletar  - 1', '10/01/2021', '09:00', 'admin', '1');")
+                                + "VALUES ('teste deletar', 'teste deletar', '10/01/2021', '09:00', 'admin', '1');")
             self.connect.commit()
-            print("banco criado")
 
             self.cursor.close()
             self.connect.close()
         except Exception as e:
-            print(e)
+            pass

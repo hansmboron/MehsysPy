@@ -1,10 +1,10 @@
 import sqlite3
 import sys
 
-from PyQt5.QtCore import Qt, pyqtSignal
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDesktopWidget, QApplication, QMessageBox, QMainWindow
 
-from loginUi import Ui_TelaLoginUi
+from view.loginUi import Ui_TelaLoginUi
 from principal import PrincipalWindow
 from Utils.criaBdSqlite import CreateBdSqlite
 # from usuario import UserWindow
@@ -49,7 +49,6 @@ class LoginWindow(QMainWindow, Ui_TelaLoginUi):
             id_user = str(rs[0][0])
             self.cursor.execute('insert into utils (current_user) values (?)', [id_user])
             self.db.commit()
-            print(id_user)
             if rs[0][5] == 'admin':  # Se perfil == 'admin'
                 self.window = PrincipalWindow()
                 self.window.show()

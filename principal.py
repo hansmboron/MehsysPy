@@ -8,7 +8,7 @@ from reportlab.lib import colors
 
 from Utils.readOnly import ReadOnlyDelegate
 from usuario import UserWindow
-from principalUi import Ui_MainWindow
+from view.principalUi import Ui_MainWindow
 
 
 class PrincipalWindow(QMainWindow, Ui_MainWindow):
@@ -103,6 +103,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             sql = 'DELETE FROM utils WHERE current_user;'
             cursor.execute(sql)
             db.commit()
+            cursor.close()
             db.close()
             sys.exit(0)
         else:
@@ -734,7 +735,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.txtPesCli_hor.setText(self.listPesCli_hor.currentItem().text())
         self.listPesCli_hor.setVisible(False)
 
-    # popula combobox serviços
+    # popula combobox serviçosF
     def popula_cbb_servicos(self):
         self.cbbSer_hor.clear()
         self.cbbSer_hor.addItem("Selecionar")
@@ -767,7 +768,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
               "p.horario=c.horario and " \
               "p.data=c.data and " \
               "p.funcionario=c.funcionario where " \
-              "c.data is null "
+              "c.data is null order by p.data"
         try:
             cursor.execute(sql)
             rs = cursor.fetchall()
@@ -831,6 +832,6 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    login = PrincipalWindow()
-    login.show()
+    principal = PrincipalWindow()
+    principal.show()
     app.exec_()
