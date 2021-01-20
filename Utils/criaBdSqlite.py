@@ -9,7 +9,8 @@ class CreateBdSqlite:
 
     def create_tables(self):
         try:
-            self.cursor.execute("CREATE TABLE tbusuarios (\
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS utils (current_user INTEGER)")
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS tbusuarios (\
                                         id	INTEGER NOT NULL,\
                                         usuario	TEXT NOT NULL,\
                                         fone	TEXT NOT NULL,\
@@ -19,7 +20,7 @@ class CreateBdSqlite:
                                         hora_in	TEXT DEFAULT NULL,\
                                         hora_out	TEXT DEFAULT NULL,\
                                         PRIMARY KEY(id));")
-            self.cursor.execute("CREATE TABLE horarios ("
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS horarios ("
                                 + "horario	TEXT NOT NULL UNIQUE"
                                 + ");")
 
@@ -28,7 +29,7 @@ class CreateBdSqlite:
                                 + ");")
             self.cursor.execute("INSERT INTO tbusuarios ("
                                 + "usuario, fone, login, senha, perfil, hora_in, hora_out) "
-                                + "VALUES ('admin', '(00)00000-0000', 'admin', '1234', 'admin', '', '');")
+                                + "VALUES ('trocar senha', '(00)00000-0000', 'admin', '1234', 'admin', '00:00', '00:00');")
             self.cursor.execute("INSERT INTO horarios (horario) "
                                 + "VALUES ('08:00'), ('08:15'), ('08:30'), ('08:45'), ('09:00'), "
                                 + "('09:15'), ('09:30'), ('09:45'), ('10:00'), ('10:15'), "
@@ -37,7 +38,7 @@ class CreateBdSqlite:
                                 + "('14:00'), ('14:15'), ('14:30'), ('14:45'), ('15:00'), "
                                 + "('15:15'), ('15:30'), ('15:45'), ('16:00'), ('16:15'), "
                                 + "('16:30'), ('16:45');")
-            self.cursor.execute("CREATE TABLE tbservicos ("
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS tbservicos ("
                                 + "id	INTEGER NOT NULL UNIQUE, "
                                 + "nome TEXT NOT NULL, "
                                 + "usuario	TEXT NOT NULL, "
@@ -45,12 +46,12 @@ class CreateBdSqlite:
                                 + "duracao	TEXT DEFAULT NULL, "
                                 + "PRIMARY KEY(id AUTOINCREMENT)"
                                 + ");")
-            self.cursor.execute("CREATE TABLE horarios_agendados ("
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS horarios_agendados ("
                                 + "	data	TEXT NOT NULL,"
                                 + "	funcionario	TEXT NOT NULL,"
                                 + "	horario	TEXT NOT NULL"
                                 + ");")
-            self.cursor.execute("CREATE TABLE tbclientes ("
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS tbclientes ("
                                 + "	id	INTEGER NOT NULL UNIQUE,"
                                 + "	nome	TEXT NOT NULL,"
                                 + "	sexo	TEXT DEFAULT NULL,"
@@ -64,7 +65,7 @@ class CreateBdSqlite:
                                 + "	funcionario,"
                                 + "	horario"
                                 + ");")
-            self.cursor.execute("CREATE TABLE tbhorarios ("
+            self.cursor.execute("CREATE TABLE IF NOT EXISTS tbhorarios ("
                                 + "	id	INTEGER NOT NULL,"
                                 + "	cliente	TEXT NOT NULL,"
                                 + "	servico	TEXT NOT NULL,"
@@ -84,7 +85,6 @@ class CreateBdSqlite:
             self.cursor.execute("INSERT INTO tbhorarios ("
                                 + "cliente, servico, data, horario, profissional, id_ser) "
                                 + "VALUES ('teste deletar', 'teste deletar  - 1', '10/01/2021', '09:00', 'admin', '1');")
-
             self.connect.commit()
             print("banco criado")
 

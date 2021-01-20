@@ -160,9 +160,22 @@ class UserWindow(QMainWindow, Ui_UserMain):
 
     # popular campos do formulário selecionando uma linha da tabela
     def setar_campos_usu(self):
-        # TODO: verificar se usuario atual é o mesmo que selecionado e bloquear perfil
+        self.cbbPer_usu.setEnabled(True)
+        self.btnSal_usu.setEnabled(False)
+        self.btnAtu_usu.setEnabled(True)
+        self.btnDel_usu.setEnabled(True)
         rows = sorted(set(index.row() for index in self.table_user.selectedIndexes()))
         for r in rows:
+            db = sqlite3.connect('dbmehsys.db')
+            cursor = db.cursor()
+            id_clicked = self.table_user.item(r, 0).text()
+            sql = 'SELECT u.id, u.usuario, c.current_user FROM tbusuarios as u inner join utils as c on (? = ' \
+                  'c.current_user) limit 2'
+            cursor.execute(sql, [id_clicked])
+            rs = cursor.fetchall()
+            if len(rs) >= 1:
+                self.cbbPer_usu.setEnabled(False)
+                self.btnDel_usu.setEnabled(False)
             self.txtID_usu.setText(self.table_user.item(r, 0).text())
             self.txtNom_usu.setText(self.table_user.item(r, 1).text())
             self.txtTel_usu.setText(self.table_user.item(r, 2).text())
@@ -179,14 +192,12 @@ class UserWindow(QMainWindow, Ui_UserMain):
                     QTime(int(self.table_user.item(r, 7).text()[:2]), int(self.table_user.item(r, 7).text()[3:])))
             else:
                 self.timFim.setTime(QTime(0, 0))
-        self.btnSal_usu.setEnabled(False)
-        self.btnAtu_usu.setEnabled(True)
-        self.btnDel_usu.setEnabled(True)
 
     def on_btn_clear_usu_pressed(self):
         self.txtID_usu.setText(None)
         self.txtNom_usu.setText(None)
         self.txtTel_usu.setText(None)
+        self.cbbPer_usu.setEnabled(True)
         self.cbbPer_usu.setCurrentIndex(0)
         self.txtLog_usu.setText(None)
         self.txtSen_usu.setText(None)

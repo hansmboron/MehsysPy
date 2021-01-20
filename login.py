@@ -1,14 +1,18 @@
 import sqlite3
 import sys
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import QDesktopWidget, QApplication, QMessageBox, QMainWindow
 
 from loginUi import Ui_TelaLoginUi
 from principal import PrincipalWindow
+from Utils.criaBdSqlite import CreateBdSqlite
+# from usuario import UserWindow
 
 
 class LoginWindow(QMainWindow, Ui_TelaLoginUi):
+
+    # current_user_id_sig = pyqtSignal(str)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -42,6 +46,10 @@ class LoginWindow(QMainWindow, Ui_TelaLoginUi):
                                                        "Senha padrão(1234)", QMessageBox.Ok,
                                 QMessageBox.Ok)
         elif len(rs) > 0:
+            id_user = str(rs[0][0])
+            self.cursor.execute('insert into utils (current_user) values (?)', [id_user])
+            self.db.commit()
+            print(id_user)
             if rs[0][5] == 'admin':  # Se perfil == 'admin'
                 self.window = PrincipalWindow()
                 self.window.show()
@@ -50,11 +58,13 @@ class LoginWindow(QMainWindow, Ui_TelaLoginUi):
                 self.window.actionClientes_2.setEnabled(True)
                 self.window.actionHor_rios_2.setEnabled(True)
                 self.window.actionServi_os_2.setEnabled(True)
+                self.cursor.close()
                 self.db.close()
                 login.close()
             else:  # perfil == 'user'
                 self.window = PrincipalWindow()
                 self.window.show()
+                self.cursor.close()
                 self.db.close()
                 login.close()
         else:
@@ -76,5 +86,7 @@ class LoginWindow(QMainWindow, Ui_TelaLoginUi):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     login = LoginWindow()
+    bd = CreateBdSqlite()
+    bd.create_tables()
     login.show()
     app.exec_()

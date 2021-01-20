@@ -98,6 +98,12 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         reply = QMessageBox.question(self, "Sair?", "Tem certeza que quer Sair?", QMessageBox.Yes | QMessageBox.No,
                                      QMessageBox.No)
         if reply == QMessageBox.Yes:
+            db = sqlite3.connect('dbmehsys.db')
+            cursor = db.cursor()
+            sql = 'DELETE FROM utils WHERE current_user;'
+            cursor.execute(sql)
+            db.commit()
+            db.close()
             sys.exit(0)
         else:
             event.ignore()
