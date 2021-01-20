@@ -44,6 +44,9 @@
        <height>212</height>
       </rect>
      </property>
+     <property name="statusTip">
+      <string>Selecione algum profissional para atualizar ou excluir(você não pode deletar a si próprio)</string>
+     </property>
      <column>
       <property name="text">
        <string>Id</string>
@@ -232,6 +235,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="btnPesUsu_usu">
+        <property name="statusTip">
+         <string>Pesquisar usuário por nome</string>
+        </property>
         <property name="text">
          <string>Pesquisar</string>
         </property>
@@ -264,6 +270,13 @@
      <layout class="QHBoxLayout" name="horizontalLayout_8">
       <item>
        <widget class="QPushButton" name="btnSal_usu">
+        <property name="statusTip">
+         <string>Cadastrar novo profissional</string>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(150, 0, 0);
+color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Salvar</string>
         </property>
@@ -273,6 +286,9 @@
        <widget class="QPushButton" name="btnAtu_usu">
         <property name="enabled">
          <bool>false</bool>
+        </property>
+        <property name="statusTip">
+         <string>Atualizar usuário</string>
         </property>
         <property name="text">
          <string>Atualizar</string>
@@ -284,6 +300,9 @@
         <property name="enabled">
          <bool>false</bool>
         </property>
+        <property name="statusTip">
+         <string>Excluir usuário(você não pode deletar à si próprio)</string>
+        </property>
         <property name="text">
          <string>Excluir</string>
         </property>
@@ -291,6 +310,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="btnLim_usu">
+        <property name="statusTip">
+         <string>Limpar campos para poder cadastrar novo profissional</string>
+        </property>
         <property name="text">
          <string>Limpar</string>
         </property>

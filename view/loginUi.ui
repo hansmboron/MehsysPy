@@ -60,6 +60,11 @@
       </item>
       <item>
        <widget class="QLineEdit" name="txtUser">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="toolTip">
          <string>Nome de usuário</string>
         </property>
@@ -89,6 +94,11 @@
       </item>
       <item>
        <widget class="QLineEdit" name="txtPass">
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+         </font>
+        </property>
         <property name="toolTip">
          <string>Senha do usuário</string>
         </property>
@@ -117,6 +127,11 @@
        <height>34</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="toolTip">
       <string>Entrar</string>
      </property>
@@ -124,7 +139,7 @@
       <string>Entrar</string>
      </property>
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(120, 0, 180);</string>
+      <string notr="true">background-color: rgb(150, 0, 150);</string>
      </property>
      <property name="text">
       <string>Entrar</string>

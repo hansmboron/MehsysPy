@@ -1,7 +1,9 @@
+import os
 import sqlite3
 import sys
 
 from PyQt5.QtCore import QDate
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QMainWindow, QDesktopWidget, QFileDialog
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
@@ -9,6 +11,8 @@ from reportlab.lib import colors
 from Utils.readOnly import ReadOnlyDelegate
 from usuario import UserWindow
 from view.principalUi import Ui_MainWindow
+from trabalho import TrabalhoWindow
+from sobre import SobreWindow
 
 
 class PrincipalWindow(QMainWindow, Ui_MainWindow):
@@ -16,6 +20,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
+
+        scriptDir = os.path.dirname(os.path.realpath(__file__))
+        self.setWindowIcon(QIcon(scriptDir + os.path.sep + 'img/logo_peq.png'))
 
         # centralizar tela
         self.center()
@@ -54,7 +61,6 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         # self.listPesCli_hor.setEnabled(False)
 
         # conectar Métodos com componentes da view
-        self.actionUsu_rios.triggered.connect(self.open_users_screens)
         self.actionSair_2.triggered.connect(self.closeEvent)
         self.actionClientes.triggered.connect(self.on_menu_clientes)
         self.actionHor_rios.triggered.connect(self.on_menu_horarios)
@@ -62,6 +68,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.actionClientes_2.triggered.connect(self.create_pdf_clients)
         self.actionServi_os_2.triggered.connect(self.create_pdf_services)
         self.actionHor_rios_2.triggered.connect(self.create_pdf_agendamentos)
+        self.actionUsu_rios.triggered.connect(self.open_users_screen)
+        self.actionAddHor.triggered.connect(self.open_addHor_screen)
+        self.actionSobre.triggered.connect(self.open_sobre_screen)
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
         self.btnAtu_cli.clicked.connect(self.on_btn_atu_cli_pressed)
         self.btnExc_cli.clicked.connect(self.on_btn_del_cli_pressed)
@@ -106,8 +115,6 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             cursor.close()
             db.close()
             sys.exit(0)
-        else:
-            event.ignore()
 
     # def keyPressEvent(self, event):
     #     if event.key() and self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
@@ -132,9 +139,17 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
     # def keyPressEvent(self, event):
     #     print("Pressionado!!!")
 
-    def open_users_screens(self):
+    def open_users_screen(self):
         self.user = UserWindow()
         self.user.show()
+
+    def open_addHor_screen(self):
+        self.trabalho = TrabalhoWindow()
+        self.trabalho.show()
+
+    def open_sobre_screen(self):
+        self.sobre = SobreWindow()
+        self.sobre.show()
 
     def on_menu_clientes(self):
         self.tabWidget.setCurrentIndex(1)

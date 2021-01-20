@@ -36,7 +36,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabHor">
      <attribute name="title">
@@ -63,6 +63,9 @@
         <width>681</width>
         <height>211</height>
        </rect>
+      </property>
+      <property name="statusTip">
+       <string>Selecione algum agendamento para atualizar ou deletar</string>
       </property>
       <column>
        <property name="text">
@@ -109,6 +112,9 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <widget class="QLineEdit" name="txtPesCli_hor">
+           <property name="statusTip">
+            <string>Digite qualquer coisa para pesquisar um cliente</string>
+           </property>
            <property name="placeholderText">
             <string>Pesquisar cliente</string>
            </property>
@@ -119,6 +125,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="cbbSer_hor">
+           <property name="statusTip">
+            <string>Selecione um serviço</string>
+           </property>
            <property name="placeholderText">
             <string>Selecionar serviço</string>
            </property>
@@ -126,6 +135,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="cbbPro_hor">
+           <property name="statusTip">
+            <string>Selecione um profissional</string>
+           </property>
            <property name="placeholderText">
             <string>Selecionar Profissional</string>
            </property>
@@ -140,16 +152,26 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="statusTip">
+            <string>Código do agendamento</string>
+           </property>
            <property name="placeholderText">
             <string>Id</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="dat_hor"/>
+          <widget class="QDateEdit" name="dat_hor">
+           <property name="statusTip">
+            <string>Digite data para o agendamento</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QComboBox" name="cbbHor_hor">
+           <property name="statusTip">
+            <string>Selecione horário disponível(se não aparecer nada clique fora ou no botão 'Agendar')</string>
+           </property>
            <property name="placeholderText">
             <string>Selecionar horário</string>
            </property>
@@ -171,6 +193,13 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QPushButton" name="btnAge_hor">
+         <property name="statusTip">
+          <string>Criar novo agendamento</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(150, 0, 150);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>Agendar</string>
          </property>
@@ -180,6 +209,9 @@
         <widget class="QPushButton" name="btnAtu_hor">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="statusTip">
+          <string>Atualizar agendameto</string>
          </property>
          <property name="text">
           <string>Atualizar</string>
@@ -191,6 +223,9 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="statusTip">
+          <string>Deletar agendamento</string>
+         </property>
          <property name="text">
           <string>Excluir</string>
          </property>
@@ -198,6 +233,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="BtnImp_hor">
+         <property name="statusTip">
+          <string>Imprimir comprovante</string>
+         </property>
          <property name="text">
           <string>Imprimir</string>
          </property>
@@ -205,6 +243,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnLim_hor">
+         <property name="statusTip">
+          <string>Limpar campos para poder realizar novo agendamento</string>
+         </property>
          <property name="text">
           <string>Limpar</string>
          </property>
@@ -224,6 +265,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QLineEdit" name="txtPesNom_hor">
+         <property name="statusTip">
+          <string>Pesquisar agendamentos por nome do cliente</string>
+         </property>
          <property name="placeholderText">
           <string>Nome cliente</string>
          </property>
@@ -234,6 +278,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnPesNom_hor">
+         <property name="statusTip">
+          <string>Pesquisar agendamentos por nome de cliente</string>
+         </property>
          <property name="text">
           <string>Pesquisar</string>
          </property>
@@ -241,6 +288,9 @@
        </item>
        <item>
         <widget class="QLineEdit" name="txtPesDat_hor">
+         <property name="statusTip">
+          <string>pesquisar agendamento por data</string>
+         </property>
          <property name="placeholderText">
           <string>Data agendamento</string>
          </property>
@@ -251,6 +301,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnPesDat_hor">
+         <property name="statusTip">
+          <string>Pesquisar agendamento por data</string>
+         </property>
          <property name="text">
           <string>Pesquisar</string>
          </property>
@@ -285,6 +338,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QLineEdit" name="txtPesNom_cli">
+         <property name="statusTip">
+          <string>Pesquisar clientes por nome</string>
+         </property>
          <property name="placeholderText">
           <string>Nome cliente</string>
          </property>
@@ -295,6 +351,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnPesNom_cli">
+         <property name="statusTip">
+          <string>Pesquisar clientes por nome</string>
+         </property>
          <property name="text">
           <string>Pesquisar</string>
          </property>
@@ -310,6 +369,9 @@
         <width>681</width>
         <height>211</height>
        </rect>
+      </property>
+      <property name="statusTip">
+       <string>Selecione algum cliente para atualizar ou deletar</string>
       </property>
       <column>
        <property name="text">
@@ -354,6 +416,13 @@
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
         <widget class="QPushButton" name="btnSal_cli">
+         <property name="statusTip">
+          <string>Cadastrar novo cliente</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 150, 0);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>Salvar</string>
          </property>
@@ -363,6 +432,9 @@
         <widget class="QPushButton" name="btnAtu_cli">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="statusTip">
+          <string>Atualizar dados do cliente</string>
          </property>
          <property name="text">
           <string>Atualizar</string>
@@ -374,6 +446,9 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="statusTip">
+          <string>Deletar cliente</string>
+         </property>
          <property name="text">
           <string>Excluir</string>
          </property>
@@ -381,6 +456,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="btnLim_cli">
+         <property name="statusTip">
+          <string>Limpar campos para poder cadastrar novo cliente</string>
+         </property>
          <property name="text">
           <string>Limpar</string>
          </property>
@@ -402,6 +480,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
           <widget class="QLineEdit" name="txtNom_cli">
+           <property name="statusTip">
+            <string>Digite nome do cliente</string>
+           </property>
            <property name="placeholderText">
             <string>Nome cliente</string>
            </property>
@@ -412,6 +493,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="cbcSex_cli">
+           <property name="statusTip">
+            <string>Selecione sexo do cliente</string>
+           </property>
            <property name="placeholderText">
             <string>Selecionar sexo</string>
            </property>
@@ -419,6 +503,9 @@
          </item>
          <item>
           <widget class="QLineEdit" name="txtCpf_cli">
+           <property name="statusTip">
+            <string>Digite CPF do cliente</string>
+           </property>
            <property name="placeholderText">
             <string>CPF cliente</string>
            </property>
@@ -436,6 +523,9 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="statusTip">
+            <string>Código do cliente</string>
+           </property>
            <property name="placeholderText">
             <string>Id</string>
            </property>
@@ -443,6 +533,9 @@
          </item>
          <item>
           <widget class="QLineEdit" name="txtEnd_cli">
+           <property name="statusTip">
+            <string>Endereço do cliente</string>
+           </property>
            <property name="placeholderText">
             <string>Endereço cliente</string>
            </property>
@@ -450,6 +543,9 @@
          </item>
          <item>
           <widget class="QLineEdit" name="txtFon_cli">
+           <property name="statusTip">
+            <string>Telefone do cliente</string>
+           </property>
            <property name="placeholderText">
             <string>Fone cliente</string>
            </property>
@@ -489,6 +585,9 @@
       <layout class="QHBoxLayout" name="horizontalLayout_7">
        <item>
         <widget class="QLineEdit" name="lineEdit_9">
+         <property name="statusTip">
+          <string>Pesquisar serviço por nome</string>
+         </property>
          <property name="placeholderText">
           <string>Nome serviço</string>
          </property>
@@ -499,6 +598,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_15">
+         <property name="statusTip">
+          <string>Pesquisar serviço por nome</string>
+         </property>
          <property name="text">
           <string>Pesquisar</string>
          </property>
@@ -514,6 +616,9 @@
         <width>681</width>
         <height>211</height>
        </rect>
+      </property>
+      <property name="statusTip">
+       <string>Selecione algum serviço para atualizar ou deletar</string>
       </property>
       <column>
        <property name="text">
@@ -553,6 +658,13 @@
       <layout class="QHBoxLayout" name="horizontalLayout_8">
        <item>
         <widget class="QPushButton" name="pushButton_17">
+         <property name="statusTip">
+          <string>Cadastrar novo serviço</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 0, 150);
+color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>Salvar</string>
          </property>
@@ -562,6 +674,9 @@
         <widget class="QPushButton" name="pushButton_18">
          <property name="enabled">
           <bool>false</bool>
+         </property>
+         <property name="statusTip">
+          <string>Atualizar serviço</string>
          </property>
          <property name="text">
           <string>Atualizar</string>
@@ -573,6 +688,9 @@
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="statusTip">
+          <string>Deletar serviço</string>
+         </property>
          <property name="text">
           <string>Excluir</string>
          </property>
@@ -580,6 +698,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="pushButton_21">
+         <property name="statusTip">
+          <string>Limpar campos para poder adicionar novo serviço</string>
+         </property>
          <property name="text">
           <string>Limpar</string>
          </property>
@@ -601,6 +722,9 @@
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
           <widget class="QLineEdit" name="txtNom_ser">
+           <property name="statusTip">
+            <string>Digite nome do serviço</string>
+           </property>
            <property name="placeholderText">
             <string>Nome serviço</string>
            </property>
@@ -611,6 +735,9 @@
          </item>
          <item>
           <widget class="QComboBox" name="cbbPro_ser">
+           <property name="statusTip">
+            <string>Selecione profissional que realizará este serviço</string>
+           </property>
            <property name="placeholderText">
             <string>Selecionar profissional</string>
            </property>
@@ -618,6 +745,9 @@
          </item>
          <item>
           <widget class="QLineEdit" name="txtSer_ser">
+           <property name="statusTip">
+            <string>Digite valor do serviço</string>
+           </property>
            <property name="placeholderText">
             <string>Valor serviço</string>
            </property>
@@ -635,13 +765,20 @@
            <property name="enabled">
             <bool>false</bool>
            </property>
+           <property name="statusTip">
+            <string>Código do serviço</string>
+           </property>
            <property name="placeholderText">
             <string>Id</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="horHor_ser"/>
+          <widget class="QLineEdit" name="horHor_ser">
+           <property name="statusTip">
+            <string>Digite duração aproximada do serviço</string>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="verticalSpacer">
@@ -716,6 +853,7 @@
     </property>
     <addaction name="actionAjuda"/>
     <addaction name="actionAddHor"/>
+    <addaction name="actionSobre"/>
    </widget>
    <widget class="QMenu" name="menuSair">
     <property name="title">
@@ -758,30 +896,48 @@
    <property name="text">
     <string>Usuários</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+4</string>
+   </property>
   </action>
   <action name="actionClientes_2">
    <property name="text">
     <string>Clientes</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+2</string>
    </property>
   </action>
   <action name="actionHor_rios_2">
    <property name="text">
     <string>Horários</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+1</string>
+   </property>
   </action>
   <action name="actionServi_os_2">
    <property name="text">
     <string>Serviços</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+3</string>
    </property>
   </action>
   <action name="actionAjuda">
    <property name="text">
     <string>Ajuda</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
   </action>
   <action name="actionAddHor">
    <property name="text">
     <string>Adicionar horários</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
   <action name="actionSair_2">
@@ -790,6 +946,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionSobre">
+   <property name="text">
+    <string>Sobre</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
    </property>
   </action>
  </widget>
