@@ -16,6 +16,9 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(370, 460)
         Form.setMinimumSize(QtCore.QSize(370, 460))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/logo/img/logo_gra.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        Form.setWindowIcon(icon)
         self.groupBox = QtWidgets.QGroupBox(Form)
         self.groupBox.setGeometry(QtCore.QRect(10, 10, 351, 151))
         self.groupBox.setObjectName("groupBox")
@@ -73,3 +76,4 @@ class Ui_Form(object):
         self.btnLim_tim.setText(_translate("Form", "Limpar"))
         self.btnAdd_hor.setText(_translate("Form", "Adicionar"))
         self.btnDel_hor.setText(_translate("Form", "Deletar"))
+import res_rc

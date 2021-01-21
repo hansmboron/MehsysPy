@@ -19,6 +19,10 @@
   <property name="windowTitle">
    <string>Tela Principal - Mehsys</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../res.qrc">
+    <normaloff>:/logo/img/logo_gra.png</normaloff>:/logo/img/logo_gra.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
@@ -36,7 +40,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tabHor">
      <attribute name="title">
@@ -232,7 +236,7 @@ color: rgb(255, 255, 255);</string>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="BtnImp_hor">
+        <widget class="QPushButton" name="btnImp_hor">
          <property name="statusTip">
           <string>Imprimir comprovante</string>
          </property>
@@ -499,6 +503,21 @@ color: rgb(255, 255, 255);</string>
            <property name="placeholderText">
             <string>Selecionar sexo</string>
            </property>
+           <item>
+            <property name="text">
+             <string>Indefinido</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Femenino</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Masculino</string>
+            </property>
+           </item>
           </widget>
          </item>
          <item>
@@ -957,6 +976,8 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res.qrc"/>
+ </resources>
  <connections/>
 </ui>

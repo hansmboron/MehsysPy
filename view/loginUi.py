@@ -16,6 +16,9 @@ class Ui_TelaLoginUi(object):
         TelaLoginUi.setObjectName("TelaLoginUi")
         TelaLoginUi.resize(400, 280)
         TelaLoginUi.setMinimumSize(QtCore.QSize(400, 280))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/logo/img/logo_gra.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        TelaLoginUi.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(TelaLoginUi)
         self.centralwidget.setObjectName("centralwidget")
         self.frame = QtWidgets.QFrame(self.centralwidget)
@@ -83,3 +86,4 @@ class Ui_TelaLoginUi(object):
         self.btnEntrar.setToolTip(_translate("TelaLoginUi", "Entrar"))
         self.btnEntrar.setStatusTip(_translate("TelaLoginUi", "Entrar"))
         self.btnEntrar.setText(_translate("TelaLoginUi", "Entrar"))
+import res_rc

@@ -1,9 +1,7 @@
-import os
 import sqlite3
 import sys
 
 from PyQt5.QtCore import QTime
-from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication, QWidget, QDesktopWidget, QMessageBox
 from view.trabalhoUi import Ui_Form
 
@@ -13,8 +11,7 @@ class TrabalhoWindow(QWidget, Ui_Form):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
-        scriptDir = os.path.dirname(os.path.realpath(__file__))
-        self.setWindowIcon(QIcon(scriptDir + os.path.sep + 'img/logo_peq.png'))
+
         self.popula_lista()
 
         self.center()

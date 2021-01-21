@@ -20,23 +20,26 @@
    <string>Sobre o sistema - Mehsys</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>../img/logo_peq.png</normaloff>../img/logo_peq.png</iconset>
+   <iconset resource="../res.qrc">
+    <normaloff>:/logo/img/logo_gra.png</normaloff>:/logo/img/logo_gra.png</iconset>
   </property>
   <widget class="QLabel" name="logo">
    <property name="geometry">
     <rect>
-     <x>145</x>
-     <y>10</y>
+     <x>142</x>
+     <y>11</y>
      <width>221</width>
-     <height>71</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
     <string/>
    </property>
    <property name="pixmap">
-    <pixmap>../img/mehsys.png</pixmap>
+    <pixmap resource="../res.qrc">:/logo/img/mehsys.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPlainTextEdit" name="plainTextEdit">
@@ -244,15 +247,15 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>40</x>
+     <x>60</x>
      <y>104</y>
-     <width>421</width>
+     <width>401</width>
      <height>111</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>11</pointsize>
     </font>
    </property>
    <property name="text">
@@ -271,7 +274,7 @@ aprendizado.</string>
    <property name="geometry">
     <rect>
      <x>236</x>
-     <y>70</y>
+     <y>76</y>
      <width>41</width>
      <height>21</height>
     </rect>
@@ -286,6 +289,8 @@ aprendizado.</string>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../res.qrc"/>
+ </resources>
  <connections/>
 </ui>

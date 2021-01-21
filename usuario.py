@@ -1,9 +1,7 @@
-import os
 import sqlite3
 import sys
 
 from PyQt5.QtCore import QTime
-from PyQt5.QtGui import QIcon
 
 from Utils.readOnly import ReadOnlyDelegate
 from view.userUi import Ui_UserMain
@@ -14,8 +12,6 @@ class UserWindow(QMainWindow, Ui_UserMain):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        scriptDir = os.path.dirname(os.path.realpath(__file__))
-        self.setWindowIcon(QIcon(scriptDir + os.path.sep + 'img/logo_peq.png'))
 
         self.setupUi(self)
         # centralizar tela

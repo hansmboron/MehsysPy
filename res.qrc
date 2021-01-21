@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="logo">
+    <file>img/mehsys.png</file>
+    <file>img/logo_gra.png</file>
+  </qresource>
+</RCC>

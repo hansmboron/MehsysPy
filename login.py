@@ -1,10 +1,8 @@
-import os
 import sqlite3
 import sys
 
 from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QDesktopWidget, QApplication, QMessageBox, QMainWindow
+from PyQt5.QtWidgets import QDesktopWidget, QApplication, QMessageBox, QMainWindow, QStyle
 
 from view.loginUi import Ui_TelaLoginUi
 from principal import PrincipalWindow
@@ -15,8 +13,10 @@ class LoginWindow(QMainWindow, Ui_TelaLoginUi):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
-        scriptDir = os.path.dirname(os.path.realpath(__file__))
-        self.setWindowIcon(QIcon(scriptDir + os.path.sep + 'img/logo_peq.png'))
+
+        self.btnEntrar.setIcon(self.style().standardIcon(getattr(QStyle, 'SP_DialogApplyButton')))
+        # scriptDir = os.path.dirname(os.path.realpath(__file__))
+        # self.setWindowIcon(QIcon(scriptDir + os.path.sep + 'img/logo_peq.png'))
 
         self.center()
 

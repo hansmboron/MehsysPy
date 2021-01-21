@@ -16,6 +16,9 @@ class Ui_UserMain(object):
         UserMain.setObjectName("UserMain")
         UserMain.resize(723, 575)
         UserMain.setMinimumSize(QtCore.QSize(720, 540))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(":/logo/img/logo_gra.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        UserMain.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(UserMain)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
@@ -184,3 +187,4 @@ class Ui_UserMain(object):
         self.btnDel_usu.setText(_translate("UserMain", "Excluir"))
         self.btnLim_usu.setStatusTip(_translate("UserMain", "Limpar campos para poder cadastrar novo profissional"))
         self.btnLim_usu.setText(_translate("UserMain", "Limpar"))
+import res_rc
