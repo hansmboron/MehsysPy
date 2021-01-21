@@ -3,7 +3,8 @@ import sys
 
 from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QMainWindow, QDesktopWidget, QFileDialog
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib import colors
 
 from Utils.readOnly import ReadOnlyDelegate
@@ -299,22 +300,26 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo', 'clientes.pdf')
             if file[0]:
                 try:
-                    doc = SimpleDocTemplate(file[0])
+                    doc = SimpleDocTemplate(file[0], title='Relatório de Clientes')
                     flow_obj = []
                     td = [["ID", "NOME", "SEXO", "CPF", "ENDEREÇO", "TELEFONE"]]
                     db = sqlite3.connect('dbmehsys.db')
                     cursor = db.cursor()
-                    cursor.execute("select * from tbclientes")
+                    cursor.execute("select * from tbclientes order by nome")
                     rs = cursor.fetchall()
                     for i in range(len(rs)):
                         data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4], rs[i][5]]
                         td.append(data)
+                    styleSheet = getSampleStyleSheet()
+                    style = styleSheet['Title']
+                    title = Paragraph("Relatório de Clientes", style)
                     table = Table(td)
                     db.close()
-                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
+                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 0.5, colors.black),
                                      ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
                                      ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
                     table.setStyle(ts)
+                    flow_obj.append(title)
                     flow_obj.append(table)
                     doc.build(flow_obj)
                     QMessageBox.information(
@@ -473,22 +478,26 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo', 'serviços.pdf')
             if file[0]:
                 try:
-                    doc = SimpleDocTemplate(file[0])
+                    doc = SimpleDocTemplate(file[0], title='Relatório de Serviços')
                     flow_obj = []
                     td = [["ID", "SERVIÇO", "PROFISSIONAL", "VALOR", "DURAÇÃO"]]
                     db = sqlite3.connect('dbmehsys.db')
                     cursor = db.cursor()
-                    cursor.execute("select * from tbservicos")
+                    cursor.execute("select * from tbservicos order by name")
                     rs = cursor.fetchall()
                     for i in range(len(rs)):
                         data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4]]
                         td.append(data)
+                    styleSheet = getSampleStyleSheet()
+                    style = styleSheet['Title']
+                    title = Paragraph("Relatório de Serviços", style)
                     table = Table(td)
                     db.close()
-                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
+                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 0.5, colors.black),
                                      ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
                                      ("BACKGROUND", (0, 1), (-1, -1), colors.lightseagreen)])
                     table.setStyle(ts)
+                    flow_obj.append(title)
                     flow_obj.append(table)
                     doc.build(flow_obj)
                     QMessageBox.information(
@@ -816,22 +825,26 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo', 'agendamendos.pdf')
             if file[0]:
                 try:
-                    doc = SimpleDocTemplate(file[0])
+                    doc = SimpleDocTemplate(file[0], title="Relatório de Agendamentos")
                     flow_obj = []
                     td = [["ID", "CLIENTE", "SERVIÇO", "DATA", "HORÁRIO", "PROFISSIONAL"]]
                     db = sqlite3.connect('dbmehsys.db')
                     cursor = db.cursor()
-                    cursor.execute("select * from tbhorarios")
+                    cursor.execute("select * from tbhorarios order by data")
                     rs = cursor.fetchall()
                     for i in range(len(rs)):
                         data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4], rs[i][5]]
                         td.append(data)
+                    styleSheet = getSampleStyleSheet()
+                    style = styleSheet['Title']
+                    title = Paragraph("Relatório de Agendamentos", style)
                     table = Table(td)
                     db.close()
-                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 1, colors.black),
+                    ts = TableStyle([("GRID", (0, 0), (-1, -1), 0.5, colors.black),
                                      ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
                                      ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
                     table.setStyle(ts)
+                    flow_obj.append(title)
                     flow_obj.append(table)
                     doc.build(flow_obj)
                     QMessageBox.information(
