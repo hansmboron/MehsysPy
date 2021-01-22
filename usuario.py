@@ -116,7 +116,6 @@ class UserWindow(QMainWindow, Ui_UserMain):
         confirm = QMessageBox.question(self, 'REMOVER USUÁRIO?',
                                        f'Tem certeza que quer REMOVER o Usuário ({self.txtNom_usu.text()}) do sistema?',
                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-        # TODO: Verificar se usuário é o mesmo que está tentando deletar e não deletar
         if confirm == QMessageBox.Yes:
             try:
                 cursor.execute(sql, [id])
@@ -162,6 +161,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
     def setar_campos_usu(self):
         self.cbbPer_usu.setEnabled(True)
         self.btnSal_usu.setEnabled(False)
+        self.btnSal_usu.setStyleSheet(None)
         self.btnAtu_usu.setEnabled(True)
         self.btnDel_usu.setEnabled(True)
         rows = sorted(set(index.row() for index in self.table_user.selectedIndexes()))
@@ -204,6 +204,8 @@ class UserWindow(QMainWindow, Ui_UserMain):
         self.timInicio.setTime(QTime(0, 0))
         self.timFim.setTime(QTime(0, 0))
         self.btnSal_usu.setEnabled(True)
+        self.btnSal_usu.setStyleSheet("background-color: rgb(150, 0, 0);\n"
+                                      "color: rgb(255, 255, 255);")
         self.btnAtu_usu.setEnabled(False)
         self.btnDel_usu.setEnabled(False)
 

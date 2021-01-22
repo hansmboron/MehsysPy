@@ -121,8 +121,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
 
     # popula horários somente quando outros campos obrigatórios estão preenchidos e o horário não está no cliq do mouse
     def mousePressEvent(self, event):
-        if event.buttons() and self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
-                and len(self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
+        if event.buttons() and self.cbbPro_hor.currentIndex() >= 1 and self.cbbSer_hor.currentIndex() >= 1 and \
+                len(
+                    self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
             self.popula_cbb_horarios()
 
     # centralizar tela
@@ -136,10 +137,12 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
     #     print("Pressionado!!!")
 
     def open_users_screen(self):
+        self.cbbPro_hor.setCurrentIndex(0)
         self.user = UserWindow()
         self.user.show()
 
     def open_addHor_screen(self):
+        self.cbbHor_hor.clear()
         self.trabalho = TrabalhoWindow()
         self.trabalho.show()
 
@@ -253,6 +256,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.txtEnd_cli.setText(None)
         self.txtFon_cli.setText(None)
         self.btnSal_cli.setEnabled(True)
+        self.btnSal_cli.setStyleSheet("background-color: rgb(0, 150, 0);\n"
+                                      "color: rgb(255, 255, 255);")
         self.btnAtu_cli.setEnabled(False)
         self.btnExc_cli.setEnabled(False)
 
@@ -288,6 +293,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             self.txtEnd_cli.setText(self.table_cli.item(r, 4).text())
             self.txtFon_cli.setText(self.table_cli.item(r, 5).text())
         self.btnSal_cli.setEnabled(False)
+        self.btnSal_cli.setStyleSheet(None)
         self.btnAtu_cli.setEnabled(True)
         self.btnExc_cli.setEnabled(True)
 
@@ -317,7 +323,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                     db.close()
                     ts = TableStyle([("GRID", (0, 0), (-1, -1), 0.5, colors.black),
                                      ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
-                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
+                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightseagreen)])
                     table.setStyle(ts)
                     flow_obj.append(title)
                     flow_obj.append(table)
@@ -411,6 +417,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.txtSer_ser.setText(None)
         self.horHor_ser.setText(None)
         self.pushButton_17.setEnabled(True)
+        self.pushButton_17.setStyleSheet("background-color: rgb(0, 0, 150);\n"
+                                         "color: rgb(255, 255, 255);")
         self.pushButton_18.setEnabled(False)
         self.pushButton_19.setEnabled(False)
 
@@ -448,6 +456,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             self.txtSer_ser.setText(self.table_ser.item(r, 3).text())
             self.horHor_ser.setText(self.table_ser.item(r, 4).text())
         self.pushButton_17.setEnabled(False)
+        self.pushButton_17.setStyleSheet(None)
         self.pushButton_18.setEnabled(True)
         self.pushButton_19.setEnabled(True)
 
@@ -483,7 +492,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                     td = [["ID", "SERVIÇO", "PROFISSIONAL", "VALOR", "DURAÇÃO"]]
                     db = sqlite3.connect('dbmehsys.db')
                     cursor = db.cursor()
-                    cursor.execute("select * from tbservicos order by name")
+                    cursor.execute("select * from tbservicos order by nome")
                     rs = cursor.fetchall()
                     for i in range(len(rs)):
                         data = [rs[i][0], rs[i][1], rs[i][2], rs[i][3], rs[i][4]]
@@ -495,7 +504,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                     db.close()
                     ts = TableStyle([("GRID", (0, 0), (-1, -1), 0.5, colors.black),
                                      ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
-                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightseagreen)])
+                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
                     table.setStyle(ts)
                     flow_obj.append(title)
                     flow_obj.append(table)
@@ -526,9 +535,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             if len(rs_ser) >= 1:
                 id_ser = rs_ser[0][0]
 
-            if self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
-                    and len(self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 \
-                    and self.dat_hor.text() != '01/01/2000':
+            if self.cbbPro_hor.currentIndex() >= 1 and self.cbbSer_hor.currentIndex() >= 1 and \
+                    len(
+                        self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
                 self.popula_cbb_horarios()
                 QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
 
@@ -569,9 +578,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             if len(rs_ser) >= 1:
                 id_ser = rs_ser[0][0]
 
-            if self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
-                    and len(self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 \
-                    and self.dat_hor.text() != '01/01/2000':
+            if self.cbbPro_hor.currentIndex() >= 1 and self.cbbSer_hor.currentIndex() >= 1 and \
+                    len(self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
                 self.popula_cbb_horarios()
                 QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
 
@@ -632,6 +640,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.btnAtu_hor.setEnabled(False)
         self.btnExc_hor.setEnabled(False)
         self.btnAge_hor.setEnabled(True)
+        self.btnAge_hor.setStyleSheet("background-color: rgb(150, 0, 150);\n"
+                                      "color: rgb(255, 255, 255);")
         self.listPesCli_hor.setVisible(False)
         self.cbbHor_hor.clear()
 
@@ -702,6 +712,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.btnAtu_hor.setEnabled(True)
         self.btnExc_hor.setEnabled(True)
         self.btnAge_hor.setEnabled(False)
+        self.btnAge_hor.setStyleSheet(None)
         self.cbbSer_hor.setEnabled(False)
         self.listPesCli_hor.setVisible(False)
 
@@ -842,7 +853,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                     db.close()
                     ts = TableStyle([("GRID", (0, 0), (-1, -1), 0.5, colors.black),
                                      ("BACKGROUND", (0, 0), (-1, 0), colors.mediumpurple),
-                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightskyblue)])
+                                     ("BACKGROUND", (0, 1), (-1, -1), colors.lightsteelblue)])
                     table.setStyle(ts)
                     flow_obj.append(title)
                     flow_obj.append(table)
