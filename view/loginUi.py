@@ -14,52 +14,66 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_TelaLoginUi(object):
     def setupUi(self, TelaLoginUi):
         TelaLoginUi.setObjectName("TelaLoginUi")
-        TelaLoginUi.resize(400, 280)
-        TelaLoginUi.setMinimumSize(QtCore.QSize(400, 280))
+        TelaLoginUi.resize(400, 290)
+        TelaLoginUi.setMinimumSize(QtCore.QSize(400, 290))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/logo/img/logo_gra.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         TelaLoginUi.setWindowIcon(icon)
+        TelaLoginUi.setStyleSheet("background-color: #850085;")
         self.centralwidget = QtWidgets.QWidget(TelaLoginUi)
         self.centralwidget.setObjectName("centralwidget")
-        self.frame = QtWidgets.QFrame(self.centralwidget)
-        self.frame.setGeometry(QtCore.QRect(20, 10, 361, 241))
-        self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
-        self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
-        self.frame.setObjectName("frame")
-        self.layoutWidget = QtWidgets.QWidget(self.frame)
-        self.layoutWidget.setGeometry(QtCore.QRect(20, 10, 321, 131))
-        self.layoutWidget.setObjectName("layoutWidget")
-        self.verticalLayout = QtWidgets.QVBoxLayout(self.layoutWidget)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setObjectName("verticalLayout")
-        self.label = QtWidgets.QLabel(self.layoutWidget)
-        self.label.setObjectName("label")
-        self.verticalLayout.addWidget(self.label)
-        self.txtUser = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.txtUser.setFont(font)
-        self.txtUser.setClearButtonEnabled(True)
-        self.txtUser.setObjectName("txtUser")
-        self.verticalLayout.addWidget(self.txtUser)
-        self.label_2 = QtWidgets.QLabel(self.layoutWidget)
-        self.label_2.setObjectName("label_2")
-        self.verticalLayout.addWidget(self.label_2)
-        self.txtPass = QtWidgets.QLineEdit(self.layoutWidget)
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.txtPass.setFont(font)
-        self.txtPass.setEchoMode(QtWidgets.QLineEdit.Password)
-        self.txtPass.setClearButtonEnabled(True)
-        self.txtPass.setObjectName("txtPass")
-        self.verticalLayout.addWidget(self.txtPass)
-        self.btnEntrar = QtWidgets.QPushButton(self.frame)
-        self.btnEntrar.setGeometry(QtCore.QRect(20, 190, 321, 34))
+        self.btnEntrar = QtWidgets.QPushButton(self.centralwidget)
+        self.btnEntrar.setGeometry(QtCore.QRect(40, 210, 319, 38))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.btnEntrar.setFont(font)
-        self.btnEntrar.setStyleSheet("background-color: rgb(150, 0, 150);")
+        self.btnEntrar.setStyleSheet("QPushButton{\n"
+"    padding: 5px 10px;\n"
+"    border: none;\n"
+"    border-radius: 10px;\n"
+"    background-color: rgb(0, 150, 0);\n"
+"}\n"
+"\n"
+"QPushButton:hover{\n"
+"    background-color: rgb(0, 92, 157)\n"
+"}")
         self.btnEntrar.setObjectName("btnEntrar")
+        self.txtUser = QtWidgets.QLineEdit(self.centralwidget)
+        self.txtUser.setGeometry(QtCore.QRect(40, 86, 319, 40))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.txtUser.setFont(font)
+        self.txtUser.setStyleSheet("QLineEdit{\n"
+"    background-color: rgba(0, 0, 0, 100);\n"
+"    color: #fff;\n"
+"    border-radius: 10px;\n"
+"    border: 2px solid rgb(0, 92, 157);\n"
+"    padding-left: 10px;\n"
+"}")
+        self.txtUser.setClearButtonEnabled(True)
+        self.txtUser.setObjectName("txtUser")
+        self.txtPass = QtWidgets.QLineEdit(self.centralwidget)
+        self.txtPass.setGeometry(QtCore.QRect(40, 137, 319, 40))
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        self.txtPass.setFont(font)
+        self.txtPass.setStyleSheet("QLineEdit{\n"
+"    background-color: rgba(0, 0, 0, 100);\n"
+"    color: #fff;\n"
+"    border-radius: 10px;\n"
+"    border: 2px solid rgb(0, 92, 157);\n"
+"    padding-left: 10px;\n"
+"}")
+        self.txtPass.setEchoMode(QtWidgets.QLineEdit.Password)
+        self.txtPass.setClearButtonEnabled(True)
+        self.txtPass.setObjectName("txtPass")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(92, 10, 221, 64))
+        self.label.setStyleSheet("background-image: url(:/logo/img/logo.png) ;\n"
+"background-repeat: no-repeat;\n"
+"")
+        self.label.setText("")
+        self.label.setObjectName("label")
         TelaLoginUi.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(TelaLoginUi)
         self.statusbar.setObjectName("statusbar")
@@ -71,19 +85,14 @@ class Ui_TelaLoginUi(object):
     def retranslateUi(self, TelaLoginUi):
         _translate = QtCore.QCoreApplication.translate
         TelaLoginUi.setWindowTitle(_translate("TelaLoginUi", "Tela Login - Mehsys"))
-        self.label.setToolTip(_translate("TelaLoginUi", "Nome de usuário"))
-        self.label.setStatusTip(_translate("TelaLoginUi", "Nome de usuário"))
-        self.label.setText(_translate("TelaLoginUi", "Usuário:"))
-        self.txtUser.setToolTip(_translate("TelaLoginUi", "Nome de usuário"))
-        self.txtUser.setStatusTip(_translate("TelaLoginUi", "Nome de usuário"))
-        self.txtUser.setPlaceholderText(_translate("TelaLoginUi", "Nome de usuário"))
-        self.label_2.setToolTip(_translate("TelaLoginUi", "Senha do usuário"))
-        self.label_2.setStatusTip(_translate("TelaLoginUi", "Senha do usuário"))
-        self.label_2.setText(_translate("TelaLoginUi", "Senha:"))
-        self.txtPass.setToolTip(_translate("TelaLoginUi", "Senha do usuário"))
-        self.txtPass.setStatusTip(_translate("TelaLoginUi", "Senha do usuário"))
-        self.txtPass.setPlaceholderText(_translate("TelaLoginUi", "Senha do usuário"))
         self.btnEntrar.setToolTip(_translate("TelaLoginUi", "Entrar"))
         self.btnEntrar.setStatusTip(_translate("TelaLoginUi", "Entrar"))
         self.btnEntrar.setText(_translate("TelaLoginUi", "Entrar"))
+        self.txtUser.setToolTip(_translate("TelaLoginUi", "Nome de usuário"))
+        self.txtUser.setStatusTip(_translate("TelaLoginUi", "Nome de usuário"))
+        self.txtUser.setPlaceholderText(_translate("TelaLoginUi", "Nome de usuário"))
+        self.txtPass.setToolTip(_translate("TelaLoginUi", "Senha do usuário"))
+        self.txtPass.setStatusTip(_translate("TelaLoginUi", "Senha do usuário"))
+        self.txtPass.setPlaceholderText(_translate("TelaLoginUi", "Senha do usuário"))
+        self.label.setStatusTip(_translate("TelaLoginUi", "Visite: https://mehsys.site para saber mais"))
 import res_rc

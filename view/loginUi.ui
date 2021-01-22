@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>280</height>
+    <height>290</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>280</height>
+    <height>290</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -23,132 +23,141 @@
    <iconset resource="../res.qrc">
     <normaloff>:/logo/img/logo_gra.png</normaloff>:/logo/img/logo_gra.png</iconset>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: #850085;</string>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QFrame" name="frame">
+   <widget class="QPushButton" name="btnEntrar">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>361</width>
-      <height>241</height>
+      <x>40</x>
+      <y>210</y>
+      <width>319</width>
+      <height>38</height>
      </rect>
     </property>
-    <property name="frameShape">
-     <enum>QFrame::StyledPanel</enum>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
-    <property name="frameShadow">
-     <enum>QFrame::Raised</enum>
+    <property name="toolTip">
+     <string>Entrar</string>
     </property>
-    <widget class="QWidget" name="layoutWidget">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>321</width>
-       <height>131</height>
-      </rect>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="toolTip">
-         <string>Nome de usuário</string>
-        </property>
-        <property name="statusTip">
-         <string>Nome de usuário</string>
-        </property>
-        <property name="text">
-         <string>Usuário:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="txtUser">
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>Nome de usuário</string>
-        </property>
-        <property name="statusTip">
-         <string>Nome de usuário</string>
-        </property>
-        <property name="placeholderText">
-         <string>Nome de usuário</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2">
-        <property name="toolTip">
-         <string>Senha do usuário</string>
-        </property>
-        <property name="statusTip">
-         <string>Senha do usuário</string>
-        </property>
-        <property name="text">
-         <string>Senha:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="txtPass">
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
-        <property name="toolTip">
-         <string>Senha do usuário</string>
-        </property>
-        <property name="statusTip">
-         <string>Senha do usuário</string>
-        </property>
-        <property name="echoMode">
-         <enum>QLineEdit::Password</enum>
-        </property>
-        <property name="placeholderText">
-         <string>Senha do usuário</string>
-        </property>
-        <property name="clearButtonEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QPushButton" name="btnEntrar">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>190</y>
-       <width>321</width>
-       <height>34</height>
-      </rect>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>14</pointsize>
-      </font>
-     </property>
-     <property name="toolTip">
-      <string>Entrar</string>
-     </property>
-     <property name="statusTip">
-      <string>Entrar</string>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">background-color: rgb(150, 0, 150);</string>
-     </property>
-     <property name="text">
-      <string>Entrar</string>
-     </property>
-    </widget>
+    <property name="statusTip">
+     <string>Entrar</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	padding: 5px 10px;
+	border: none;
+	border-radius: 10px;
+	background-color: rgb(0, 150, 0);
+}
+
+QPushButton:hover{
+	background-color: rgb(0, 92, 157)
+}</string>
+    </property>
+    <property name="text">
+     <string>Entrar</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtUser">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>86</y>
+      <width>319</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Nome de usuário</string>
+    </property>
+    <property name="statusTip">
+     <string>Nome de usuário</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+	background-color: rgba(0, 0, 0, 100);
+	color: #fff;
+	border-radius: 10px;
+	border: 2px solid rgb(0, 92, 157);
+	padding-left: 10px;
+}</string>
+    </property>
+    <property name="placeholderText">
+     <string>Nome de usuário</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtPass">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>137</y>
+      <width>319</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Senha do usuário</string>
+    </property>
+    <property name="statusTip">
+     <string>Senha do usuário</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLineEdit{
+	background-color: rgba(0, 0, 0, 100);
+	color: #fff;
+	border-radius: 10px;
+	border: 2px solid rgb(0, 92, 157);
+	padding-left: 10px;
+}</string>
+    </property>
+    <property name="echoMode">
+     <enum>QLineEdit::Password</enum>
+    </property>
+    <property name="placeholderText">
+     <string>Senha do usuário</string>
+    </property>
+    <property name="clearButtonEnabled">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>92</x>
+      <y>10</y>
+      <width>221</width>
+      <height>64</height>
+     </rect>
+    </property>
+    <property name="statusTip">
+     <string>Visite: https://mehsys.site para saber mais</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-image: url(:/logo/img/logo.png) ;
+background-repeat: no-repeat;
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
