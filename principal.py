@@ -3,9 +3,10 @@ import sys
 
 from PyQt5.QtCore import QDate
 from PyQt5.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QMainWindow, QDesktopWidget, QFileDialog
-from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib import colors
+from reportlab.lib.pagesizes import A9
 
 from Utils.readOnly import ReadOnlyDelegate
 from usuario import UserWindow
@@ -82,6 +83,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.btnAge_hor.clicked.connect(self.on_btn_sal_hor_pressed)
         self.btnAtu_hor.clicked.connect(self.on_btn_atu_hor_pressed)
         self.btnExc_hor.clicked.connect(self.on_btn_del_hor_pressed)
+        self.btnImp_hor.clicked.connect(self.on_btn_imprimir)
         self.btnLim_hor.clicked.connect(self.on_btn_clear_hor_pressed)
         self.btnPesNom_hor.clicked.connect(self.pesquisar_horarios)
         self.txtPesNom_hor.textChanged.connect(self.pesquisar_horarios)
@@ -579,7 +581,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                 id_ser = rs_ser[0][0]
 
             if self.cbbPro_hor.currentIndex() >= 1 and self.cbbSer_hor.currentIndex() >= 1 and \
-                    len(self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
+                    len(
+                        self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
                 self.popula_cbb_horarios()
                 QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
 
@@ -629,6 +632,57 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         else:
             db.close()
 
+    def on_btn_imprimir(self):
+        id = self.txtId_hor.text()
+        confirm = QMessageBox.question(self, 'CONFIRMA IMPRESSÃO?',
+                                       f'Confirma a impressão do comprovante de agendamento nº ({id})?',
+                                       QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if confirm == QMessageBox.Yes:
+            file = QFileDialog.getSaveFileName(self, 'Salvar Arquivo', f'comprovante{id}.pdf')
+            if file[0]:
+                try:
+                    flow_obj = []
+                    db = sqlite3.connect('dbmehsys.db')
+                    cursor = db.cursor()
+                    sql = 'select h.id, h.cliente, h.servico, h.data, h.horario, h.profissional, s.valor, s.duracao ' \
+                          'from tbhorarios as h inner join tbservicos as s on (s.nome = h.id_ser) where h.id = ? '
+                    cursor.execute(sql, [id])
+                    rs = cursor.fetchall()
+                    doc = SimpleDocTemplate(file[0], title=f"Comprovante número ({str(rs[0][0])})")
+
+                    styleSheet = getSampleStyleSheet()
+                    titleStyle = styleSheet['Title']
+                    itemStyle = ParagraphStyle(name='Heading2',
+                                               fontSize=16,
+                                               leading=18,
+                                               textColor=colors.darkmagenta,
+                                               spaceBefore=12,
+                                               spaceAfter=6)
+                    title = Paragraph(f"Comprovante de agendamento número {str(rs[0][0])}", titleStyle)
+                    cliente = Paragraph(f"Cliente:            {rs[0][1]}", itemStyle)
+                    servico = Paragraph(f"Serviço:            {rs[0][2]}", itemStyle)
+                    data = Paragraph(f'Data:               {rs[0][3]}', itemStyle)
+                    horario = Paragraph(f'Horário:            {rs[0][4]}', itemStyle)
+                    prof = Paragraph(f'Profissional:       {rs[0][5]}', itemStyle)
+                    valor = Paragraph(f'Valor:              {rs[0][6]}', itemStyle)
+                    duracao = Paragraph(f'Duração aproximada: {rs[0][7]}', itemStyle)
+                    flow_obj.append(title)
+                    flow_obj.append(cliente)
+                    flow_obj.append(servico)
+                    flow_obj.append(data)
+                    flow_obj.append(horario)
+                    flow_obj.append(prof)
+                    flow_obj.append(valor)
+                    flow_obj.append(duracao)
+                    doc.build(flow_obj)
+                    cursor.close()
+                    db.close()
+                    QMessageBox.information(
+                        self, 'Comprovante gerado com SUCESSO!!!',
+                        f'Comprovante de Agendamento nº {id} salvo em: "{file[0]}"')
+                except Exception as e:
+                    QMessageBox.warning(self, 'ERRO!!!', str(e))
+
     def on_btn_clear_hor_pressed(self):
         self.txtId_hor.setText(None)
         self.txtPesCli_hor.setText(None)
@@ -639,6 +693,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.cbbSer_hor.setEnabled(True)
         self.btnAtu_hor.setEnabled(False)
         self.btnExc_hor.setEnabled(False)
+        self.btnImp_hor.setEnabled(False)
         self.btnAge_hor.setEnabled(True)
         self.btnAge_hor.setStyleSheet("background-color: rgb(150, 0, 150);\n"
                                       "color: rgb(255, 255, 255);")
@@ -711,6 +766,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             self.cbbPro_hor.setCurrentText(self.table_hor.item(r, 5).text())
         self.btnAtu_hor.setEnabled(True)
         self.btnExc_hor.setEnabled(True)
+        self.btnImp_hor.setEnabled(True)
         self.btnAge_hor.setEnabled(False)
         self.btnAge_hor.setStyleSheet(None)
         self.cbbSer_hor.setEnabled(False)

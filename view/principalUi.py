@@ -105,6 +105,7 @@ class Ui_MainWindow(object):
         self.btnExc_hor.setObjectName("btnExc_hor")
         self.horizontalLayout_2.addWidget(self.btnExc_hor)
         self.btnImp_hor = QtWidgets.QPushButton(self.layoutWidget1)
+        self.btnImp_hor.setEnabled(False)
         self.btnImp_hor.setObjectName("btnImp_hor")
         self.horizontalLayout_2.addWidget(self.btnImp_hor)
         self.btnLim_hor = QtWidgets.QPushButton(self.layoutWidget1)
@@ -378,7 +379,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuSair.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
