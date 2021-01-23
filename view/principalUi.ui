@@ -24,471 +24,343 @@
     <normaloff>:/logo/img/logo_gra.png</normaloff>:/logo/img/logo_gra.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>7</x>
-      <y>6</y>
-      <width>731</width>
-      <height>541</height>
-     </rect>
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout_10">
+    <property name="leftMargin">
+     <number>6</number>
     </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="currentIndex">
-     <number>0</number>
-    </property>
-    <widget class="QWidget" name="tabHor">
-     <attribute name="title">
-      <string>Horários</string>
-     </attribute>
-     <widget class="Line" name="line">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>210</y>
-        <width>681</width>
-        <height>16</height>
-       </rect>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
+      <property name="styleSheet">
+       <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
       </property>
-     </widget>
-     <widget class="QTableWidget" name="table_hor">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>280</y>
-        <width>681</width>
-        <height>211</height>
-       </rect>
+      <property name="currentIndex">
+       <number>1</number>
       </property>
-      <property name="statusTip">
-       <string>Selecione algum agendamento para atualizar ou deletar</string>
-      </property>
-      <column>
-       <property name="text">
-        <string>Id</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Cliente</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Serviço</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Data</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Horário</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Profissional</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>681</width>
-        <height>141</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+      <widget class="QWidget" name="tabHor">
+       <attribute name="icon">
+        <iconset resource="../res.qrc">
+         <normaloff>:/icons/img/agendamento.png</normaloff>:/icons/img/agendamento.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Horários</string>
+       </attribute>
+       <widget class="Line" name="line">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>198</y>
+          <width>691</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="table_hor">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>265</y>
+          <width>691</width>
+          <height>225</height>
+         </rect>
+        </property>
+        <property name="statusTip">
+         <string>Selecione algum agendamento para atualizar ou deletar</string>
+        </property>
+        <column>
+         <property name="text">
+          <string>Id</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Cliente</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Serviço</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Data</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Horário</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Profissional</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>0</y>
+          <width>691</width>
+          <height>141</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QLineEdit" name="txtPesCli_hor">
-           <property name="statusTip">
-            <string>Digite qualquer coisa para pesquisar um cliente</string>
-           </property>
-           <property name="placeholderText">
-            <string>Pesquisar cliente</string>
-           </property>
-           <property name="clearButtonEnabled">
-            <bool>true</bool>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLineEdit" name="txtPesCli_hor">
+             <property name="statusTip">
+              <string>Digite qualquer coisa para pesquisar um cliente</string>
+             </property>
+             <property name="placeholderText">
+              <string>Pesquisar cliente</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cbbSer_hor">
+             <property name="statusTip">
+              <string>Selecione um serviço</string>
+             </property>
+             <property name="placeholderText">
+              <string>Selecionar serviço</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cbbPro_hor">
+             <property name="statusTip">
+              <string>Selecione um profissional</string>
+             </property>
+             <property name="placeholderText">
+              <string>Selecionar Profissional</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
          <item>
-          <widget class="QComboBox" name="cbbSer_hor">
-           <property name="statusTip">
-            <string>Selecione um serviço</string>
-           </property>
-           <property name="placeholderText">
-            <string>Selecionar serviço</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbbPro_hor">
-           <property name="statusTip">
-            <string>Selecione um profissional</string>
-           </property>
-           <property name="placeholderText">
-            <string>Selecionar Profissional</string>
-           </property>
-          </widget>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QLineEdit" name="txtId_hor">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="statusTip">
+              <string>Código do agendamento</string>
+             </property>
+             <property name="placeholderText">
+              <string>Id</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDateEdit" name="dat_hor">
+             <property name="statusTip">
+              <string>Digite data para o agendamento</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cbbHor_hor">
+             <property name="statusTip">
+              <string>Selecione horário disponível(se não aparecer nada clique fora ou no botão 'Agendar')</string>
+             </property>
+             <property name="placeholderText">
+              <string>Selecionar horário</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>143</y>
+          <width>691</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLineEdit" name="txtId_hor">
+          <widget class="QPushButton" name="btnAge_hor">
+           <property name="statusTip">
+            <string>Criar novo agendamento</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid #850085;
+	background-color: #850085;
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+           </property>
+           <property name="text">
+            <string>Agendar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res.qrc">
+             <normaloff>:/icons/img/plus-border.png</normaloff>:/icons/img/plus-border.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnAtu_hor">
            <property name="enabled">
             <bool>false</bool>
            </property>
            <property name="statusTip">
-            <string>Código do agendamento</string>
+            <string>Atualizar agendameto</string>
            </property>
-           <property name="placeholderText">
-            <string>Id</string>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+           </property>
+           <property name="text">
+            <string>Atualizar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res.qrc">
+             <normaloff>:/icons/img/refresh.png</normaloff>:/icons/img/refresh.png</iconset>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="dat_hor">
+          <widget class="QPushButton" name="btnExc_hor">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="statusTip">
-            <string>Digite data para o agendamento</string>
+            <string>Deletar agendamento</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+           </property>
+           <property name="text">
+            <string>Excluir</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res.qrc">
+             <normaloff>:/icons/img/edit-delete.png</normaloff>:/icons/img/edit-delete.png</iconset>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbbHor_hor">
-           <property name="statusTip">
-            <string>Selecione horário disponível(se não aparecer nada clique fora ou no botão 'Agendar')</string>
+          <widget class="QPushButton" name="btnImp_hor">
+           <property name="enabled">
+            <bool>false</bool>
            </property>
-           <property name="placeholderText">
-            <string>Selecionar horário</string>
+           <property name="statusTip">
+            <string>Imprimir comprovante</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+           </property>
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res.qrc">
+             <normaloff>:/icons/img/print.png</normaloff>:/icons/img/print.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btnLim_hor">
+           <property name="statusTip">
+            <string>Limpar campos para poder realizar novo agendamento</string>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid #850085;
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+           </property>
+           <property name="text">
+            <string>Limpar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res.qrc">
+             <normaloff>:/icons/img/limpar.png</normaloff>:/icons/img/limpar.png</iconset>
            </property>
           </widget>
          </item>
         </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>155</y>
-        <width>681</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QPushButton" name="btnAge_hor">
-         <property name="statusTip">
-          <string>Criar novo agendamento</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(150, 0, 150);
-color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>Agendar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnAtu_hor">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="statusTip">
-          <string>Atualizar agendameto</string>
-         </property>
-         <property name="text">
-          <string>Atualizar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnExc_hor">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="statusTip">
-          <string>Deletar agendamento</string>
-         </property>
-         <property name="text">
-          <string>Excluir</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnImp_hor">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="statusTip">
-          <string>Imprimir comprovante</string>
-         </property>
-         <property name="text">
-          <string>Imprimir</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnLim_hor">
-         <property name="statusTip">
-          <string>Limpar campos para poder realizar novo agendamento</string>
-         </property>
-         <property name="text">
-          <string>Limpar</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>230</y>
-        <width>681</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_3">
-       <item>
-        <widget class="QLineEdit" name="txtPesNom_hor">
-         <property name="statusTip">
-          <string>Pesquisar agendamentos por nome do cliente</string>
-         </property>
-         <property name="placeholderText">
-          <string>Nome cliente</string>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnPesNom_hor">
-         <property name="statusTip">
-          <string>Pesquisar agendamentos por nome de cliente</string>
-         </property>
-         <property name="text">
-          <string>Pesquisar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txtPesDat_hor">
-         <property name="statusTip">
-          <string>pesquisar agendamento por data</string>
-         </property>
-         <property name="placeholderText">
-          <string>Data agendamento</string>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnPesDat_hor">
-         <property name="statusTip">
-          <string>Pesquisar agendamento por data</string>
-         </property>
-         <property name="text">
-          <string>Pesquisar</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QListWidget" name="listPesCli_hor">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>47</y>
-        <width>338</width>
-        <height>91</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tabCli">
-     <attribute name="title">
-      <string>Clientes</string>
-     </attribute>
-     <widget class="QWidget" name="layoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>230</y>
-        <width>481</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <item>
-        <widget class="QLineEdit" name="txtPesNom_cli">
-         <property name="statusTip">
-          <string>Pesquisar clientes por nome</string>
-         </property>
-         <property name="placeholderText">
-          <string>Nome cliente</string>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnPesNom_cli">
-         <property name="statusTip">
-          <string>Pesquisar clientes por nome</string>
-         </property>
-         <property name="text">
-          <string>Pesquisar</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QTableWidget" name="table_cli">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>280</y>
-        <width>681</width>
-        <height>211</height>
-       </rect>
-      </property>
-      <property name="statusTip">
-       <string>Selecione algum cliente para atualizar ou deletar</string>
-      </property>
-      <column>
-       <property name="text">
-        <string>Id</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Nome</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Sexo</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>CPF</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Endereço</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Fone</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QWidget" name="layoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>155</y>
-        <width>681</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QPushButton" name="btnSal_cli">
-         <property name="statusTip">
-          <string>Cadastrar novo cliente</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 150, 0);
-color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>Salvar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnAtu_cli">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="statusTip">
-          <string>Atualizar dados do cliente</string>
-         </property>
-         <property name="text">
-          <string>Atualizar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnExc_cli">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="statusTip">
-          <string>Deletar cliente</string>
-         </property>
-         <property name="text">
-          <string>Excluir</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="btnLim_cli">
-         <property name="statusTip">
-          <string>Limpar campos para poder cadastrar novo cliente</string>
-         </property>
-         <property name="text">
-          <string>Limpar</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>681</width>
-        <height>141</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_6">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
+       </widget>
+       <widget class="QWidget" name="layoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>223</y>
+          <width>691</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QLineEdit" name="txtNom_cli">
+          <widget class="QLineEdit" name="txtPesNom_hor">
            <property name="statusTip">
-            <string>Digite nome do cliente</string>
+            <string>Pesquisar agendamentos por nome do cliente</string>
            </property>
            <property name="placeholderText">
             <string>Nome cliente</string>
@@ -499,344 +371,776 @@ color: rgb(255, 255, 255);</string>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbcSex_cli">
+          <widget class="QPushButton" name="btnPesNom_hor">
            <property name="statusTip">
-            <string>Selecione sexo do cliente</string>
+            <string>Pesquisar agendamentos por nome de cliente</string>
            </property>
-           <property name="placeholderText">
-            <string>Selecionar sexo</string>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid #850085;
+	height: 30px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
            </property>
-           <item>
-            <property name="text">
-             <string>Indefinido</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Femenino</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Masculino</string>
-            </property>
-           </item>
+           <property name="text">
+            <string>Pesquisar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res.qrc">
+             <normaloff>:/icons/img/pesquisar.png</normaloff>:/icons/img/pesquisar.png</iconset>
+           </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="txtCpf_cli">
+          <widget class="QLineEdit" name="txtPesDat_hor">
            <property name="statusTip">
-            <string>Digite CPF do cliente</string>
+            <string>pesquisar agendamento por data</string>
            </property>
            <property name="placeholderText">
-            <string>CPF cliente</string>
+            <string>Data agendamento</string>
            </property>
            <property name="clearButtonEnabled">
             <bool>true</bool>
            </property>
           </widget>
          </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_4">
          <item>
-          <widget class="QLineEdit" name="txtId_cli">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
+          <widget class="QPushButton" name="btnPesDat_hor">
            <property name="statusTip">
-            <string>Código do cliente</string>
+            <string>Pesquisar agendamento por data</string>
            </property>
-           <property name="placeholderText">
+           <property name="styleSheet">
+            <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid #850085;
+	height: 30px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+           </property>
+           <property name="text">
+            <string>Pesquisar</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../res.qrc">
+             <normaloff>:/icons/img/pesquisar.png</normaloff>:/icons/img/pesquisar.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QListWidget" name="listPesCli_hor">
+        <property name="geometry">
+         <rect>
+          <x>21</x>
+          <y>38</y>
+          <width>341</width>
+          <height>90</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tabCli">
+       <attribute name="icon">
+        <iconset resource="../res.qrc">
+         <normaloff>:/icons/img/cli_ico.png</normaloff>:/icons/img/cli_ico.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Clientes</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <property name="leftMargin">
+         <number>20</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>6</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <property name="spacing">
+             <number>12</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="txtNom_cli">
+              <property name="statusTip">
+               <string>Digite nome do cliente</string>
+              </property>
+              <property name="placeholderText">
+               <string>Nome cliente</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbcSex_cli">
+              <property name="statusTip">
+               <string>Selecione sexo do cliente</string>
+              </property>
+              <property name="placeholderText">
+               <string>Selecionar sexo</string>
+              </property>
+              <item>
+               <property name="text">
+                <string>Indefinido</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Femenino</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Masculino</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtCpf_cli">
+              <property name="statusTip">
+               <string>Digite CPF do cliente</string>
+              </property>
+              <property name="placeholderText">
+               <string>CPF cliente</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <property name="spacing">
+             <number>12</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="txtId_cli">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="statusTip">
+               <string>Código do cliente</string>
+              </property>
+              <property name="placeholderText">
+               <string>Id</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtEnd_cli">
+              <property name="statusTip">
+               <string>Endereço do cliente</string>
+              </property>
+              <property name="placeholderText">
+               <string>Endereço cliente</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtFon_cli">
+              <property name="statusTip">
+               <string>Telefone do cliente</string>
+              </property>
+              <property name="placeholderText">
+               <string>Fone cliente</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>15</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="btnSal_cli">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="statusTip">
+             <string>Cadastrar novo cliente</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(0, 140, 0);
+	background-color: rgb(0, 150, 0);
+height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Salvar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/salvar.png</normaloff>:/icons/img/salvar.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnAtu_cli">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="statusTip">
+             <string>Atualizar dados do cliente</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Atualizar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/refresh.png</normaloff>:/icons/img/refresh.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnExc_cli">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="statusTip">
+             <string>Deletar cliente</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Excluir</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/edit-delete.png</normaloff>:/icons/img/edit-delete.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnLim_cli">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="statusTip">
+             <string>Limpar campos para poder cadastrar novo cliente</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(0, 140, 0);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Limpar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/limpar.png</normaloff>:/icons/img/limpar.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <property name="leftMargin">
+           <number>100</number>
+          </property>
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="rightMargin">
+           <number>100</number>
+          </property>
+          <item>
+           <widget class="QLineEdit" name="txtPesNom_cli">
+            <property name="statusTip">
+             <string>Pesquisar clientes por nome</string>
+            </property>
+            <property name="placeholderText">
+             <string>Nome cliente</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="btnPesNom_cli">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="statusTip">
+             <string>Pesquisar clientes por nome</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(0, 140, 0);
+	padding-left: 10px;
+	padding-right:10px;
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Pesquisar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/pesquisar.png</normaloff>:/icons/img/pesquisar.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="table_cli">
+          <property name="statusTip">
+           <string>Selecione algum cliente para atualizar ou deletar</string>
+          </property>
+          <column>
+           <property name="text">
             <string>Id</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="txtEnd_cli">
-           <property name="statusTip">
-            <string>Endereço do cliente</string>
+          </column>
+          <column>
+           <property name="text">
+            <string>Nome</string>
            </property>
-           <property name="placeholderText">
-            <string>Endereço cliente</string>
+          </column>
+          <column>
+           <property name="text">
+            <string>Sexo</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="txtFon_cli">
-           <property name="statusTip">
-            <string>Telefone do cliente</string>
+          </column>
+          <column>
+           <property name="text">
+            <string>CPF</string>
            </property>
-           <property name="placeholderText">
-            <string>Fone cliente</string>
+          </column>
+          <column>
+           <property name="text">
+            <string>Endereço</string>
            </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="Line" name="line_2">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>210</y>
-        <width>681</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tabSer">
-     <attribute name="title">
-      <string>Serviços</string>
-     </attribute>
-     <widget class="QWidget" name="layoutWidget_4">
-      <property name="geometry">
-       <rect>
-        <x>120</x>
-        <y>230</y>
-        <width>481</width>
-        <height>41</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_7">
-       <item>
-        <widget class="QLineEdit" name="lineEdit_9">
-         <property name="statusTip">
-          <string>Pesquisar serviço por nome</string>
-         </property>
-         <property name="placeholderText">
-          <string>Nome serviço</string>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_15">
-         <property name="statusTip">
-          <string>Pesquisar serviço por nome</string>
-         </property>
-         <property name="text">
-          <string>Pesquisar</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QTableWidget" name="table_ser">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>280</y>
-        <width>681</width>
-        <height>211</height>
-       </rect>
-      </property>
-      <property name="statusTip">
-       <string>Selecione algum serviço para atualizar ou deletar</string>
-      </property>
-      <column>
-       <property name="text">
-        <string>Id</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Nome</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Profissional</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Valor</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Duração</string>
-       </property>
-      </column>
-     </widget>
-     <widget class="QWidget" name="layoutWidget_5">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>155</y>
-        <width>681</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_8">
-       <item>
-        <widget class="QPushButton" name="pushButton_17">
-         <property name="statusTip">
-          <string>Cadastrar novo serviço</string>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 0, 150);
-color: rgb(255, 255, 255);</string>
-         </property>
-         <property name="text">
-          <string>Salvar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_18">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="statusTip">
-          <string>Atualizar serviço</string>
-         </property>
-         <property name="text">
-          <string>Atualizar</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_19">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="statusTip">
-          <string>Deletar serviço</string>
-         </property>
-         <property name="text">
-          <string>Excluir</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_21">
-         <property name="statusTip">
-          <string>Limpar campos para poder adicionar novo serviço</string>
-         </property>
-         <property name="text">
-          <string>Limpar</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="layoutWidget_6">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>10</y>
-        <width>681</width>
-        <height>141</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_9">
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
-         <item>
-          <widget class="QLineEdit" name="txtNom_ser">
-           <property name="statusTip">
-            <string>Digite nome do serviço</string>
+          </column>
+          <column>
+           <property name="text">
+            <string>Fone</string>
            </property>
-           <property name="placeholderText">
-            <string>Nome serviço</string>
-           </property>
-           <property name="clearButtonEnabled">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="cbbPro_ser">
-           <property name="statusTip">
-            <string>Selecione profissional que realizará este serviço</string>
-           </property>
-           <property name="placeholderText">
-            <string>Selecionar profissional</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="txtSer_ser">
-           <property name="statusTip">
-            <string>Digite valor do serviço</string>
-           </property>
-           <property name="placeholderText">
-            <string>Valor serviço</string>
-           </property>
-           <property name="clearButtonEnabled">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QVBoxLayout" name="verticalLayout_6">
-         <item>
-          <widget class="QLineEdit" name="txtId_ser">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-           <property name="statusTip">
-            <string>Código do serviço</string>
-           </property>
-           <property name="placeholderText">
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabSer">
+       <attribute name="icon">
+        <iconset resource="../res.qrc">
+         <normaloff>:/icons/img/ser_ico.png</normaloff>:/icons/img/ser_ico.png</iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Serviços</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <property name="leftMargin">
+         <number>20</number>
+        </property>
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <property name="bottomMargin">
+         <number>12</number>
+        </property>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <property name="topMargin">
+           <number>6</number>
+          </property>
+          <property name="bottomMargin">
+           <number>6</number>
+          </property>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <property name="spacing">
+             <number>12</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="txtNom_ser">
+              <property name="statusTip">
+               <string>Digite nome do serviço</string>
+              </property>
+              <property name="placeholderText">
+               <string>Nome serviço</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbbPro_ser">
+              <property name="statusTip">
+               <string>Selecione profissional que realizará este serviço</string>
+              </property>
+              <property name="placeholderText">
+               <string>Selecionar profissional</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="txtSer_ser">
+              <property name="statusTip">
+               <string>Digite valor do serviço</string>
+              </property>
+              <property name="placeholderText">
+               <string>Valor serviço</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <property name="spacing">
+             <number>12</number>
+            </property>
+            <item>
+             <widget class="QLineEdit" name="txtId_ser">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="statusTip">
+               <string>Código do serviço</string>
+              </property>
+              <property name="placeholderText">
+               <string>Id</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="horHor_ser">
+              <property name="statusTip">
+               <string>Digite duração aproximada do serviço</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>14</width>
+                <height>35</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="bottomMargin">
+           <number>15</number>
+          </property>
+          <item>
+           <widget class="QPushButton" name="pushButton_17">
+            <property name="statusTip">
+             <string>Cadastrar novo serviço</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(0, 0, 140);
+	background-color: rgb(0, 0, 150);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Salvar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/salvar.png</normaloff>:/icons/img/salvar.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_18">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="statusTip">
+             <string>Atualizar serviço</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Atualizar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/refresh.png</normaloff>:/icons/img/refresh.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_19">
+            <property name="enabled">
+             <bool>false</bool>
+            </property>
+            <property name="statusTip">
+             <string>Deletar serviço</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(100, 100, 100);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Excluir</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/edit-delete.png</normaloff>:/icons/img/edit-delete.png</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_21">
+            <property name="statusTip">
+             <string>Limpar campos para poder adicionar novo serviço</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(0, 0, 150);
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Limpar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/limpar.png</normaloff>:/icons/img/limpar.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="line_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <property name="leftMargin">
+           <number>100</number>
+          </property>
+          <property name="topMargin">
+           <number>12</number>
+          </property>
+          <property name="rightMargin">
+           <number>100</number>
+          </property>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_9">
+            <property name="statusTip">
+             <string>Pesquisar serviço por nome</string>
+            </property>
+            <property name="placeholderText">
+             <string>Nome serviço</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_15">
+            <property name="statusTip">
+             <string>Pesquisar serviço por nome</string>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{
+	border-radius: 5px;
+	border: 1px solid rgb(0, 0, 150);
+	padding-left: 10px;
+	padding-right:10px;
+	height: 30px;
+}
+QPushButton:hover{
+	background-color: rgb(0, 50, 200);
+}</string>
+            </property>
+            <property name="text">
+             <string>Pesquisar</string>
+            </property>
+            <property name="icon">
+             <iconset resource="../res.qrc">
+              <normaloff>:/icons/img/pesquisar.png</normaloff>:/icons/img/pesquisar.png</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="table_ser">
+          <property name="statusTip">
+           <string>Selecione algum serviço para atualizar ou deletar</string>
+          </property>
+          <column>
+           <property name="text">
             <string>Id</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="horHor_ser">
-           <property name="statusTip">
-            <string>Digite duração aproximada do serviço</string>
+          </column>
+          <column>
+           <property name="text">
+            <string>Nome</string>
            </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="verticalSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
+          </column>
+          <column>
+           <property name="text">
+            <string>Profissional</string>
            </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Fixed</enum>
+          </column>
+          <column>
+           <property name="text">
+            <string>Valor</string>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>45</height>
-            </size>
+          </column>
+          <column>
+           <property name="text">
+            <string>Duração</string>
            </property>
-          </spacer>
-         </item>
-        </layout>
-       </item>
-      </layout>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
-     <widget class="Line" name="line_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>210</y>
-        <width>681</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -873,7 +1177,6 @@ color: rgb(255, 255, 255);</string>
     <property name="title">
      <string>Opções</string>
     </property>
-    <addaction name="actionAjuda"/>
     <addaction name="actionAddHor"/>
     <addaction name="actionSobre"/>
    </widget>
@@ -891,6 +1194,10 @@ color: rgb(255, 255, 255);</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionClientes">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/cli_ico.png</normaloff>:/icons/img/cli_ico.png</iconset>
+   </property>
    <property name="text">
     <string>Clientes</string>
    </property>
@@ -899,6 +1206,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionHor_rios">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/agendamento.png</normaloff>:/icons/img/agendamento.png</iconset>
+   </property>
    <property name="text">
     <string>Horários</string>
    </property>
@@ -907,6 +1218,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionServi_os">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/ser_ico.png</normaloff>:/icons/img/ser_ico.png</iconset>
+   </property>
    <property name="text">
     <string>Serviços</string>
    </property>
@@ -915,6 +1230,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionUsu_rios">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/usuario.png</normaloff>:/icons/img/usuario.png</iconset>
+   </property>
    <property name="text">
     <string>Usuários</string>
    </property>
@@ -923,6 +1242,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionClientes_2">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/print.png</normaloff>:/icons/img/print.png</iconset>
+   </property>
    <property name="text">
     <string>Clientes</string>
    </property>
@@ -931,6 +1254,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionHor_rios_2">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/print.png</normaloff>:/icons/img/print.png</iconset>
+   </property>
    <property name="text">
     <string>Horários</string>
    </property>
@@ -939,6 +1266,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionServi_os_2">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/print.png</normaloff>:/icons/img/print.png</iconset>
+   </property>
    <property name="text">
     <string>Serviços</string>
    </property>
@@ -955,6 +1286,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionAddHor">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/plus-border.png</normaloff>:/icons/img/plus-border.png</iconset>
+   </property>
    <property name="text">
     <string>Adicionar horários</string>
    </property>
@@ -963,6 +1298,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionSair_2">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/exit.png</normaloff>:/icons/img/exit.png</iconset>
+   </property>
    <property name="text">
     <string>Sair</string>
    </property>
@@ -971,6 +1310,10 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionSobre">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/inf2.png</normaloff>:/icons/img/inf2.png</iconset>
+   </property>
    <property name="text">
     <string>Sobre</string>
    </property>

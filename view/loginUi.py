@@ -37,6 +37,9 @@ class Ui_TelaLoginUi(object):
 "QPushButton:hover{\n"
 "    background-color: rgb(0, 92, 157)\n"
 "}")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap(":/icons/img/Sucesso.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.btnEntrar.setIcon(icon1)
         self.btnEntrar.setObjectName("btnEntrar")
         self.txtUser = QtWidgets.QLineEdit(self.centralwidget)
         self.txtUser.setGeometry(QtCore.QRect(40, 86, 319, 40))
@@ -87,7 +90,7 @@ class Ui_TelaLoginUi(object):
         TelaLoginUi.setWindowTitle(_translate("TelaLoginUi", "Tela Login - Mehsys"))
         self.btnEntrar.setToolTip(_translate("TelaLoginUi", "Entrar"))
         self.btnEntrar.setStatusTip(_translate("TelaLoginUi", "Entrar"))
-        self.btnEntrar.setText(_translate("TelaLoginUi", "Entrar"))
+        self.btnEntrar.setText(_translate("TelaLoginUi", " Entrar"))
         self.txtUser.setToolTip(_translate("TelaLoginUi", "Nome de usuário"))
         self.txtUser.setStatusTip(_translate("TelaLoginUi", "Nome de usuário"))
         self.txtUser.setPlaceholderText(_translate("TelaLoginUi", "Nome de usuário"))

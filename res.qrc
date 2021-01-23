@@ -4,4 +4,21 @@
     <file>img/mehsys.png</file>
     <file>img/logo_gra.png</file>
   </qresource>
+  <qresource prefix="icons">
+    <file>img/usuario.png</file>
+    <file>img/print.png</file>
+    <file>img/plus-border.png</file>
+    <file>img/limpar.png</file>
+    <file>img/agendamento.png</file>
+    <file>img/conf.png</file>
+    <file>img/edit-delete.png</file>
+    <file>img/salvar.png</file>
+    <file>img/refresh.png</file>
+    <file>img/Sucesso.png</file>
+    <file>img/pesquisar.png</file>
+    <file>img/cli_ico.png</file>
+    <file>img/ser_ico.png</file>
+    <file>img/exit.png</file>
+    <file>img/inf2.png</file>
+  </qresource>
 </RCC>

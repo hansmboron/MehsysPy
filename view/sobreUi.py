@@ -19,28 +19,37 @@ class Ui_Form(object):
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(":/logo/img/logo_gra.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         Form.setWindowIcon(icon)
+        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout.setObjectName("verticalLayout")
         self.logo = QtWidgets.QLabel(Form)
-        self.logo.setGeometry(QtCore.QRect(142, 11, 221, 61))
         self.logo.setText("")
         self.logo.setPixmap(QtGui.QPixmap(":/logo/img/mehsys.png"))
-        self.logo.setScaledContents(True)
+        self.logo.setScaledContents(False)
+        self.logo.setAlignment(QtCore.Qt.AlignCenter)
         self.logo.setObjectName("logo")
-        self.plainTextEdit = QtWidgets.QPlainTextEdit(Form)
-        self.plainTextEdit.setGeometry(QtCore.QRect(10, 220, 481, 241))
-        self.plainTextEdit.setObjectName("plainTextEdit")
-        self.label = QtWidgets.QLabel(Form)
-        self.label.setGeometry(QtCore.QRect(60, 104, 401, 111))
-        font = QtGui.QFont()
-        font.setPointSize(11)
-        self.label.setFont(font)
-        self.label.setTextFormat(QtCore.Qt.PlainText)
-        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.logo)
         self.label_2 = QtWidgets.QLabel(Form)
-        self.label_2.setGeometry(QtCore.QRect(236, 76, 41, 21))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.label_2.setFont(font)
+        self.label_2.setStyleSheet("padding-bottom: 10px;")
+        self.label_2.setAlignment(QtCore.Qt.AlignCenter)
         self.label_2.setObjectName("label_2")
+        self.verticalLayout.addWidget(self.label_2)
+        self.label = QtWidgets.QLabel(Form)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.label.setFont(font)
+        self.label.setTextFormat(QtCore.Qt.PlainText)
+        self.label.setAlignment(QtCore.Qt.AlignCenter)
+        self.label.setObjectName("label")
+        self.verticalLayout.addWidget(self.label)
+        self.plainTextEdit = QtWidgets.QPlainTextEdit(Form)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.plainTextEdit.setFont(font)
+        self.plainTextEdit.setObjectName("plainTextEdit")
+        self.verticalLayout.addWidget(self.plainTextEdit)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -48,6 +57,13 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Sobre o sistema - Mehsys"))
+        self.label_2.setText(_translate("Form", "v1.0"))
+        self.label.setText(_translate("Form", "Sistema simples, grátis e open source para agendamento de horários\n"
+"Desenvolvido por Hans M. Boron.\n"
+"Sistema feito 100% em Python.\n"
+"Contato: <mehsysbrasil@gmail.com>\n"
+"Site: https://mehsys.site\n"
+"Icones: https://www.freepik.com "))
         self.plainTextEdit.setPlainText(_translate("Form", " Apache License\n"
 "                           Version 2.0, January 2004\n"
 "                        http://www.apache.org/licenses/\n"
@@ -238,11 +254,4 @@ class Ui_Form(object):
 "   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n"
 "   See the License for the specific language governing permissions and\n"
 "   limitations under the License."))
-        self.label.setText(_translate("Form", "Sistema simples e grátis de agendamento de horários\n"
-"para salão de beleza / barbearia.\n"
-"Desenvolvido por Hans M. Boron.\n"
-"contato: <mehsysbrasil@gmail.com>\n"
-"Sistema feito 100% em Python por questões de \n"
-"aprendizado."))
-        self.label_2.setText(_translate("Form", "v1.0"))
 import res_rc

@@ -6,7 +6,6 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QMainWi
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import A9
 
 from Utils.readOnly import ReadOnlyDelegate
 from usuario import UserWindow
@@ -113,15 +112,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             cursor.close()
             db.close()
             sys.exit(0)
+        else:
+            event.ignore()
 
-    # def keyPressEvent(self, event):
-    #     if event.key() and self.cbbPro_hor.currentText() != '' and self.cbbPro_hor.currentText() != 'Selecionar' \
-    #             and self.cbbHor_hor.currentIndex() < 0 \
-    #             and self.dat_hor.text() != '01/01/2000':
-    #         print('evento')
-    #         self.popula_cbb_horarios(self.cbbPro_hor.currentText(), self.dat_hor.text())
-
-    # popula horários somente quando outros campos obrigatórios estão preenchidos e o horário não está no cliq do mouse
     def mousePressEvent(self, event):
         if event.buttons() and self.cbbPro_hor.currentIndex() >= 1 and self.cbbSer_hor.currentIndex() >= 1 and \
                 len(
@@ -258,8 +251,13 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.txtEnd_cli.setText(None)
         self.txtFon_cli.setText(None)
         self.btnSal_cli.setEnabled(True)
-        self.btnSal_cli.setStyleSheet("background-color: rgb(0, 150, 0);\n"
-                                      "color: rgb(255, 255, 255);")
+        self.btnSal_cli.setStyleSheet("QPushButton{\n"
+                                      "    border: 1px solid rgb(0, 140, 0);\n"
+                                      "    background-color: rgb(0, 150, 0);\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "    background-color: rgb(0, 50, 200);\n"
+                                      "}")
         self.btnAtu_cli.setEnabled(False)
         self.btnExc_cli.setEnabled(False)
 
@@ -295,9 +293,28 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             self.txtEnd_cli.setText(self.table_cli.item(r, 4).text())
             self.txtFon_cli.setText(self.table_cli.item(r, 5).text())
         self.btnSal_cli.setEnabled(False)
-        self.btnSal_cli.setStyleSheet(None)
+        self.btnSal_cli.setStyleSheet("QPushButton{\n"
+                                      "    border: 1px solid rgb(100, 100, 100);\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "    background-color: rgb(0, 50, 200);\n"
+                                      "}")
         self.btnAtu_cli.setEnabled(True)
+        self.btnAtu_cli.setStyleSheet("QPushButton{\n"
+                                      "    border: 1px solid rgb(0, 140, 0);\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "    background-color: rgb(0, 50, 200);\n"
+                                      "}")
         self.btnExc_cli.setEnabled(True)
+        self.btnExc_cli.setStyleSheet("QPushButton{\n"
+                                      "    border-radius: 5px;\n"
+                                      "    border: 1px solid rgb(0, 140, 0);\n"
+                                      "    height: 30px;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "    background-color: rgb(0, 50, 200);\n"
+                                      "}")
 
     def create_pdf_clients(self):
         confirm = QMessageBox.question(self, 'CONFIRMA IMPRESSÃO?',
@@ -402,7 +419,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                 cursor.execute(sql, [id])
                 db.commit()
                 QMessageBox.information(
-                    self, 'SUCESSO!!!', f'Cliente ({self.txtNom_ser.text()}) EXCLUIDO com Sucesso!')
+                    self, 'SUCESSO!!!', f'Serviço ({self.txtNom_ser.text()}) EXCLUIDO com Sucesso!')
                 self.pesquisar_servicos()
                 self.on_btn_clear_ser_pressed()
                 db.close()
@@ -419,8 +436,13 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.txtSer_ser.setText(None)
         self.horHor_ser.setText(None)
         self.pushButton_17.setEnabled(True)
-        self.pushButton_17.setStyleSheet("background-color: rgb(0, 0, 150);\n"
-                                         "color: rgb(255, 255, 255);")
+        self.pushButton_17.setStyleSheet("QPushButton{\n"
+                                         "    border: 1px solid rgb(0, 0, 140);\n"
+                                         "    background-color: rgb(0, 0, 150);\n"
+                                         "}\n"
+                                         "QPushButton:hover{\n"
+                                         "    background-color: rgb(0, 50, 200);\n"
+                                         "}")
         self.pushButton_18.setEnabled(False)
         self.pushButton_19.setEnabled(False)
 
@@ -458,9 +480,18 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             self.txtSer_ser.setText(self.table_ser.item(r, 3).text())
             self.horHor_ser.setText(self.table_ser.item(r, 4).text())
         self.pushButton_17.setEnabled(False)
-        self.pushButton_17.setStyleSheet(None)
+        self.pushButton_17.setStyleSheet("QPushButton{\n"
+                                         "    background-color: transparent;\n"
+                                         "}\n")
+
         self.pushButton_18.setEnabled(True)
+        self.pushButton_18.setStyleSheet("QPushButton{\n"
+                                         "    border: 1px solid rgb(0, 0, 150);\n"
+                                         "}\n")
         self.pushButton_19.setEnabled(True)
+        self.pushButton_19.setStyleSheet("QPushButton{\n"
+                                         "    border: 1px solid rgb(0, 0, 150);\n"
+                                         "}\n")
 
     # popula combobox profissional
     def popula_cbb_profissional(self):
@@ -695,8 +726,13 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.btnExc_hor.setEnabled(False)
         self.btnImp_hor.setEnabled(False)
         self.btnAge_hor.setEnabled(True)
-        self.btnAge_hor.setStyleSheet("background-color: rgb(150, 0, 150);\n"
-                                      "color: rgb(255, 255, 255);")
+        self.btnAge_hor.setStyleSheet("QPushButton{\n"
+                                      "    border: 1px solid #850085;\n"
+                                      "    background-color: #850085;\n"
+                                      "}\n"
+                                      "QPushButton:hover{\n"
+                                      "    background-color: rgb(0, 50, 200);\n"
+                                      "}")
         self.listPesCli_hor.setVisible(False)
         self.cbbHor_hor.clear()
 
@@ -765,10 +801,21 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             self.cbbHor_hor.setCurrentText(self.table_hor.item(r, 4).text())
             self.cbbPro_hor.setCurrentText(self.table_hor.item(r, 5).text())
         self.btnAtu_hor.setEnabled(True)
+        self.btnAtu_hor.setStyleSheet("QPushButton{\n"
+                                         "    border: 1px solid #850085;\n"
+                                         "}\n")
         self.btnExc_hor.setEnabled(True)
+        self.btnExc_hor.setStyleSheet("QPushButton{\n"
+                                      "    border: 1px solid #850085;\n"
+                                      "}\n")
         self.btnImp_hor.setEnabled(True)
+        self.btnImp_hor.setStyleSheet("QPushButton{\n"
+                                      "    border: 1px solid #850085;\n"
+                                      "}\n")
         self.btnAge_hor.setEnabled(False)
-        self.btnAge_hor.setStyleSheet(None)
+        self.btnAge_hor.setStyleSheet("QPushButton{\n"
+                                         "    background-color: transparent;\n"
+                                         "}\n")
         self.cbbSer_hor.setEnabled(False)
         self.listPesCli_hor.setVisible(False)
 

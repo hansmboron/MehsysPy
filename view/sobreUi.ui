@@ -23,36 +23,73 @@
    <iconset resource="../res.qrc">
     <normaloff>:/logo/img/logo_gra.png</normaloff>:/logo/img/logo_gra.png</iconset>
   </property>
-  <widget class="QLabel" name="logo">
-   <property name="geometry">
-    <rect>
-     <x>142</x>
-     <y>11</y>
-     <width>221</width>
-     <height>61</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="pixmap">
-    <pixmap resource="../res.qrc">:/logo/img/mehsys.png</pixmap>
-   </property>
-   <property name="scaledContents">
-    <bool>true</bool>
-   </property>
-  </widget>
-  <widget class="QPlainTextEdit" name="plainTextEdit">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>220</y>
-     <width>481</width>
-     <height>241</height>
-    </rect>
-   </property>
-   <property name="plainText">
-    <string> Apache License
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="logo">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="../res.qrc">:/logo/img/mehsys.png</pixmap>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">padding-bottom: 10px;</string>
+     </property>
+     <property name="text">
+      <string>v1.0</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Sistema simples, grátis e open source para agendamento de horários
+Desenvolvido por Hans M. Boron.
+Sistema feito 100% em Python.
+Contato: &lt;mehsysbrasil@gmail.com&gt;
+Site: https://mehsys.site
+Icones: https://www.freepik.com </string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPlainTextEdit" name="plainTextEdit">
+     <property name="font">
+      <font>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="plainText">
+      <string> Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
 
@@ -242,52 +279,10 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label">
-   <property name="geometry">
-    <rect>
-     <x>60</x>
-     <y>104</y>
-     <width>401</width>
-     <height>111</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>Sistema simples e grátis de agendamento de horários
-para salão de beleza / barbearia.
-Desenvolvido por Hans M. Boron.
-contato: &lt;mehsysbrasil@gmail.com&gt;
-Sistema feito 100% em Python por questões de 
-aprendizado.</string>
-   </property>
-   <property name="textFormat">
-    <enum>Qt::PlainText</enum>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>236</x>
-     <y>76</y>
-     <width>41</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>14</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>v1.0</string>
-   </property>
-  </widget>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources>
   <include location="../res.qrc"/>

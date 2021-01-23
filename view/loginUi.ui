@@ -60,7 +60,11 @@ QPushButton:hover{
 }</string>
     </property>
     <property name="text">
-     <string>Entrar</string>
+     <string> Entrar</string>
+    </property>
+    <property name="icon">
+     <iconset resource="../res.qrc">
+      <normaloff>:/icons/img/Sucesso.png</normaloff>:/icons/img/Sucesso.png</iconset>
     </property>
    </widget>
    <widget class="QLineEdit" name="txtUser">
