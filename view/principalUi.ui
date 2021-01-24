@@ -45,18 +45,8 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
-      <property name="styleSheet">
-       <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-      </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="tabHor">
        <attribute name="icon">
@@ -221,15 +211,8 @@ QPushButton:hover{
             <string>Criar novo agendamento</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid #850085;
-	background-color: #850085;
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
+            <string notr="true">background-color: #850085;
+</string>
            </property>
            <property name="text">
             <string>Agendar</string>
@@ -248,16 +231,6 @@ QPushButton:hover{
            <property name="statusTip">
             <string>Atualizar agendameto</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-           </property>
            <property name="text">
             <string>Atualizar</string>
            </property>
@@ -274,16 +247,6 @@ QPushButton:hover{
            </property>
            <property name="statusTip">
             <string>Deletar agendamento</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
            </property>
            <property name="text">
             <string>Excluir</string>
@@ -302,16 +265,6 @@ QPushButton:hover{
            <property name="statusTip">
             <string>Imprimir comprovante</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-           </property>
            <property name="text">
             <string>Imprimir</string>
            </property>
@@ -325,16 +278,6 @@ QPushButton:hover{
           <widget class="QPushButton" name="btnLim_hor">
            <property name="statusTip">
             <string>Limpar campos para poder realizar novo agendamento</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid #850085;
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
            </property>
            <property name="text">
             <string>Limpar</string>
@@ -375,18 +318,6 @@ QPushButton:hover{
            <property name="statusTip">
             <string>Pesquisar agendamentos por nome de cliente</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid #850085;
-	height: 30px;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-           </property>
            <property name="text">
             <string>Pesquisar</string>
            </property>
@@ -413,18 +344,6 @@ QPushButton:hover{
           <widget class="QPushButton" name="btnPesDat_hor">
            <property name="statusTip">
             <string>Pesquisar agendamento por data</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid #850085;
-	height: 30px;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
            </property>
            <property name="text">
             <string>Pesquisar</string>
@@ -606,15 +525,7 @@ QPushButton:hover{
              <string>Cadastrar novo cliente</string>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(0, 140, 0);
-	background-color: rgb(0, 150, 0);
-height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
+             <string notr="true">background-color: rgb(0, 170, 0);</string>
             </property>
             <property name="text">
              <string>Salvar</string>
@@ -636,16 +547,6 @@ QPushButton:hover{
             <property name="statusTip">
              <string>Atualizar dados do cliente</string>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-            </property>
             <property name="text">
              <string>Atualizar</string>
             </property>
@@ -666,16 +567,6 @@ QPushButton:hover{
             <property name="statusTip">
              <string>Deletar cliente</string>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-            </property>
             <property name="text">
              <string>Excluir</string>
             </property>
@@ -692,16 +583,6 @@ QPushButton:hover{
             </property>
             <property name="statusTip">
              <string>Limpar campos para poder cadastrar novo cliente</string>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(0, 140, 0);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
             </property>
             <property name="text">
              <string>Limpar</string>
@@ -752,18 +633,6 @@ QPushButton:hover{
             </property>
             <property name="statusTip">
              <string>Pesquisar clientes por nome</string>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(0, 140, 0);
-	padding-left: 10px;
-	padding-right:10px;
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
             </property>
             <property name="text">
              <string>Pesquisar</string>
@@ -946,15 +815,7 @@ QPushButton:hover{
              <string>Cadastrar novo serviço</string>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(0, 0, 140);
-	background-color: rgb(0, 0, 150);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
+             <string notr="true">background-color: rgb(20, 0, 170);</string>
             </property>
             <property name="text">
              <string>Salvar</string>
@@ -973,16 +834,6 @@ QPushButton:hover{
             <property name="statusTip">
              <string>Atualizar serviço</string>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-            </property>
             <property name="text">
              <string>Atualizar</string>
             </property>
@@ -1000,16 +851,6 @@ QPushButton:hover{
             <property name="statusTip">
              <string>Deletar serviço</string>
             </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(100, 100, 100);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
-            </property>
             <property name="text">
              <string>Excluir</string>
             </property>
@@ -1023,16 +864,6 @@ QPushButton:hover{
            <widget class="QPushButton" name="pushButton_21">
             <property name="statusTip">
              <string>Limpar campos para poder adicionar novo serviço</string>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(0, 0, 150);
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
             </property>
             <property name="text">
              <string>Limpar</string>
@@ -1080,18 +911,6 @@ QPushButton:hover{
            <widget class="QPushButton" name="pushButton_15">
             <property name="statusTip">
              <string>Pesquisar serviço por nome</string>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">QPushButton{
-	border-radius: 5px;
-	border: 1px solid rgb(0, 0, 150);
-	padding-left: 10px;
-	padding-right:10px;
-	height: 30px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
             </property>
             <property name="text">
              <string>Pesquisar</string>

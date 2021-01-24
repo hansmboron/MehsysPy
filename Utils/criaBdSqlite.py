@@ -1,4 +1,5 @@
 import sqlite3
+import bcrypt
 
 
 class CreateBdSqlite:
@@ -8,6 +9,9 @@ class CreateBdSqlite:
         self.cursor = self.connect.cursor()
 
     def create_tables(self):
+        password = b'1234'
+        hashed = bcrypt.hashpw(password, bcrypt.gensalt(7))
+        print(hashed)
         try:
             self.cursor.execute("CREATE TABLE IF NOT EXISTS utils (current_user INTEGER)")
             self.cursor.execute("CREATE TABLE IF NOT EXISTS tbusuarios (\
@@ -29,7 +33,7 @@ class CreateBdSqlite:
                                 + ");")
             self.cursor.execute("INSERT INTO tbusuarios ("
                                 + "usuario, fone, login, senha, perfil, hora_in, hora_out) "
-                                + "VALUES ('trocar senha', '(00)00000-0000', 'admin', '1234', 'admin', '00:00', '00:00');")
+                                + "VALUES ('trocar senha', '(00)00000-0000', 'admin', ?, 'admin', '00:00', '00:00');", [hashed])
             self.cursor.execute("INSERT INTO horarios (horario) "
                                 + "VALUES ('08:00'), ('08:15'), ('08:30'), ('08:45'), ('09:00'), "
                                 + "('09:15'), ('09:30'), ('09:45'), ('10:00'), ('10:15'), "
@@ -90,4 +94,4 @@ class CreateBdSqlite:
             self.cursor.close()
             self.connect.close()
         except Exception as e:
-            pass
+            print(str(e))

@@ -30,9 +30,10 @@ class Ui_UserMain(object):
         self.verticalLayout_2.setContentsMargins(12, -1, 12, 12)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_9.setContentsMargins(0, 6, 0, 6)
+        self.horizontalLayout_9.setContentsMargins(0, 0, 0, 1)
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_5.setSpacing(12)
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         self.txtNom_usu = QtWidgets.QLineEdit(self.groupBox)
         self.txtNom_usu.setClearButtonEnabled(True)
@@ -51,6 +52,7 @@ class Ui_UserMain(object):
         self.verticalLayout_5.addWidget(self.timInicio)
         self.horizontalLayout_9.addLayout(self.verticalLayout_5)
         self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setSpacing(12)
         self.verticalLayout_6.setObjectName("verticalLayout_6")
         self.txtID_usu = QtWidgets.QLineEdit(self.groupBox)
         self.txtID_usu.setEnabled(False)
@@ -69,19 +71,12 @@ class Ui_UserMain(object):
         self.horizontalLayout_9.addLayout(self.verticalLayout_6)
         self.verticalLayout_2.addLayout(self.horizontalLayout_9)
         self.horizontalLayout_8 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_8.setContentsMargins(0, 6, 0, 8)
+        self.horizontalLayout_8.setContentsMargins(0, 16, 0, 12)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.btnSal_usu = QtWidgets.QPushButton(self.groupBox)
         self.btnSal_usu.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnSal_usu.setStyleSheet("QPushButton{\n"
-"    background-color: rgb(170, 0, 0);\n"
-"    border-radius: 5px;\n"
-"    height: 30px;\n"
-"    border: 1px solid rgb(150, 0, 0);\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
+        self.btnSal_usu.setStyleSheet("background-color: rgb(170, 0, 0);\n"
+"color: rgb(255, 255, 255);")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons/img/salvar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnSal_usu.setIcon(icon1)
@@ -90,11 +85,6 @@ class Ui_UserMain(object):
         self.btnAtu_usu = QtWidgets.QPushButton(self.groupBox)
         self.btnAtu_usu.setEnabled(False)
         self.btnAtu_usu.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnAtu_usu.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    height: 30px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"}")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/icons/img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnAtu_usu.setIcon(icon2)
@@ -103,12 +93,6 @@ class Ui_UserMain(object):
         self.btnDel_usu = QtWidgets.QPushButton(self.groupBox)
         self.btnDel_usu.setEnabled(False)
         self.btnDel_usu.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnDel_usu.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    height: 30px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"}\n"
-"")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(":/icons/img/edit-delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnDel_usu.setIcon(icon3)
@@ -116,14 +100,6 @@ class Ui_UserMain(object):
         self.horizontalLayout_8.addWidget(self.btnDel_usu)
         self.btnLim_usu = QtWidgets.QPushButton(self.groupBox)
         self.btnLim_usu.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnLim_usu.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    height: 30px;\n"
-"    border: 1px solid rgb(150, 0, 0);\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(":/icons/img/limpar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnLim_usu.setIcon(icon4)
@@ -138,7 +114,7 @@ class Ui_UserMain(object):
         self.line_3.setObjectName("line_3")
         self.verticalLayout_2.addWidget(self.line_3)
         self.horizontalLayout_7 = QtWidgets.QHBoxLayout()
-        self.horizontalLayout_7.setContentsMargins(100, 8, 100, 0)
+        self.horizontalLayout_7.setContentsMargins(100, 10, 100, 0)
         self.horizontalLayout_7.setObjectName("horizontalLayout_7")
         self.txtPesUsu_usu = QtWidgets.QLineEdit(self.groupBox)
         self.txtPesUsu_usu.setClearButtonEnabled(True)
@@ -146,16 +122,6 @@ class Ui_UserMain(object):
         self.horizontalLayout_7.addWidget(self.txtPesUsu_usu)
         self.btnPesUsu_usu = QtWidgets.QPushButton(self.groupBox)
         self.btnPesUsu_usu.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnPesUsu_usu.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    height: 30px;\n"
-"    border: 1px solid rgb(150, 0, 0);\n"
-"    padding-left: 10px;\n"
-"    padding-right: 10px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(":/icons/img/pesquisar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnPesUsu_usu.setIcon(icon5)

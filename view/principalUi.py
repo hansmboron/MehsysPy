@@ -36,14 +36,6 @@ class Ui_MainWindow(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy)
-        self.tabWidget.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.tabWidget.setObjectName("tabWidget")
         self.tabHor = QtWidgets.QWidget()
         self.tabHor.setObjectName("tabHor")
@@ -108,15 +100,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.btnAge_hor = QtWidgets.QPushButton(self.layoutWidget1)
-        self.btnAge_hor.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid #850085;\n"
-"    background-color: #850085;\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
+        self.btnAge_hor.setStyleSheet("background-color: #850085;\n"
+"")
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap(":/icons/img/plus-border.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnAge_hor.setIcon(icon1)
@@ -124,14 +109,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.btnAge_hor)
         self.btnAtu_hor = QtWidgets.QPushButton(self.layoutWidget1)
         self.btnAtu_hor.setEnabled(False)
-        self.btnAtu_hor.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         icon2 = QtGui.QIcon()
         icon2.addPixmap(QtGui.QPixmap(":/icons/img/refresh.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnAtu_hor.setIcon(icon2)
@@ -139,14 +116,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.btnAtu_hor)
         self.btnExc_hor = QtWidgets.QPushButton(self.layoutWidget1)
         self.btnExc_hor.setEnabled(False)
-        self.btnExc_hor.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         icon3 = QtGui.QIcon()
         icon3.addPixmap(QtGui.QPixmap(":/icons/img/edit-delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnExc_hor.setIcon(icon3)
@@ -154,28 +123,12 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.btnExc_hor)
         self.btnImp_hor = QtWidgets.QPushButton(self.layoutWidget1)
         self.btnImp_hor.setEnabled(False)
-        self.btnImp_hor.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap(":/icons/img/print.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnImp_hor.setIcon(icon4)
         self.btnImp_hor.setObjectName("btnImp_hor")
         self.horizontalLayout_2.addWidget(self.btnImp_hor)
         self.btnLim_hor = QtWidgets.QPushButton(self.layoutWidget1)
-        self.btnLim_hor.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid #850085;\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         icon5 = QtGui.QIcon()
         icon5.addPixmap(QtGui.QPixmap(":/icons/img/limpar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnLim_hor.setIcon(icon5)
@@ -192,16 +145,6 @@ class Ui_MainWindow(object):
         self.txtPesNom_hor.setObjectName("txtPesNom_hor")
         self.horizontalLayout_3.addWidget(self.txtPesNom_hor)
         self.btnPesNom_hor = QtWidgets.QPushButton(self.layoutWidget2)
-        self.btnPesNom_hor.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid #850085;\n"
-"    height: 30px;\n"
-"    padding-right: 10px;\n"
-"    padding-left: 10px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         icon6 = QtGui.QIcon()
         icon6.addPixmap(QtGui.QPixmap(":/icons/img/pesquisar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnPesNom_hor.setIcon(icon6)
@@ -212,16 +155,6 @@ class Ui_MainWindow(object):
         self.txtPesDat_hor.setObjectName("txtPesDat_hor")
         self.horizontalLayout_3.addWidget(self.txtPesDat_hor)
         self.btnPesDat_hor = QtWidgets.QPushButton(self.layoutWidget2)
-        self.btnPesDat_hor.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid #850085;\n"
-"    height: 30px;\n"
-"    padding-right: 10px;\n"
-"    padding-left: 10px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.btnPesDat_hor.setIcon(icon6)
         self.btnPesDat_hor.setObjectName("btnPesDat_hor")
         self.horizontalLayout_3.addWidget(self.btnPesDat_hor)
@@ -278,15 +211,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.btnSal_cli = QtWidgets.QPushButton(self.tabCli)
         self.btnSal_cli.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnSal_cli.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(0, 140, 0);\n"
-"    background-color: rgb(0, 150, 0);\n"
-"height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
+        self.btnSal_cli.setStyleSheet("background-color: rgb(0, 170, 0);")
         icon8 = QtGui.QIcon()
         icon8.addPixmap(QtGui.QPixmap(":/icons/img/salvar.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnSal_cli.setIcon(icon8)
@@ -295,41 +220,17 @@ class Ui_MainWindow(object):
         self.btnAtu_cli = QtWidgets.QPushButton(self.tabCli)
         self.btnAtu_cli.setEnabled(False)
         self.btnAtu_cli.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnAtu_cli.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.btnAtu_cli.setIcon(icon2)
         self.btnAtu_cli.setObjectName("btnAtu_cli")
         self.horizontalLayout_5.addWidget(self.btnAtu_cli)
         self.btnExc_cli = QtWidgets.QPushButton(self.tabCli)
         self.btnExc_cli.setEnabled(False)
         self.btnExc_cli.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnExc_cli.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.btnExc_cli.setIcon(icon3)
         self.btnExc_cli.setObjectName("btnExc_cli")
         self.horizontalLayout_5.addWidget(self.btnExc_cli)
         self.btnLim_cli = QtWidgets.QPushButton(self.tabCli)
         self.btnLim_cli.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnLim_cli.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(0, 140, 0);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.btnLim_cli.setIcon(icon5)
         self.btnLim_cli.setObjectName("btnLim_cli")
         self.horizontalLayout_5.addWidget(self.btnLim_cli)
@@ -348,16 +249,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_4.addWidget(self.txtPesNom_cli)
         self.btnPesNom_cli = QtWidgets.QPushButton(self.tabCli)
         self.btnPesNom_cli.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        self.btnPesNom_cli.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(0, 140, 0);\n"
-"    padding-left: 10px;\n"
-"    padding-right:10px;\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.btnPesNom_cli.setIcon(icon6)
         self.btnPesNom_cli.setObjectName("btnPesNom_cli")
         self.horizontalLayout_4.addWidget(self.btnPesNom_cli)
@@ -423,53 +314,21 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setContentsMargins(-1, 12, -1, 15)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.pushButton_17 = QtWidgets.QPushButton(self.tabSer)
-        self.pushButton_17.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(0, 0, 140);\n"
-"    background-color: rgb(0, 0, 150);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
+        self.pushButton_17.setStyleSheet("background-color: rgb(20, 0, 170);")
         self.pushButton_17.setIcon(icon8)
         self.pushButton_17.setObjectName("pushButton_17")
         self.horizontalLayout_8.addWidget(self.pushButton_17)
         self.pushButton_18 = QtWidgets.QPushButton(self.tabSer)
         self.pushButton_18.setEnabled(False)
-        self.pushButton_18.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.pushButton_18.setIcon(icon2)
         self.pushButton_18.setObjectName("pushButton_18")
         self.horizontalLayout_8.addWidget(self.pushButton_18)
         self.pushButton_19 = QtWidgets.QPushButton(self.tabSer)
         self.pushButton_19.setEnabled(False)
-        self.pushButton_19.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(100, 100, 100);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.pushButton_19.setIcon(icon3)
         self.pushButton_19.setObjectName("pushButton_19")
         self.horizontalLayout_8.addWidget(self.pushButton_19)
         self.pushButton_21 = QtWidgets.QPushButton(self.tabSer)
-        self.pushButton_21.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(0, 0, 150);\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.pushButton_21.setIcon(icon5)
         self.pushButton_21.setObjectName("pushButton_21")
         self.horizontalLayout_8.addWidget(self.pushButton_21)
@@ -487,16 +346,6 @@ class Ui_MainWindow(object):
         self.lineEdit_9.setObjectName("lineEdit_9")
         self.horizontalLayout_7.addWidget(self.lineEdit_9)
         self.pushButton_15 = QtWidgets.QPushButton(self.tabSer)
-        self.pushButton_15.setStyleSheet("QPushButton{\n"
-"    border-radius: 5px;\n"
-"    border: 1px solid rgb(0, 0, 150);\n"
-"    padding-left: 10px;\n"
-"    padding-right:10px;\n"
-"    height: 30px;\n"
-"}\n"
-"QPushButton:hover{\n"
-"    background-color: rgb(0, 50, 200);\n"
-"}")
         self.pushButton_15.setIcon(icon6)
         self.pushButton_15.setObjectName("pushButton_15")
         self.horizontalLayout_7.addWidget(self.pushButton_15)
@@ -593,7 +442,7 @@ class Ui_MainWindow(object):
         self.menubar.addAction(self.menuSair.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

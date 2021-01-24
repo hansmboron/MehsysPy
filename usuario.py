@@ -1,6 +1,7 @@
 import sqlite3
 import sys
 
+import bcrypt
 from PyQt5.QtCore import QTime
 
 from Utils.readOnly import ReadOnlyDelegate
@@ -57,6 +58,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
         fone = self.txtTel_usu.text()
         login = self.txtLog_usu.text()
         senha = self.txtSen_usu.text()
+        hashed = bcrypt.hashpw(senha, bcrypt.gensalt(7))
         perfil = self.cbbPer_usu.currentText()
         hora_in = self.timInicio.text()
         hora_out = self.timFim.text()
@@ -66,7 +68,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
             elif len(senha.strip()) < 4 or len(login.strip()) < 4:
                 QMessageBox.warning(self, 'ERRO!!!', 'Login e senha precisam ter pelo menos 4 caracteres!')
             else:
-                cursor.execute(sql, [nome, fone, login, senha, perfil, hora_in, hora_out])
+                cursor.execute(sql, [nome, fone, login, hashed, perfil, hora_in, hora_out])
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO!!!', 'Usuário ADICIONADO com Sucesso!')
@@ -86,6 +88,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
         fone = self.txtTel_usu.text()
         login = self.txtLog_usu.text()
         senha = self.txtSen_usu.text()
+        hashed = bcrypt.hashpw(senha, bcrypt.gensalt(7))
         perfil = self.cbbPer_usu.currentText()
         hora_in = self.timInicio.text()
         hora_out = self.timFim.text()
@@ -96,7 +99,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
             elif len(senha.strip()) < 4 or len(login.strip()) < 4:
                 QMessageBox.warning(self, 'ERRO!!!', 'Login e senha precisam ter pelo menos 4 caracteres!')
             else:
-                cursor.execute(sql, [nome, fone, login, senha, perfil, hora_in, hora_out, id])
+                cursor.execute(sql, [nome, fone, login, hashed, perfil, hora_in, hora_out, id])
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO!!!', 'Usuário ATUALIZADO com Sucesso!')
@@ -180,7 +183,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
             self.txtNom_usu.setText(self.table_user.item(r, 1).text())
             self.txtTel_usu.setText(self.table_user.item(r, 2).text())
             self.txtLog_usu.setText(self.table_user.item(r, 3).text())
-            self.txtSen_usu.setText(self.table_user.item(r, 4).text())
+            # self.txtSen_usu.setText(self.table_user.item(r, 4).text())
             self.cbbPer_usu.setCurrentText(self.table_user.item(r, 5).text())
             if self.table_user.item(r, 6).text() != '':
                 self.timInicio.setTime(
@@ -204,7 +207,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
         self.timInicio.setTime(QTime(0, 0))
         self.timFim.setTime(QTime(0, 0))
         self.btnSal_usu.setEnabled(True)
-        self.btnSal_usu.setStyleSheet("background-color: rgb(150, 0, 0);\n"
+        self.btnSal_usu.setStyleSheet("background-color: rgb(170, 0, 0);\n"
                                       "color: rgb(255, 255, 255);")
         self.btnAtu_usu.setEnabled(False)
         self.btnDel_usu.setEnabled(False)

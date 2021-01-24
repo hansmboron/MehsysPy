@@ -49,16 +49,19 @@
           <number>0</number>
          </property>
          <property name="topMargin">
-          <number>6</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>6</number>
+          <number>1</number>
          </property>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_5">
+           <property name="spacing">
+            <number>12</number>
+           </property>
            <item>
             <widget class="QLineEdit" name="txtNom_usu">
              <property name="statusTip">
@@ -122,6 +125,9 @@
          </item>
          <item>
           <layout class="QVBoxLayout" name="verticalLayout_6">
+           <property name="spacing">
+            <number>12</number>
+           </property>
            <item>
             <widget class="QLineEdit" name="txtID_usu">
              <property name="enabled">
@@ -175,13 +181,13 @@
           <number>0</number>
          </property>
          <property name="topMargin">
-          <number>6</number>
+          <number>16</number>
          </property>
          <property name="rightMargin">
           <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>8</number>
+          <number>12</number>
          </property>
          <item>
           <widget class="QPushButton" name="btnSal_usu">
@@ -192,15 +198,8 @@
             <string>Cadastrar novo profissional</string>
            </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton{
-	background-color: rgb(170, 0, 0);
-	border-radius: 5px;
-	height: 30px;
-	border: 1px solid rgb(150, 0, 0);
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
+            <string notr="true">background-color: rgb(170, 0, 0);
+color: rgb(255, 255, 255);</string>
            </property>
            <property name="text">
             <string>Salvar</string>
@@ -222,13 +221,6 @@ QPushButton:hover{
            <property name="statusTip">
             <string>Atualizar usuário</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	height: 30px;
-	border: 1px solid rgb(100, 100, 100);
-}</string>
-           </property>
            <property name="text">
             <string>Atualizar</string>
            </property>
@@ -249,14 +241,6 @@ QPushButton:hover{
            <property name="statusTip">
             <string>Excluir usuário(você não pode deletar à si próprio)</string>
            </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	height: 30px;
-	border: 1px solid rgb(100, 100, 100);
-}
-</string>
-           </property>
            <property name="text">
             <string>Excluir</string>
            </property>
@@ -273,16 +257,6 @@ QPushButton:hover{
            </property>
            <property name="statusTip">
             <string>Limpar campos para poder cadastrar novo profissional</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	height: 30px;
-	border: 1px solid rgb(150, 0, 0);
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
            </property>
            <property name="text">
             <string>Limpar</string>
@@ -317,7 +291,7 @@ QPushButton:hover{
           <number>100</number>
          </property>
          <property name="topMargin">
-          <number>8</number>
+          <number>10</number>
          </property>
          <property name="rightMargin">
           <number>100</number>
@@ -345,18 +319,6 @@ QPushButton:hover{
            </property>
            <property name="statusTip">
             <string>Pesquisar usuário por nome</string>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton{
-	border-radius: 5px;
-	height: 30px;
-	border: 1px solid rgb(150, 0, 0);
-	padding-left: 10px;
-	padding-right: 10px;
-}
-QPushButton:hover{
-	background-color: rgb(0, 50, 200);
-}</string>
            </property>
            <property name="text">
             <string>Pesquisar</string>
