@@ -3,7 +3,7 @@ import sys
 
 from PyQt5.QtCore import QDate, QEvent
 from PyQt5.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QMainWindow, QDesktopWidget, QFileDialog, \
-    QStyle, QMenu
+    QStyle, QMenu, QAction
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib import colors
@@ -29,6 +29,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.txtSer_ser.setInputMask('R$#.###,##')
         self.horHor_ser.setInputMask('#:##min')
         self.horHor_ser.setText('n')
+
+        self.centralwidget.installEventFilter(self)
 
         # largura padrao das tabelas
         self.table_hor.setColumnWidth(0, 50)
@@ -122,9 +124,29 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                     self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
             self.popula_cbb_horarios()
 
-    def eventFilter(self, source, event):
-        if event.type() ==  QEvent.ContextMenu and source is self.centralwidget:
-            print(event)
+    def contextMenuEvent(self, event):
+        menu = QMenu(self)
+        actHor = menu.addAction("Horários")
+        actCli = menu.addAction("Clientes")
+        actSer = menu.addAction("Serviços")
+        menu.addSeparator()
+        actAdd = menu.addAction("Adicionar Horários")
+        actSob = menu.addAction("Sobre")
+        actSai = menu.addAction("Sair")
+
+        action = menu.exec_(self.mapToGlobal(event.pos()))
+        if action == actHor:
+            self.on_menu_horarios()
+        elif action == actCli:
+            self.on_menu_clientes()
+        elif action == actSer:
+            self.on_menu_servicos()
+        elif action == actAdd:
+            self.open_addHor_screen()
+        elif action == actSob:
+            self.open_sobre_screen()
+        elif action == actSai:
+            self.closeEvent(event)
 
     # centralizar tela
     def center(self):
