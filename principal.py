@@ -561,7 +561,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
 
             elif len(
-                    cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() == 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
+                    cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() <= 0 or self.cbbSer_hor.currentIndex() <= 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
                 QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para criar novo Agendamento!')
             else:
                 cursor.execute(sql, [cliente, servico, data, horario, prof, id_ser])
@@ -604,7 +604,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.warning(self, 'ATENÇÃO!!!', 'Selecione o horário disponível na caixa de horários!')
 
             elif len(
-                    cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() == 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
+                    cliente.strip()) < 4 or self.cbbHor_hor.currentIndex() == 0 or self.cbbSer_hor.currentIndex() <= 0 or self.cbbPro_hor.currentIndex() <= 0 or data == '01/01/2000':
                 QMessageBox.warning(self, 'ERRO!!!',
                                     'Preencha os campos obrigatórios para Atualizar o Agendamento!')
             else:

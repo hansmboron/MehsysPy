@@ -11,7 +11,6 @@ class CreateBdSqlite:
     def create_tables(self):
         password = b'1234'
         hashed = bcrypt.hashpw(password, bcrypt.gensalt(7))
-        print(hashed)
         try:
             self.cursor.execute("CREATE TABLE IF NOT EXISTS utils (current_user INTEGER)")
             self.cursor.execute("CREATE TABLE IF NOT EXISTS tbusuarios (\
@@ -33,7 +32,7 @@ class CreateBdSqlite:
                                 + ");")
             self.cursor.execute("INSERT INTO tbusuarios ("
                                 + "usuario, fone, login, senha, perfil, hora_in, hora_out) "
-                                + "VALUES ('trocar senha', '(00)00000-0000', 'admin', ?, 'admin', '00:00', '00:00');", [hashed])
+                                + "VALUES ('Exemplo usuário alterar', '(00)00000-0000', 'admin', ?, 'admin', '00:00', '00:00');", [hashed])
             self.cursor.execute("INSERT INTO horarios (horario) "
                                 + "VALUES ('08:00'), ('08:15'), ('08:30'), ('08:45'), ('09:00'), "
                                 + "('09:15'), ('09:30'), ('09:45'), ('10:00'), ('10:15'), "
@@ -82,16 +81,16 @@ class CreateBdSqlite:
                                 + ");")
             self.cursor.execute("INSERT INTO tbclientes ("
                                 + "nome, sexo, cpf, endereco, fone) "
-                                + "VALUES ('teste deletar', 'Indefinido', '000.000.000-00', '', '(00)00000-0000');")
+                                + "VALUES ('Exemplo cliente deletar', 'Indefinido', '000.000.000-00', '', '(00)00000-0000');")
             self.cursor.execute("INSERT INTO tbservicos ("
                                 + "nome, usuario, valor, duracao) "
-                                + "VALUES ('teste deletar', '', 'R$0.020,00', '0:10min');")
+                                + "VALUES ('Exemplo serviço deletar', '', 'R$0.020,00', '0:10min');")
             self.cursor.execute("INSERT INTO tbhorarios ("
                                 + "cliente, servico, data, horario, profissional, id_ser) "
-                                + "VALUES ('teste deletar', 'teste deletar', '10/01/2021', '09:00', 'admin', '1');")
+                                + "VALUES ('Exemplo cliente deletar', 'Exemplo serviço deletar', '10/01/2021', '09:00', 'admin', '1');")
             self.connect.commit()
 
             self.cursor.close()
             self.connect.close()
         except Exception as e:
-            print(str(e))
+            pass

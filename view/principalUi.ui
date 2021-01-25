@@ -984,7 +984,7 @@ QProgressBar::chunk
        </sizepolicy>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tabHor">
        <attribute name="icon">
@@ -1350,6 +1350,9 @@ QProgressBar::chunk
               <property name="statusTip">
                <string>Digite nome do cliente</string>
               </property>
+              <property name="maxLength">
+               <number>100</number>
+              </property>
               <property name="placeholderText">
                <string>Nome cliente</string>
               </property>
@@ -1421,8 +1424,14 @@ QProgressBar::chunk
               <property name="statusTip">
                <string>Endereço do cliente</string>
               </property>
+              <property name="maxLength">
+               <number>150</number>
+              </property>
               <property name="placeholderText">
                <string>Endereço cliente</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -1433,6 +1442,9 @@ QProgressBar::chunk
               </property>
               <property name="placeholderText">
                <string>Fone cliente</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -1661,6 +1673,9 @@ QProgressBar::chunk
               <property name="statusTip">
                <string>Digite nome do serviço</string>
               </property>
+              <property name="maxLength">
+               <number>100</number>
+              </property>
               <property name="placeholderText">
                <string>Nome serviço</string>
               </property>
@@ -1716,6 +1731,9 @@ QProgressBar::chunk
              <widget class="QLineEdit" name="horHor_ser">
               <property name="statusTip">
                <string>Digite duração aproximada do serviço</string>
+              </property>
+              <property name="clearButtonEnabled">
+               <bool>true</bool>
               </property>
              </widget>
             </item>

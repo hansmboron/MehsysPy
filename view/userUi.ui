@@ -1005,6 +1005,9 @@ QProgressBar::chunk
              <property name="statusTip">
               <string>*Digite o nome completo do usuário</string>
              </property>
+             <property name="maxLength">
+              <number>100</number>
+             </property>
              <property name="placeholderText">
               <string>Nome usuário</string>
              </property>
@@ -1023,6 +1026,9 @@ QProgressBar::chunk
              </property>
              <property name="placeholderText">
               <string>Telefone usuário</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -1084,21 +1090,33 @@ QProgressBar::chunk
              <property name="statusTip">
               <string>*Crie um nome de login para acesso ao sistema com pelo menos 4 caractéres</string>
              </property>
+             <property name="maxLength">
+              <number>20</number>
+             </property>
              <property name="placeholderText">
               <string>Login usuário</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QLineEdit" name="txtSen_usu">
              <property name="statusTip">
-              <string>*Crie uma senha com pelo menos 4 caractéres de qualquer tipo</string>
+              <string>*Crie uma senha com pelo menos 4 caractéres (não esqueça a senha, senhas são criptografadas)</string>
+             </property>
+             <property name="maxLength">
+              <number>20</number>
              </property>
              <property name="echoMode">
               <enum>QLineEdit::Password</enum>
              </property>
              <property name="placeholderText">
               <string>Senha usuário</string>
+             </property>
+             <property name="clearButtonEnabled">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
