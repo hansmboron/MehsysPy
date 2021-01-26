@@ -5,6 +5,7 @@
     <file>img/logo_gra.png</file>
   </qresource>
   <qresource prefix="icons">
+    <file>img/theme.png</file>
     <file>img/usuario.png</file>
     <file>img/print.png</file>
     <file>img/plus-border.png</file>

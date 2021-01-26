@@ -14,12 +14,14 @@ from view.principalUi import Ui_MainWindow
 from trabalho import TrabalhoWindow
 from sobre import SobreWindow
 from Utils.validaCPF import Valida
+from Utils.qssStyle import blackQss
 
 
 class PrincipalWindow(QMainWindow, Ui_MainWindow):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.black = True
         self.setupUi(self)
 
         # centralizar tela
@@ -70,6 +72,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.actionHor_rios_2.triggered.connect(self.create_pdf_agendamentos)
         self.actionUsu_rios.triggered.connect(self.open_users_screen)
         self.actionAddHor.triggered.connect(self.open_addHor_screen)
+        self.actionTema.triggered.connect(self.change_style)
         self.actionSobre.triggered.connect(self.open_sobre_screen)
         self.btnSal_cli.clicked.connect(self.on_btn_sal_cli_pressed)
         self.btnAtu_cli.clicked.connect(self.on_btn_atu_cli_pressed)
@@ -135,6 +138,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         actSer = menu.addAction("Serviços")
         menu.addSeparator()
         actAdd = menu.addAction("Adicionar Horários")
+        actStyle = menu.addAction("Trocar tema")
         actSob = menu.addAction("Sobre")
         actSai = menu.addAction("Sair")
 
@@ -149,6 +153,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             self.open_addHor_screen()
         elif action == actSob:
             self.open_sobre_screen()
+        elif action == actStyle:
+            self.change_style()
         elif action == actSai:
             self.closeEvent(event)
 
@@ -170,6 +176,16 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.cbbHor_hor.clear()
         self.trabalho = TrabalhoWindow()
         self.trabalho.show()
+
+    def change_style(self):
+        if self.black:
+            self.setStyleSheet('')
+            self.actionTema.setText('Tema escuro')
+            self.black = False
+        else:
+            self.setStyleSheet(blackQss)
+            self.actionTema.setText('Tema claro (sistema)')
+            self.black = True
 
     def open_sobre_screen(self):
         self.sobre = SobreWindow()

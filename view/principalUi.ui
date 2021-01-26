@@ -1953,6 +1953,7 @@ QProgressBar::chunk
      <string>Opções</string>
     </property>
     <addaction name="actionAddHor"/>
+    <addaction name="actionTema"/>
     <addaction name="actionSobre"/>
    </widget>
    <widget class="QMenu" name="menuSair">
@@ -2094,6 +2095,18 @@ QProgressBar::chunk
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionTema">
+   <property name="icon">
+    <iconset resource="../res.qrc">
+     <normaloff>:/icons/img/theme.png</normaloff>:/icons/img/theme.png</iconset>
+   </property>
+   <property name="text">
+    <string>Tema claro (sistema)</string>
+   </property>
+   <property name="statusTip">
+    <string>Trocar tema claro(sistema) | escuro</string>
    </property>
   </action>
  </widget>
