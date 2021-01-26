@@ -41,7 +41,7 @@ class LoginWindow(QMainWindow, Ui_TelaLoginUi):
         rs1 = self.cursor.fetchall()
         if len(rs1) >= 1:
             hashed = rs1[0][0]
-            if bcrypt.checkpw(password, hashed):
+            if bcrypt.checkpw(password.encode('utf-8'), hashed):
                 self.cursor.execute(sql, [user, hashed])
                 rs = self.cursor.fetchall()
                 if len(rs) > 0:

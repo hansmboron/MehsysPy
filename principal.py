@@ -13,6 +13,7 @@ from usuario import UserWindow
 from view.principalUi import Ui_MainWindow
 from trabalho import TrabalhoWindow
 from sobre import SobreWindow
+from Utils.validaCPF import Valida
 
 
 class PrincipalWindow(QMainWindow, Ui_MainWindow):
@@ -193,6 +194,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
 
     # Adicionar novo cliente
     def on_btn_sal_cli_pressed(self):
+        val_cpf = Valida()
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
         sql = 'insert into tbclientes(nome, sexo, cpf, endereco, fone) values(?,?,?,?,?)'
@@ -204,6 +206,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         try:
             if len(nome.strip()) < 4 or len(cpf.strip()) < 14 or len(fone.strip()) < 14:
                 QMessageBox.warning(self, 'ERRO!!!', 'Preencha os campos obrigatórios para adicionar novo cliente!')
+            elif not val_cpf.validaCPf(cpf):
+                QMessageBox.warning(self, 'CPF INVÁLIDO!!!', 'CPF INVÁLIDO!\nVerifique o CPF digitado!')
             else:
                 cursor.execute(sql, [nome, sexo, cpf, endereco, fone])
                 db.commit()
@@ -218,6 +222,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
 
     # atualizar dados de cliente
     def on_btn_atu_cli_pressed(self):
+        val_cpf = Valida()
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
         sql = 'update tbclientes set nome=?, sexo=?, cpf=?, endereco=?, fone=? where id=?'
@@ -231,6 +236,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             if len(nome.strip()) < 4 or len(cpf.strip()) < 14 or len(fone.strip()) < 14:
                 QMessageBox.warning(self, 'Preencha os campos', 'Preencha os campos obrigatórios para atualizar dados '
                                                                 'do cliente')
+            elif not val_cpf.validaCPf(cpf):
+                QMessageBox.warning(self, 'CPF INVÁLIDO!!!', 'CPF INVÁLIDO!\nVerifique o CPF digitado!')
             else:
                 cursor.execute(sql, [nome, sexo, cpf, endereco, fone, id])
                 db.commit()

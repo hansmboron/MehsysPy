@@ -9,8 +9,8 @@ class CreateBdSqlite:
         self.cursor = self.connect.cursor()
 
     def create_tables(self):
-        password = b'1234'
-        hashed = bcrypt.hashpw(password, bcrypt.gensalt(7))
+        password = '1234'
+        hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(7))
         try:
             self.cursor.execute("CREATE TABLE IF NOT EXISTS utils (current_user INTEGER)")
             self.cursor.execute("CREATE TABLE IF NOT EXISTS tbusuarios (\
@@ -81,7 +81,7 @@ class CreateBdSqlite:
                                 + ");")
             self.cursor.execute("INSERT INTO tbclientes ("
                                 + "nome, sexo, cpf, endereco, fone) "
-                                + "VALUES ('Exemplo cliente deletar', 'Indefinido', '000.000.000-00', '', '(00)00000-0000');")
+                                + "VALUES ('Exemplo cliente deletar', 'Indefinido', '444.096.280-70', '', '(00)00000-0000');")
             self.cursor.execute("INSERT INTO tbservicos ("
                                 + "nome, usuario, valor, duracao) "
                                 + "VALUES ('Exemplo serviço deletar', '', 'R$0.020,00', '0:10min');")
