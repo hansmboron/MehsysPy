@@ -87,7 +87,7 @@ class CreateBdSqlite:
                                 + "VALUES ('Exemplo serviço deletar', '', 'R$0.020,00', '0:10min');")
             self.cursor.execute("INSERT INTO tbhorarios ("
                                 + "cliente, servico, data, horario, profissional, id_ser) "
-                                + "VALUES ('Exemplo cliente deletar', 'Exemplo serviço deletar', '10/01/2021', '09:00', 'admin', '1');")
+                                + "VALUES ('Exemplo cliente deletar', 'Exemplo serviço deletar', '10/01/2021', '09:00', 'Exemplo usuário alterar', '1');")
             self.connect.commit()
 
             self.cursor.close()

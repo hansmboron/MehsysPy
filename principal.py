@@ -1,9 +1,9 @@
 import sqlite3
 import sys
 
-from PyQt5.QtCore import QDate, QEvent
-from PyQt5.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QMainWindow, QDesktopWidget, QFileDialog, \
-    QStyle, QMenu, QAction
+from PyQt5.QtCore import Qt
+from PyQt5.QtCore import QDate
+from PyQt5.QtWidgets import QApplication, QMessageBox, QTableWidgetItem, QMainWindow, QDesktopWidget, QFileDialog, QMenu
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
 from reportlab.lib import colors
@@ -120,6 +120,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             event.ignore()
 
     def mousePressEvent(self, event):
+        if self.cbbPro_hor.currentIndex() < 0:
+            self.popula_cbb_profissional_hor()
+            self.pesquisar_horarios()
         if event.buttons() and self.cbbPro_hor.currentIndex() >= 1 and self.cbbSer_hor.currentIndex() >= 1 and \
                 len(
                     self.txtPesCli_hor.text()) >= 4 and self.cbbHor_hor.currentIndex() < 0 and self.dat_hor.text() != '01/01/2000':
@@ -159,7 +162,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
     def open_users_screen(self):
         self.cbbPro_hor.setCurrentIndex(0)
         self.user = UserWindow()
+        self.user.setWindowModality(Qt.ApplicationModal)
         self.user.show()
+        self.cbbPro_hor.clear()
 
     def open_addHor_screen(self):
         self.cbbHor_hor.clear()
@@ -226,7 +231,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
         sql = 'update tbclientes set nome=?, sexo=?, cpf=?, endereco=?, fone=? where id=?'
+        sql2 = 'update tbhorarios set cliente=? where cliente=?'  # atualiza o nome também na tabela de agendamentos
         nome = self.txtNom_cli.text()
+        old_nome = self.old_nome_cli
         sexo = self.cbcSex_cli.currentText()
         cpf = self.txtCpf_cli.text()
         endereco = self.txtEnd_cli.text()
@@ -240,6 +247,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                 QMessageBox.warning(self, 'CPF INVÁLIDO!!!', 'CPF INVÁLIDO!\nVerifique o CPF digitado!')
             else:
                 cursor.execute(sql, [nome, sexo, cpf, endereco, fone, id])
+                if nome != old_nome:
+                    cursor.execute(sql2, [nome, old_nome])
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO!!!', 'Cliente ATUALIZADO com Sucesso!')
@@ -313,6 +322,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         rows = sorted(set(index.row() for index in self.table_cli.selectedIndexes()))
         for r in rows:
             self.txtId_cli.setText(self.table_cli.item(r, 0).text())
+            self.old_nome_cli = self.table_cli.item(r, 1).text()
             self.txtNom_cli.setText(self.table_cli.item(r, 1).text())
             self.cbcSex_cli.setCurrentText(self.table_cli.item(r, 2).text())
             self.txtCpf_cli.setText(self.table_cli.item(r, 3).text())
@@ -390,7 +400,10 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
         sql = 'update tbservicos set nome=?, usuario=?, valor=?, duracao=? where id=?'
+        sql2 = 'update tbhorarios set servico=? where servico=?'
         nome = self.txtNom_ser.text()
+        old_nome = self.old_nome_ser
+        print(f'Old_nome: {old_nome}')
         prof = self.cbbPro_ser.currentText()
         valor = self.txtSer_ser.text()
         duracao = self.horHor_ser.text()
@@ -402,6 +415,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                                     'do serviço')
             else:
                 cursor.execute(sql, [nome, prof, valor, duracao, id])
+                if nome != old_nome:
+                    cursor.execute(sql2, [nome, old_nome])
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO!!!', 'Serviço ATUALIZADO com Sucesso!')
@@ -477,6 +492,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         rows = sorted(set(index.row() for index in self.table_ser.selectedIndexes()))
         for r in rows:
             self.txtId_ser.setText(self.table_ser.item(r, 0).text())
+            self.old_nome_ser = self.table_ser.item(r, 1).text()
             self.txtNom_ser.setText(self.table_ser.item(r, 1).text())
             self.cbbPro_ser.setCurrentText(self.table_ser.item(r, 2).text())
             self.txtSer_ser.setText(self.table_ser.item(r, 3).text())
@@ -593,10 +609,15 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         cliente = self.txtPesCli_hor.text()
         servico = self.cbbSer_hor.currentText()
         data = self.dat_hor.text()
+        old_data = self.old_data_hor
         horario = self.cbbHor_hor.currentText()
+        old_hor = self.old_horario_hor
         prof = self.cbbPro_hor.currentText()
+        old_prof = self.old_prof_hor
         id = self.txtId_hor.text()
         sql3 = 'select nome from tbservicos where nome = ?'
+        print(f'NOVOS: {data}  {horario}  {prof}')
+        print(f'VELHOS: {old_data}  {old_hor}  {old_prof}')
         try:
             cursor.execute(sql3, [servico])
             rs_ser = cursor.fetchall()
@@ -616,7 +637,7 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
                                     'Preencha os campos obrigatórios para Atualizar o Agendamento!')
             else:
                 cursor.execute(sql, [cliente, servico, data, horario, prof, id_ser, id])
-                cursor.execute(sql2, [data, prof, horario, data, prof, horario])
+                cursor.execute(sql2, [data, prof, horario, old_data, old_prof, old_hor])
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO!!!', 'Agendamento ATUALIZADO com Sucesso!')
@@ -634,16 +655,16 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         sql = 'delete from tbhorarios where id=?'
         sql2 = 'delete from horarios_agendados where data=? and funcionario=? and horario=?'
         id = self.txtId_hor.text()
-        data = self.dat_hor.text()
-        horario = self.cbbHor_hor.currentText()
-        prof = self.cbbPro_hor.currentText()
+        old_data = self.old_data_hor
+        old_horario = self.old_horario_hor
+        old_prof = self.old_prof_hor
         confirm = QMessageBox.question(self, 'REMOVER AGENDAMENTO?',
                                        f'Tem certeza que quer REMOVER o agendamento nº:({id})?',
                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if confirm == QMessageBox.Yes:
             try:
                 cursor.execute(sql, [id])
-                cursor.execute(sql2, [data, prof, horario])
+                cursor.execute(sql2, [old_data, old_prof, old_horario])
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO!!!', f'Agendamento nº:({id}) EXCLUIDO com Sucesso!')
@@ -776,6 +797,8 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
 
     # popular campos do formulário selecionando uma linha da tabela
     def setar_campos_hor(self):
+        self.pesquisar_horarios()
+        self.popula_cbb_profissional_hor()
         rows = sorted(set(index.row() for index in self.table_hor.selectedIndexes()))
         for r in rows:
             self.txtId_hor.setText(self.table_hor.item(r, 0).text())
@@ -785,6 +808,9 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
             m = int(self.table_hor.item(r, 3).text()[3:5])
             d = int(self.table_hor.item(r, 3).text()[:2])
             data = QDate(y, m, d)
+            self.old_data_hor = self.table_hor.item(r, 3).text()
+            self.old_prof_hor = self.table_hor.item(r, 5).text()
+            self.old_horario_hor = self.table_hor.item(r, 4).text()
             self.dat_hor.setDate(data)
             self.cbbHor_hor.setCurrentText(self.table_hor.item(r, 4).text())
             self.cbbPro_hor.setCurrentText(self.table_hor.item(r, 5).text())

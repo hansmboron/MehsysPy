@@ -84,7 +84,10 @@ class UserWindow(QMainWindow, Ui_UserMain):
         db = sqlite3.connect('dbmehsys.db')
         cursor = db.cursor()
         sql = 'update tbusuarios set usuario=?, fone=?, login=?, senha=?, perfil=?, hora_in=?, hora_out=? where id=?'
+        sql2 = 'update tbhorarios set profissional=? where profissional=?'
+        sql3 = 'update horarios_agendados set funcionario=? where funcionario=?'
         nome = self.txtNom_usu.text()
+        old_nome = self.old_nome_usu
         fone = self.txtTel_usu.text()
         login = self.txtLog_usu.text()
         senha = self.txtSen_usu.text()
@@ -100,6 +103,9 @@ class UserWindow(QMainWindow, Ui_UserMain):
                 QMessageBox.warning(self, 'ERRO!!!', 'Login e senha precisam ter pelo menos 4 caracteres!')
             else:
                 cursor.execute(sql, [nome, fone, login, hashed, perfil, hora_in, hora_out, id])
+                if nome != old_nome:
+                    cursor.execute(sql2, [nome, old_nome])
+                    cursor.execute(sql3, [nome, old_nome])
                 db.commit()
                 QMessageBox.information(
                     self, 'SUCESSO!!!', 'Usuário ATUALIZADO com Sucesso!')
@@ -181,6 +187,7 @@ class UserWindow(QMainWindow, Ui_UserMain):
                 self.btnDel_usu.setEnabled(False)
             self.txtID_usu.setText(self.table_user.item(r, 0).text())
             self.txtNom_usu.setText(self.table_user.item(r, 1).text())
+            self.old_nome_usu = self.table_user.item(r, 1).text()
             self.txtTel_usu.setText(self.table_user.item(r, 2).text())
             self.txtLog_usu.setText(self.table_user.item(r, 3).text())
             # self.txtSen_usu.setText(self.table_user.item(r, 4).text())
