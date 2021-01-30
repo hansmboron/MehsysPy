@@ -156,10 +156,10 @@ class UserWindow(QMainWindow, Ui_UserMain):
                 self.table_user.setItem(row, 1, QTableWidgetItem(r[1]))
                 self.table_user.setItem(row, 2, QTableWidgetItem(r[2]))
                 self.table_user.setItem(row, 3, QTableWidgetItem(r[3]))
-                self.table_user.setItem(row, 4, QTableWidgetItem(r[4]))
-                self.table_user.setItem(row, 5, QTableWidgetItem(r[5]))
-                self.table_user.setItem(row, 6, QTableWidgetItem(r[6]))
-                self.table_user.setItem(row, 7, QTableWidgetItem(r[7]))
+                self.table_user.setItem(row, 4, QTableWidgetItem(str(r[4])[:-7] + '...'))
+                self.table_user.setItem(row, 5, QTableWidgetItem(str(r[5])))
+                self.table_user.setItem(row, 6, QTableWidgetItem(str(r[6])))
+                self.table_user.setItem(row, 7, QTableWidgetItem(str(r[7])))
                 row += 1
             db.close()
         except Exception as e:

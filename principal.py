@@ -169,12 +169,24 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
         self.cbbPro_hor.setCurrentIndex(0)
         self.user = UserWindow()
         self.user.setWindowModality(Qt.ApplicationModal)
+        if not self.black:
+            self.user.setStyleSheet('')
+            self.black = False
+        else:
+            self.user.setStyleSheet(blackQss)
+            self.black = True
         self.user.show()
         self.cbbPro_hor.clear()
 
     def open_addHor_screen(self):
         self.cbbHor_hor.clear()
         self.trabalho = TrabalhoWindow()
+        if not self.black:
+            self.trabalho.setStyleSheet('')
+            self.black = False
+        else:
+            self.trabalho.setStyleSheet(blackQss)
+            self.black = True
         self.trabalho.show()
 
     def change_style(self):
@@ -189,6 +201,12 @@ class PrincipalWindow(QMainWindow, Ui_MainWindow):
 
     def open_sobre_screen(self):
         self.sobre = SobreWindow()
+        if not self.black:
+            self.sobre.setStyleSheet('')
+            self.black = False
+        else:
+            self.sobre.setStyleSheet(blackQss)
+            self.black = True
         self.sobre.show()
 
     def on_menu_clientes(self):
